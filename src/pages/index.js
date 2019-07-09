@@ -67,16 +67,18 @@ const IndexPage = ({ data, className }) => {
           <br />
           For You.
         </Title>
-        <InfoContainer>
-          <StyledIcon icon={FaClock} className={className} />
-          <H3>{`Sundays at 9:30 & 10:45a`}</H3>
-        </InfoContainer>
-        <InfoContainer>
-          <StyledIcon icon={FaMapMarkerAlt} className={className} />
-          <H3>
-            {data.site.siteMetadata.address}, {data.site.siteMetadata.city}
-          </H3>
-        </InfoContainer>
+        <InfoWrapper>
+          <InfoContainer>
+            <StyledIcon icon={FaClock} className={className} />
+            <H3>{`Sundays, 9:30 & 10:45a`}</H3>
+          </InfoContainer>
+          <InfoContainer>
+            <StyledIcon icon={FaMapMarkerAlt} className={className} />
+            <H3>
+              {data.site.siteMetadata.address}, {data.site.siteMetadata.city}
+            </H3>
+          </InfoContainer>
+        </InfoWrapper>
       </Section>
       <Section dark>
         <Title>Our Pastor</Title>
@@ -97,6 +99,15 @@ const IndexPage = ({ data, className }) => {
     </Layout>
   )
 }
+
+const InfoWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  @media (min-width: 576px) {
+    align-items: center;
+  }
+`
 
 const InfoContainer = styled.div`
   display: flex;
