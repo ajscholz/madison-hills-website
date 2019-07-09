@@ -3,8 +3,8 @@ import { createGlobalStyle } from "styled-components"
 export default createGlobalStyle`
   :root {
     --primary: #1d9639;
-    --white: white;
-    --black: black;
+    --white: #F2EEEE;
+    --black: #252323;
   }
 
   * {
@@ -23,5 +23,10 @@ export default createGlobalStyle`
 
   main {
     overflow: hidden;
+  }
+
+  a {
+    text-decoration: none;
+    color: inherit;
   }
 `
