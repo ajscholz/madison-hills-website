@@ -9,9 +9,9 @@ module.exports = {
     email: `mhcc@madisonhills.org`,
     facebook: `madisonhills`,
     address: `960 Red House Rd.`,
-    City: `Richmond`,
-    State: `KY`,
-    Zip: `40475`,
+    city: `Richmond`,
+    state: `KY`,
+    zip: `40475`,
   },
   plugins: [
     {

@@ -5,6 +5,7 @@ export default createGlobalStyle`
     --primary: #1d9639;
     --white: #F2EEEE;
     --black: #252323;
+    --danger: tomato;
   }
 
   * {
@@ -12,7 +13,6 @@ export default createGlobalStyle`
     font-family: "Nunito Sans";
     font-weight: 500;
     letter-spacing:.08rem;
-    color: var(--black);
   }
 
   html {
