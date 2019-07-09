@@ -2,14 +2,23 @@ import { createGlobalStyle } from "styled-components"
 
 export default createGlobalStyle`
   :root {
-    --primary: #1d9639;
-    --white: white;
-    --black: black;
+    --primary: #2db34b;
+    --primaryLight: #69e679;
+    --primaryDark: #00821d;
+    --white: #F2EEEE;
+    --black: #252323;
+    --danger: tomato;
+<<<<<<< HEAD
+=======
+    --mainTransition: all .3s ease;
+>>>>>>> @{-1}
   }
 
   * {
     box-sizing: border-box;
     font-family: "Nunito Sans";
+    font-weight: 500;
+    letter-spacing:.08rem;
   }
 
   html {
@@ -23,5 +32,10 @@ export default createGlobalStyle`
 
   main {
     overflow: hidden;
+  }
+
+  a {
+    text-decoration: none;
+    color: inherit;
   }
 `
