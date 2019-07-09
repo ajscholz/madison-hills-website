@@ -15,7 +15,6 @@ const Header = ({ siteTitle }) => (
 
 const StyledHeader = styled.header`
   background: var(--primary);
-  margin-bottom: 1.45rem;
 `
 
 const Section = styled.div`
