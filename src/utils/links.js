@@ -1,4 +1,4 @@
-export const links = [
+export default [
   {
     name: "about",
     path: "/about",
