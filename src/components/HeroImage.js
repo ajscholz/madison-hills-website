@@ -1,6 +1,7 @@
 import React from "react"
 import styled from "styled-components"
 import BackgroundImage from "gatsby-background-image"
+import Banner from "./Banner"
 
 const HeroImage = ({ className, image, children, full }) => {
   // adds overlay
@@ -22,7 +23,7 @@ const HeroImage = ({ className, image, children, full }) => {
       className={className}
       fluid={backgroundFluidImageStack}
     >
-      {children}
+      <Banner>{children}</Banner>
     </StyledBackgroundImage>
   )
 }
