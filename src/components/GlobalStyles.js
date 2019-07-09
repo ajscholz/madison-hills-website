@@ -2,10 +2,13 @@ import { createGlobalStyle } from "styled-components"
 
 export default createGlobalStyle`
   :root {
-    --primary: #1d9639;
+    --primary: #2db34b;
+    --primaryLight: #69e679;
+    --primaryDark: #00821d;
     --white: #F2EEEE;
     --black: #252323;
     --danger: tomato;
+    --mainTransition: all .3s ease;
   }
 
   * {

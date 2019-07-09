@@ -63,9 +63,9 @@ const IndexPage = ({ data, className }) => {
       </HeroImage>
       <Section large>
         <Title>
-          For Richmond.
+          For Richmond
           <br />
-          For You.
+          For You
         </Title>
         <InfoContainer>
           <StyledIcon icon={FaClock} className={className} />

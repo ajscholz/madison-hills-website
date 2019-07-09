@@ -83,8 +83,9 @@ const StyledField = styled(Field)`
   resize: none;
   outline: none;
   color: var(--black);
+  transition: var(--mainTransition);
   :focus {
-    border-bottom: 1px solid var(--black);
+    border-bottom: 1px solid var(--primaryDark);
   }
 `
 
@@ -107,5 +108,9 @@ const StyledButton = styled.button`
   font-size: 1rem;
   border: none;
   border-radius: 5px;
+  transition: var(--mainTransition);
   cursor: pointer;
+  &:hover {
+    background: var(--primaryDark);
+  }
 `
