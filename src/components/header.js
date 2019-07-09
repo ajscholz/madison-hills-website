@@ -26,6 +26,8 @@ const Section = styled.div`
 
 const H1 = styled.h1`
   margin: 0;
+  font-size: 1.25rem;
+  text-transform: uppercase;
 `
 
 const StyledLink = styled(Link)`

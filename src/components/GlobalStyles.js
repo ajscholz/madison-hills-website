@@ -10,6 +10,8 @@ export default createGlobalStyle`
   * {
     box-sizing: border-box;
     font-family: "Nunito Sans";
+    letter-spacing:.08rem;
+    color: var(--black);
   }
 
   html {
