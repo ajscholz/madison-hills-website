@@ -12,7 +12,6 @@ import Icon from "../components/Icon"
 import ContactForm from "../components/ContactForm"
 
 import { FaClock, FaMapMarkerAlt } from "react-icons/fa"
-import { domainToASCII } from "url"
 
 export const data = graphql`
   query MyQuery {
