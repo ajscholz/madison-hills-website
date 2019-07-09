@@ -4,6 +4,7 @@ import { graphql } from "gatsby"
 import Layout from "../components/layout"
 import HeroImage from "../components/HeroImage"
 import SEO from "../components/seo"
+import Title from "../components/TItle"
 
 export const data = graphql`
   query MyQuery {
@@ -21,7 +22,8 @@ const IndexPage = ({ data }) => (
   <Layout>
     <SEO title="Home" />
     <HeroImage image={data.file.childImageSharp.fluid} full></HeroImage>
-    <h1>Welcome to the homepage</h1>
+
+    <Title>Welcome to the homepage</Title>
   </Layout>
 )
 
