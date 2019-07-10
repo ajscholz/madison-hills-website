@@ -40,7 +40,7 @@ const Header = ({ siteTitle, drawerClickHandler }) => {
 }
 
 const StyledHeader = styled.header`
-  margin: 0 auto;
+  margin: 0;
   background: var(--white);
   padding: 1rem 2rem;
   display: flex;

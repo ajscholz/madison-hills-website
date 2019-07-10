@@ -39,9 +39,8 @@ const Layout = ({ children }) => {
   }
 
   return (
-    <>
-      <GlobalStyles />
-      <h3
+    <FlexContainer>
+      {/* <h3
         style={{
           margin: "0",
           position: "absolute",
@@ -53,7 +52,10 @@ const Layout = ({ children }) => {
         }}
       >
         {width}
-      </h3>
+      </h3> */}
+
+      <GlobalStyles />
+
       <Header
         siteTitle={data.site.siteMetadata.title}
         drawerClickHandler={() => drawerToggleHandler(!sideDrawerOpen)}
@@ -69,17 +71,29 @@ const Layout = ({ children }) => {
         <StyledBackdrop onClick={() => drawerToggleHandler(!sideDrawerOpen)} />
       ) : null}
 
-      <main>{children}</main>
+      <Main>{children}</Main>
 
       <Footer title={data.site.siteMetadata.title} />
-    </>
+    </FlexContainer>
   )
 }
+
+const FlexContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  min-height: 100%;
+`
 
 const StyledBackdrop = styled(Backdrop)`
   @media (min-width: 663px) {
     display: none;
   }
+`
+
+const Main = styled.main`
+  flex-grow: 1;
+  background: var(--white);
 `
 
 Layout.propTypes = {
