@@ -1,7 +1,7 @@
 import styled from "styled-components"
 
 export default styled.h2`
-  font-size: 2rem;
+  font-size: 1.5rem;
   text-align: center;
   text-transform: capitalize;
   position: relative;
@@ -15,5 +15,8 @@ export default styled.h2`
     position: absolute;
     bottom: -0.5rem;
     left: 0;
+  }
+  @media (min-width: 400px) {
+    font-size: 2rem;
   }
 `

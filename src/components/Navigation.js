@@ -15,14 +15,14 @@ const Navigation = () => {
                 {link.name}
               </StyledLink>
             ) : (
-              <StyledExtLink
+              <StyledLink
                 as="a"
                 href={link.path}
                 target="_blank"
                 rel="noopener noreferrer"
               >
                 {link.name}
-              </StyledExtLink>
+              </StyledLink>
             )}
           </StyledListItem>
         ))}
@@ -51,18 +51,6 @@ const StyledListItem = styled.li`
 `
 
 const StyledLink = styled(Link)`
-  text-transform: capitalize;
-  font-size: 1.5rem;
-  transition: var(--mainTransition);
-  &:hover {
-    color: var(--primary);
-  }
-  @media (min-width: 663px) {
-    font-size: 1rem;
-  }
-`
-
-const StyledExtLink = styled(StyledLink)`
   text-transform: capitalize;
   font-size: 1.5rem;
   transition: var(--mainTransition);

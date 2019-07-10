@@ -55,18 +55,12 @@ const IndexPage = ({ data, className }) => {
     <Layout>
       <SEO title="Home" />
       <HeroImage image={data.file.childImageSharp.fluid} full>
-        Welcomed
+        For Richmond.
         <br />
-        Wanted
-        <br />
-        Loved
+        For You.
       </HeroImage>
       <Section large>
-        <Title>
-          For Richmond.
-          <br />
-          For You.
-        </Title>
+        <Title>Helping people find and follow Jesus</Title>
         <InfoWrapper>
           <InfoContainer>
             <StyledIcon icon={FaClock} className={className} />
