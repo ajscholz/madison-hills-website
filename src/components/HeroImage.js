@@ -5,20 +5,19 @@ import Banner from "./Banner"
 
 const HeroImage = ({ className, image, children, full }) => {
   // adds overlay
-  const backgroundFluidImageStack =
-    full === true
-      ? [
-          image,
-          `linear-gradient(to bottom, rgba(38, 36, 40, .8), rgba(38, 36, 40, .8))`,
-        ].reverse()
-      : [
-          image,
-          `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5))`,
-        ].reverse()
+  const backgroundFluidImageStack = full
+    ? [
+        image,
+        `linear-gradient(to bottom, rgba(38, 36, 40, .8), rgba(38, 36, 40, .8))`,
+      ].reverse()
+    : [
+        image,
+        `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5))`,
+      ].reverse()
 
   return (
     <StyledBackgroundImage
-      full={full}
+      full={full.toString()}
       Tag="section"
       className={className}
       fluid={backgroundFluidImageStack}

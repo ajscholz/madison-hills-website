@@ -10,7 +10,11 @@ const Footer = ({ title }) => {
         target="_blank"
         rel="noopener noreferrer"
       >
-        Built with 🔥 by AJSolutions
+        Built with{" "}
+        <span role="img" aria-label="fire">
+          🔥
+        </span>{" "}
+        by AJSolutions
       </StyledLink>
     </StyledFooter>
   )

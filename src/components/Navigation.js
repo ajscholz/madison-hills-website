@@ -9,7 +9,7 @@ const Navigation = () => {
     <nav>
       <StyledList>
         {links.map(link => (
-          <StyledListItem>
+          <StyledListItem key={link.name}>
             <StyledLink to={link.path} alt={link.name}>
               {link.name}
             </StyledLink>
