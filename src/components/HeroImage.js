@@ -1,6 +1,7 @@
 import React from "react"
 import styled from "styled-components"
 import BackgroundImage from "gatsby-background-image"
+
 import Banner from "./Banner"
 
 const HeroImage = ({ className, image, children, full }) => {
@@ -12,12 +13,11 @@ const HeroImage = ({ className, image, children, full }) => {
       ].reverse()
     : [
         image,
-        `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5))`,
+        `linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6))`,
       ].reverse()
 
   return (
     <StyledBackgroundImage
-      full={full.toString()}
       Tag="section"
       className={className}
       fluid={backgroundFluidImageStack}
@@ -27,17 +27,20 @@ const HeroImage = ({ className, image, children, full }) => {
   )
 }
 
-const StyledBackgroundImage = styled(BackgroundImage)`
+const StyledHeroImage = styled(HeroImage)`
   height: ${props => (props.full ? "70vh" : "40vh")};
+  @media (min-width: 577px) {
+    height: ${props => (props.full ? "70vh" : "40vh")};
+  }
+`
+
+const StyledBackgroundImage = styled(BackgroundImage)`
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
   z-index: 0;
-  @media (min-width: 577px) {
-    height: ${props => (props.full ? "70vh" : "40vh")};
-  }
 `
 
-export default HeroImage
+export default StyledHeroImage

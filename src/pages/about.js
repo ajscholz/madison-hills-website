@@ -3,7 +3,7 @@ import { graphql } from "gatsby"
 
 import Layout from "../components/Layout"
 import Seo from "../components/Seo"
-import HeroImage from "../components/HeroImage"
+import StyledHeroImage from "../components/HeroImage"
 import Section from "../components/Section"
 import Title from "../components/Title"
 
@@ -23,9 +23,9 @@ const about = ({ data }) => {
   return (
     <Layout>
       <Seo title=""></Seo>
-      <HeroImage image={data.heroImage.childImageSharp.fluid}>
+      <StyledHeroImage image={data.heroImage.childImageSharp.fluid}>
         banner text
-      </HeroImage>
+      </StyledHeroImage>
       <Section>
         <Title>Section</Title>
       </Section>
