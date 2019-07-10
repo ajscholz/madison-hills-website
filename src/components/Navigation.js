@@ -28,7 +28,8 @@ const StyledList = styled.ul`
   align-items: flex-end;
   @media (min-width: 663px) {
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: space-evenly;
+    padding: 0;
   }
 `
 const StyledListItem = styled.li`
