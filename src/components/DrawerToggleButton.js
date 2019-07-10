@@ -17,6 +17,9 @@ const Button = styled.button`
   :focus {
     outline: none;
   }
+  @media (min-width: 663px) {
+    display: none;
+  }
 `
 
 const StyledIcon = styled(FaBars)`

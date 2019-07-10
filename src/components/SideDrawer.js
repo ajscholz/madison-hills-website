@@ -1,6 +1,7 @@
 import React from "react"
 import styled from "styled-components"
-import { Link } from "gatsby"
+
+import Navigation from "./Navigation"
 
 import { FaTimes } from "react-icons/fa"
 
@@ -11,15 +12,8 @@ const SideDrawer = props => (
         <StyledIcon alt="close nav" />
       </span>
     </StyledButton>
-    <StyledList>
-      {props.links.map(link => (
-        <StyledListItem>
-          <StyledLink to={link.path} alt={link.name}>
-            {link.name}
-          </StyledLink>
-        </StyledListItem>
-      ))}
-    </StyledList>
+
+    <Navigation />
   </StyledSideDrawer>
 )
 
@@ -56,26 +50,6 @@ const StyledButton = styled.button`
 const StyledIcon = styled(FaTimes)`
   font-size: 2rem;
   color: var(--primary);
-`
-
-const StyledList = styled.ul`
-  margin: 0;
-  list-style: none;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-`
-const StyledListItem = styled.li`
-  margin-bottom: 0.75rem;
-`
-
-const StyledLink = styled(Link)`
-  text-transform: capitalize;
-  font-size: 1.5rem;
-  transition: var(--mainTransition);
-  &:hover {
-    color: var(--primary);
-  }
 `
 
 export default SideDrawer
