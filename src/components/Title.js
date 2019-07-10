@@ -3,6 +3,7 @@ import styled from "styled-components"
 export default styled.h2`
   font-size: 2rem;
   text-align: center;
+  text-transform: capitalize;
   position: relative;
   display: inline-block;
   margin: 0 0 2.5rem 0;
