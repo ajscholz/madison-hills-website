@@ -5,13 +5,18 @@
  * See: https://www.gatsbyjs.org/docs/use-static-query/
  */
 
-import React from "react"
+import React, { useState } from "react"
 import PropTypes from "prop-types"
 import { useStaticQuery, graphql } from "gatsby"
+import styled from "styled-components"
 
 import Header from "./header"
 import Footer from "./Footer"
 import GlobalStyles from "../components/GlobalStyles"
+import SideDrawer from "./SideDrawer"
+import Backdrop from "./Backdrop"
+
+import links from "../utils/links"
 
 const Layout = ({ children }) => {
   const data = useStaticQuery(graphql`
@@ -24,10 +29,23 @@ const Layout = ({ children }) => {
     }
   `)
 
+  const [sideDrawerOpen, drawerToggleHandler] = useState(false)
+
   return (
     <>
       <GlobalStyles />
-      <Header siteTitle={data.site.siteMetadata.title} />
+      <Header
+        siteTitle={data.site.siteMetadata.title}
+        drawerClickHandler={() => drawerToggleHandler(!sideDrawerOpen)}
+      />
+      <SideDrawer
+        links={links}
+        open={sideDrawerOpen}
+        drawerClickHandler={() => drawerToggleHandler(!sideDrawerOpen)}
+      />
+      {sideDrawerOpen ? (
+        <StyledBackdrop onClick={() => drawerToggleHandler(!sideDrawerOpen)} />
+      ) : null}
 
       <main>{children}</main>
 
@@ -35,6 +53,12 @@ const Layout = ({ children }) => {
     </>
   )
 }
+
+const StyledBackdrop = styled(Backdrop)`
+  @media (min-width: 663px) {
+    display: none;
+  }
+`
 
 Layout.propTypes = {
   children: PropTypes.node.isRequired,

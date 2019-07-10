@@ -1,0 +1,81 @@
+import React from "react"
+import styled from "styled-components"
+import { Link } from "gatsby"
+
+import { FaTimes } from "react-icons/fa"
+
+const SideDrawer = props => (
+  <StyledSideDrawer open={props.open}>
+    <StyledButton onClick={props.drawerClickHandler} open={props.open}>
+      <span>
+        <StyledIcon alt="close nav" />
+      </span>
+    </StyledButton>
+    <StyledList>
+      {props.links.map(link => (
+        <StyledListItem>
+          <StyledLink to={link.path} alt={link.name}>
+            {link.name}
+          </StyledLink>
+        </StyledListItem>
+      ))}
+    </StyledList>
+  </StyledSideDrawer>
+)
+
+const StyledSideDrawer = styled.nav`
+  height: 100%;
+  background: var(--white);
+  box-shadow: 1px 0px 7px rgba(0, 0, 0, 0.5);
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 80%;
+  z-index: 200;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  transition: transform 0.3s ease-out;
+  transform: ${props => (props.open ? "translateX(0)" : "translateX(105%)")};
+  @media (min-width: 663px) {
+    display: none;
+  }
+`
+
+const StyledButton = styled.button`
+  padding: 0;
+  margin-bottom: 1rem;
+  border: none;
+  background: transparent;
+  &:focus {
+    outline: none;
+  }
+`
+
+const StyledIcon = styled(FaTimes)`
+  font-size: 2rem;
+  color: var(--primary);
+`
+
+const StyledList = styled.ul`
+  margin: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+`
+const StyledListItem = styled.li`
+  margin-bottom: 0.75rem;
+`
+
+const StyledLink = styled(Link)`
+  text-transform: capitalize;
+  font-size: 1.5rem;
+  transition: var(--mainTransition);
+  &:hover {
+    color: var(--primary);
+  }
+`
+
+export default SideDrawer

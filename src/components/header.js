@@ -1,11 +1,12 @@
-import React, { useState } from "react"
+import React from "react"
 import { Link, graphql, useStaticQuery } from "gatsby"
 import Img from "gatsby-image"
 import styled from "styled-components"
 import PropTypes from "prop-types"
 
+import DrawerToggleButton from "./DrawerToggleButton"
+
 import links from "../utils/links"
-import { FaBars } from "react-icons/fa"
 
 const data = graphql`
   {
@@ -19,9 +20,8 @@ const data = graphql`
   }
 `
 
-const Header = ({ siteTitle }) => {
+const Header = ({ siteTitle, drawerClickHandler }) => {
   const { logo } = useStaticQuery(data)
-  const [open, toggleOpen] = useState(false)
 
   return (
     <StyledHeader>
@@ -32,12 +32,7 @@ const Header = ({ siteTitle }) => {
             alt={siteTitle}
           ></StyledImage>
         </StyledLogoLink>
-        <MenuIcon />
-        <Drawer>
-          {links.map(link => {
-            return <StyledLink to={link.path}>{link.name}</StyledLink>
-          })}
-        </Drawer>
+        <DrawerToggleButton click={drawerClickHandler} />
       </MobileNav>
       <Nav>
         <StyledLogoLink to="/">
@@ -60,11 +55,9 @@ const StyledHeader = styled.header`
   padding: 1rem 2rem;
 `
 
-const MobileNav = styled.nav`
+const MobileNav = styled.div`
   display: flex;
-  align-items: center;
   justify-content: space-between;
-
   @media (min-width: 663px) {
     display: none;
   }
@@ -94,21 +87,6 @@ const StyledImage = styled(Img)`
 
 const StyledLink = styled(Link)`
   text-transform: capitalize;
-`
-
-const MenuIcon = styled(FaBars)`
-  font-size: 1.5rem;
-  color: var(--primary);
-`
-
-const Drawer = styled.div`
-  height: 100vh;
-  width: 100vw;
-  background: var(--primaryDark);
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
 `
 
 Header.propTypes = {

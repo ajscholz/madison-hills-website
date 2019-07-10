@@ -8,10 +8,8 @@ export default createGlobalStyle`
     --white: #F2EEEE;
     --black: #252323;
     --danger: tomato;
-<<<<<<< HEAD
-=======
     --mainTransition: all .3s ease;
->>>>>>> @{-1}
+
   }
 
   * {
@@ -22,13 +20,24 @@ export default createGlobalStyle`
   }
 
   html {
+    height: 100%;
       -ms-text-size-adjust: 100%;
   -webkit-text-size-adjust: 100%;
   }
 
   body {
+    height: 100%;
     margin: 0;
   }
+
+  #___gatsby {
+    height: 100%;
+  }
+
+#gatsby-focus-wrapper {
+  height: 100%;
+}
+
 
   main {
     overflow: hidden;
@@ -37,5 +46,9 @@ export default createGlobalStyle`
   a {
     text-decoration: none;
     color: inherit;
+  }
+
+  button, a {
+    cursor: pointer;
   }
 `
