@@ -1,7 +1,6 @@
 import React from "react"
 import { graphql } from "gatsby"
 import styled from "styled-components"
-import BackgroundImage from "gatsby-background-image"
 
 import Layout from "../components/Layout"
 import HeroImage from "../components/HeroImage"
@@ -144,11 +143,6 @@ const Event = styled.li`
   width: 100%;
   height: 100px;
 `
-
-const StyledBackgroundImage = styled(BackgroundImage)`
-  height: 100%;
-`
-
 // const PastorContainer = styled.div`
 //   display: flex;
 //   align-items: center;
