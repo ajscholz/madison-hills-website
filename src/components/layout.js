@@ -34,6 +34,10 @@ const Layout = ({ children }) => {
 
   const [sideDrawerOpen, drawerToggleHandler] = useState(false)
 
+  if (width > 662 && sideDrawerOpen) {
+    drawerToggleHandler(false)
+  }
+
   return (
     <>
       <GlobalStyles />
@@ -54,12 +58,13 @@ const Layout = ({ children }) => {
         siteTitle={data.site.siteMetadata.title}
         drawerClickHandler={() => drawerToggleHandler(!sideDrawerOpen)}
       />
-
-      <SideDrawer
-        links={links}
-        open={sideDrawerOpen}
-        drawerClickHandler={() => drawerToggleHandler(!sideDrawerOpen)}
-      />
+      {width <= 662 ? (
+        <SideDrawer
+          links={links}
+          open={sideDrawerOpen}
+          drawerClickHandler={() => drawerToggleHandler(!sideDrawerOpen)}
+        />
+      ) : null}
       {sideDrawerOpen ? (
         <StyledBackdrop onClick={() => drawerToggleHandler(!sideDrawerOpen)} />
       ) : null}

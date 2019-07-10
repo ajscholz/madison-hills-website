@@ -34,7 +34,7 @@ const Header = ({ siteTitle, drawerClickHandler }) => {
         ></StyledImage>
       </StyledLogoLink>
       {width > 662 ? <Navigation /> : null}
-      <DrawerToggleButton click={drawerClickHandler} />
+      {width < 663 ? <DrawerToggleButton click={drawerClickHandler} /> : null}
     </StyledHeader>
   )
 }
