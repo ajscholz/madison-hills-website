@@ -9,7 +9,7 @@ import React, { useState } from "react"
 import PropTypes from "prop-types"
 import { useStaticQuery, graphql } from "gatsby"
 import styled from "styled-components"
-import WindowDimensionsProvider from '../utils/WindowDimensionsProvider'
+import { useBrowserWidth } from "../context/BrowserWidthContext"
 
 import Header from "./header"
 import Footer from "./Footer"
@@ -30,11 +30,26 @@ const Layout = ({ children }) => {
     }
   `)
 
+  const width = useBrowserWidth()
+
   const [sideDrawerOpen, drawerToggleHandler] = useState(false)
 
   return (
-    <WindowDimensionsProvider>
+    <>
       <GlobalStyles />
+      <h3
+        style={{
+          margin: "0",
+          position: "absolute",
+          top: "0",
+          left: "0",
+          padding: ".5rem",
+          background: "red",
+          zIndex: "1000",
+        }}
+      >
+        {width}
+      </h3>
       <Header
         siteTitle={data.site.siteMetadata.title}
         drawerClickHandler={() => drawerToggleHandler(!sideDrawerOpen)}
@@ -52,7 +67,7 @@ const Layout = ({ children }) => {
       <main>{children}</main>
 
       <Footer title={data.site.siteMetadata.title} />
-    </WindowDimensionsProvider>
+    </>
   )
 }
 

@@ -1,12 +1,12 @@
-import React, { useState, useEffect } from "react"
+import React from "react"
 import { Link, graphql, useStaticQuery } from "gatsby"
 import Img from "gatsby-image"
 import styled from "styled-components"
 import PropTypes from "prop-types"
-import {useWindowDimensions} from '../utils/WindowDimensionsProvider'
 
 import DrawerToggleButton from "./DrawerToggleButton"
 import Navigation from "./Navigation"
+import { useBrowserWidth } from "../context/BrowserWidthContext"
 
 const data = graphql`
   {
@@ -23,11 +23,10 @@ const data = graphql`
 const Header = ({ siteTitle, drawerClickHandler }) => {
   const { logo } = useStaticQuery(data)
 
-  const {width} = useWindowDimensions()
+  const width = useBrowserWidth()
 
   return (
     <StyledHeader>
-      <h3 style={{ margin: "0", position: "absolute", top: '0', left: '0', padding: '.5rem', background: 'red', zIndex:'1000' }}>{width}</h3>
       <StyledLogoLink to="/">
         <StyledImage
           fluid={logo.childImageSharp.fluid}
