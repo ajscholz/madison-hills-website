@@ -7,4 +7,7 @@ export default styled.section`
   display: flex;
   flex-direction: column;
   align-items: center;
+  @media (min-width: 1200px) {
+    padding: ${props => (props.large ? "6rem" : "4rem")} 5vw;
+  }
 `
