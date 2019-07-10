@@ -11,7 +11,7 @@ import { useStaticQuery, graphql } from "gatsby"
 import styled from "styled-components"
 import { useBrowserWidth } from "../context/BrowserWidthContext"
 
-import Header from "./header"
+import Header from "./Header"
 import Footer from "./Footer"
 import GlobalStyles from "../components/GlobalStyles"
 import SideDrawer from "./SideDrawer"
