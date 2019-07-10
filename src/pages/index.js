@@ -1,7 +1,7 @@
 import React from "react"
 import { graphql } from "gatsby"
 import styled from "styled-components"
-import Img from "gatsby-image"
+import BackgroundImage from "gatsby-background-image"
 
 import Layout from "../components/Layout"
 import HeroImage from "../components/HeroImage"
@@ -10,6 +10,7 @@ import Title from "../components/Title"
 import Section from "../components/Section"
 import Icon from "../components/Icon"
 import ContactForm from "../components/ContactForm"
+import EventCard from "../components/EventCard"
 
 import { FaClock, FaMapMarkerAlt } from "react-icons/fa"
 
@@ -26,11 +27,10 @@ export const data = graphql`
       siteMetadata {
         address
         city
-        pastor
       }
     }
 
-    ben: file(name: { eq: "team-ben" }) {
+    kickball: file(name: { eq: "kickball" }) {
       childImageSharp {
         fluid {
           ...GatsbyImageSharpFluid
@@ -40,16 +40,16 @@ export const data = graphql`
   }
 `
 
-const getAge = birthday => {
-  const diff = Date.now() - birthday.getTime()
-  const ageDiff = new Date(diff)
+// const getAge = birthday => {
+//   const diff = Date.now() - birthday.getTime()
+//   const ageDiff = new Date(diff)
 
-  return Math.abs(ageDiff.getUTCFullYear() - 1970)
-}
+//   return Math.abs(ageDiff.getUTCFullYear() - 1970)
+// }
 
 const IndexPage = ({ data, className }) => {
-  const abelAge = getAge(new Date(2015, 4, 23))
-  const cohenAge = getAge(new Date(2017, 4, 3))
+  // const abelAge = getAge(new Date(2015, 4, 23))
+  // const cohenAge = getAge(new Date(2017, 4, 3))
 
   return (
     <Layout>
@@ -75,7 +75,15 @@ const IndexPage = ({ data, className }) => {
         </InfoWrapper>
       </Section>
       <Section dark>
-        <Title>section</Title>
+        <Title>Upcoming Events</Title>
+        <EventList>
+          <Event>
+            <EventCard
+              image={data.kickball.childImageSharp.fluid}
+              title="family kickball"
+            />
+          </Event>
+        </EventList>
         {/* <Title>Our Pastor</Title>
         <PastorContainer>
           <Avatar fluid={data.ben.childImageSharp.fluid} />
@@ -121,6 +129,24 @@ const StyledIcon = styled(Icon)`
 const H3 = styled.h3`
   font-size: 1.25rem;
   margin: 0;
+`
+
+const EventList = styled.ul`
+  width: 100%;
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+`
+
+const Event = styled.li`
+  width: 100%;
+  height: 100px;
+`
+
+const StyledBackgroundImage = styled(BackgroundImage)`
+  height: 100%;
 `
 
 // const PastorContainer = styled.div`
