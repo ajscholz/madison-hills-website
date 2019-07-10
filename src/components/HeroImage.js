@@ -9,7 +9,8 @@ const HeroImage = ({ className, image, children, full }) => {
   const backgroundFluidImageStack = full
     ? [
         image,
-        `linear-gradient(to bottom, rgba(38, 36, 40, .8), rgba(38, 36, 40, .8))`,
+        `linear-gradient(to bottom, rgba(0, 130, 29, .3), rgba(0, 130, 29, .3))`,
+        `linear-gradient(rgba(0,0,0,.6), rgba(0,0,0,.6))`,
       ].reverse()
     : [
         image,
