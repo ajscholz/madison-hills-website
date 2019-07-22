@@ -9,10 +9,12 @@ import Section from "../components/Section"
 import Title from "../components/Title"
 import TeamCard from "../components/TeamCard"
 import { List, ListItem } from "../components/List"
+import Accordion from "../components/Accordion"
 
 import staff from "../utils/staff"
 import elders from "../utils/elders"
 import deacons from "../utils/deacons"
+import beliefs from "../utils/beliefs"
 
 const about = ({ data }) => (
   <Layout>
@@ -51,6 +53,11 @@ const about = ({ data }) => (
         ))}
       </List>
     </Section>
+    <Section dark>
+      <Title>Our Beliefs</Title>
+      <Accordion beliefs={beliefs}></Accordion>
+    </Section>
+    <Section></Section>
   </Layout>
 )
 
