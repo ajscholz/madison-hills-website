@@ -83,21 +83,16 @@ const StyledField = styled(Field)`
   resize: none;
   outline: none;
   color: var(--black);
-<<<<<<< HEAD
-  :focus {
-    border-bottom: 1px solid var(--black);
-=======
   transition: var(--mainTransition);
   :focus {
     border-bottom: 1px solid var(--primaryDark);
->>>>>>> @{-1}
   }
 `
 
 const StyledErrorMessage = styled(ErrorMessage)`
   position: absolute;
   top: 0;
-  right: -0.5rem;
+  right: 0;
   font-size: 0.8rem;
   background: var(--danger);
   padding: 0.4rem 0.8rem;
@@ -113,13 +108,9 @@ const StyledButton = styled.button`
   font-size: 1rem;
   border: none;
   border-radius: 5px;
-<<<<<<< HEAD
-  cursor: pointer;
-=======
   transition: var(--mainTransition);
   cursor: pointer;
   &:hover {
     background: var(--primaryDark);
   }
->>>>>>> @{-1}
 `
