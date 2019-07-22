@@ -18,7 +18,10 @@ export default ({ image, name, jobTitle }) => {
 }
 
 const TeamCard = styled.div`
-  margin: 0.5rem 1.5rem;
+  margin: 1.5rem;
+  :last-of-type {
+    margin: 1.5rem 1.5rem 0 1.5rem;
+  }
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -34,7 +37,6 @@ const TeamCard = styled.div`
 `
 
 const Info = styled.div`
-  margin-bottom: 2.5rem;
   text-align: center;
   text-transform: capitalize;
 `

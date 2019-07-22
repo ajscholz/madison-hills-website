@@ -8,8 +8,11 @@ import StyledHeroImage from "../components/HeroImage"
 import Section from "../components/Section"
 import Title from "../components/Title"
 import TeamCard from "../components/TeamCard"
+import { List, ListItem } from "../components/List"
 
 import staff from "../utils/staff"
+import elders from "../utils/elders"
+import deacons from "../utils/deacons"
 
 const about = ({ data }) => (
   <Layout>
@@ -17,7 +20,7 @@ const about = ({ data }) => (
     <StyledHeroImage image={data.heroImage.childImageSharp.fluid}>
       About
     </StyledHeroImage>
-    <TeamSection>
+    <Section>
       <Title>Our Team</Title>
       <FlexContainer>
         {/* render a team card for each staff member in the staff array, and dynamically load the graphql image based on their name (key) */}
@@ -31,13 +34,25 @@ const about = ({ data }) => (
           />
         ))}
       </FlexContainer>
-    </TeamSection>
+    </Section>
+    <Section dark>
+      <Title>Our Elders</Title>
+      <List>
+        {elders.map(elder => (
+          <ListItem key={elder}>{elder}</ListItem>
+        ))}
+      </List>
+    </Section>
+    <Section>
+      <Title>Our Deacons</Title>
+      <List>
+        {deacons.map(deacon => (
+          <ListItem key={deacon}>{deacon}</ListItem>
+        ))}
+      </List>
+    </Section>
   </Layout>
 )
-
-const TeamSection = styled(Section)`
-  padding-bottom: 1.5rem;
-`
 
 const FlexContainer = styled.div`
   width: 100%;
