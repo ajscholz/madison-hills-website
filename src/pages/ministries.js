@@ -26,8 +26,17 @@ const about = ({ data }) => {
       <StyledHeroImage image={data.heroImage.childImageSharp.fluid}>
         Ministries
       </StyledHeroImage>
+      <Section dark>
+        <Title>Community</Title>
+      </Section>
       <Section>
-        <Title>Section</Title>
+        <Title>Teens</Title>
+      </Section>
+      <Section dark>
+        <Title>Kids</Title>
+      </Section>
+      <Section>
+        <Title>Worship</Title>
       </Section>
     </Layout>
   )
