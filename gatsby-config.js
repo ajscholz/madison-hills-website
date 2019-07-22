@@ -31,6 +31,18 @@ module.exports = {
     `gatsby-transformer-sharp`,
     `gatsby-plugin-sharp`,
     {
+      resolve: `gatsby-source-facebook`,
+      options: {
+        places: [`citynorthonline`], // Can be either a numeric ID or the URL ID
+        params: {
+          fields:
+            "videos {title, created_time,description,embed_html,live_status,picture,source,thumbnails}", // See Facebooks API to see what you can query for
+        },
+        key:
+          "EAAiSJe3aTfcBAAtnGZCifUZB4wzLOFyaNUUc418uLNhlb4MCZCbYwJHOw33P1cZAS0v4MGeNMDDIVLz7wg8OAbROwyLoVVZCOD2CkPuvSsvSFgS94iU0tVccxn3kO39vNccWZBgPGplylf63NHk4ZBPMOZAi44RLWMk6SD8RLihtzgOmYPuwlFZBS874hqLW2uWEZD", // You will need to create a Facebook application and go through review in order to get an API token.
+      },
+    },
+    {
       resolve: `gatsby-plugin-manifest`,
       options: {
         name: `Madison Hills Christian Church`,
