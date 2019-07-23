@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import { useStaticQuery, graphql } from 'gatsby';
+import SpinnerIcon from './SpinnerIcon';
 
 const emailData = graphql`
   {
@@ -59,6 +60,7 @@ export default () => {
           if (response.ok) {
             alert(data.msg);
             resetForm();
+            return;
           } else {
             throw data.msg;
           }
@@ -66,6 +68,7 @@ export default () => {
           alert(err);
           console.log(err);
         }
+        setSubmitting(false);
       }}
     >
       {({ isSubmitting }) => (
@@ -88,7 +91,8 @@ export default () => {
             <StyledErrorMessage name="message" component="div" />
           </FieldContainer>
           <StyledButton type="submit" disabled={isSubmitting}>
-            Submit
+            {isSubmitting && <SpinnerIcon margin="0 1rem 0 0" top="2px" />}
+            {isSubmitting ? `Submitting` : 'Submit'}
           </StyledButton>
         </StyledForm>
       )}
@@ -142,9 +146,16 @@ const StyledButton = styled.button`
   font-size: 1rem;
   border: none;
   border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   transition: var(--mainTransition);
   cursor: pointer;
-  &:hover {
+  &:not(:disabled):hover {
     background: var(--primaryDark);
+  }
+  &:disabled {
+    opacity: 0.9;
+    cursor: default;
   }
 `;
