@@ -1,12 +1,11 @@
-import React from "react"
-import { graphql, Link } from "gatsby"
+import React from 'react';
+import { graphql, Link } from 'gatsby';
 
-import Layout from "../components/Layout"
-import Seo from "../components/Seo"
-import StyledHeroImage from "../components/HeroImage"
-import Section from "../components/Section"
-import Title from "../components/Title"
-import Button from "../components/Button"
+import Seo from '../components/Seo';
+import StyledHeroImage from '../components/HeroImage';
+import Section from '../components/Section';
+import Title from '../components/Title';
+import Button from '../components/Button';
 
 export const data = graphql`
   {
@@ -18,11 +17,11 @@ export const data = graphql`
       }
     }
   }
-`
+`;
 
 const about = ({ data }) => {
   return (
-    <Layout>
+    <>
       <Seo title=""></Seo>
       <StyledHeroImage image={data.heroImage.childImageSharp.fluid}>
         Ministries
@@ -51,8 +50,8 @@ const about = ({ data }) => {
           <Link to="ministries/worship">Go to worship page</Link>
         </Button>
       </Section>
-    </Layout>
-  )
-}
+    </>
+  );
+};
 
-export default about
+export default about;

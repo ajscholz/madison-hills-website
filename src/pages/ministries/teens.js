@@ -1,11 +1,10 @@
-import React from "react"
-import { graphql } from "gatsby"
+import React from 'react';
+import { graphql } from 'gatsby';
 
-import Layout from "../../components/Layout"
-import HeroImage from "../../components/HeroImage"
-import Banner from "../../components/Banner"
-import Section from "../../components/Section"
-import Title from "../../components/Title"
+import HeroImage from '../../components/HeroImage';
+import Banner from '../../components/Banner';
+import Section from '../../components/Section';
+import Title from '../../components/Title';
 
 export const data = graphql`
   {
@@ -17,11 +16,11 @@ export const data = graphql`
       }
     }
   }
-`
+`;
 
 const teens = ({ data }) => {
   return (
-    <Layout>
+    <>
       <HeroImage image={data.heroImage.childImageSharp.fluid}>
         <Banner>Teen Ministry</Banner>
       </HeroImage>
@@ -38,13 +37,15 @@ const teens = ({ data }) => {
 12 Don’t let anyone look down on you because you are young, but set an example for the believers in speech, in conduct, in love, in faith and in purity. 13 Until I come, devote yourself to the public reading of Scripture, to preaching and to teaching.”`}
         </div>
         <h3>Follow us</h3>
-<div>Facebook: madisonhillsteens   </div>
-<div>Twitter: @mhteens</div>
-<div>Instagram: MH_Teens</div>
-<div>– or –</div>
-<div>Email the Teen Minister:   jeremy@madisonhills.org</div>
-<div>We are very excited to get to know you teen(s) and welcome them into our Teen Ministry!</div>
-
+        <div>Facebook: madisonhillsteens </div>
+        <div>Twitter: @mhteens</div>
+        <div>Instagram: MH_Teens</div>
+        <div>– or –</div>
+        <div>Email the Teen Minister: jeremy@madisonhills.org</div>
+        <div>
+          We are very excited to get to know you teen(s) and welcome them into
+          our Teen Ministry!
+        </div>
       </Section>
       <Section dark>
         <Title>What We Do</Title>
@@ -55,24 +56,54 @@ const teens = ({ data }) => {
         </div>
         <h3>Growth Groups</h3>
         <div>6:30 pm – 7:30 pm</div>
-        <div>Wednesdays are about Growing closer to God and to each other!  Students will experience a “light” Dinner, along with a Small Group Experience!</div>
+        <div>
+          Wednesdays are about Growing closer to God and to each other! Students
+          will experience a “light” Dinner, along with a Small Group Experience!
+        </div>
         <h3>Special Activities</h3>
         <div>
-          We love to spend time together and welcome ALL teens to join in our special events!  We have something fun, exciting, friendship building, memory making at least one a month, sometimes more!
-          </div>
+          We love to spend time together and welcome ALL teens to join in our
+          special events! We have something fun, exciting, friendship building,
+          memory making at least one a month, sometimes more!
+        </div>
       </Section>
       <Section>
         <Title>What's Coming</Title>
-        <h3>Check Out our 2018-2019 Theme</h3><div>{`We are very excited about our New Theme…which kicks off the end of August!  We are currently planning so many wonderful events, lessons, experiences that will help Students identify who they are!`}</div><h3><a href="https://drive.google.com/open?id=19jMRPwwi_eqz7sLDNbf5DdiNkwp0jfja" target="_blank" rel="noopener noreferrer">Teen Ministry Brochure</a></h3>
-<h3>Mission Trip</h3>
-<div>{`Every Summer we go to a wonderful city and do amazing projects, meet new people and serve those that need served!  These trips are 5-6 days, having amazing experiences, bonding with our group and making memories that will last a lifetime!`}<br/>
-{`This Summer, we took  27 Teens and 6 Adults to Niagara Falls…and had an amazing week!`}</div>
-<h3>Check out our Videos…</h3>
-<div><a href="https://youtu.be/Z-I8qhwYmQk" target="_blank" rel="noopener noreferrer">{`Niagara Falls (#1)`}</a></div>
- <div><a href="https://youtu.be/durLC2647Xs" target="_blank" rel="noopener noreferrer">{`Niagara Falls (#2)`}</a></div>
+        <h3>Check Out our 2018-2019 Theme</h3>
+        <div>{`We are very excited about our New Theme…which kicks off the end of August!  We are currently planning so many wonderful events, lessons, experiences that will help Students identify who they are!`}</div>
+        <h3>
+          <a
+            href="https://drive.google.com/open?id=19jMRPwwi_eqz7sLDNbf5DdiNkwp0jfja"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Teen Ministry Brochure
+          </a>
+        </h3>
+        <h3>Mission Trip</h3>
+        <div>
+          {`Every Summer we go to a wonderful city and do amazing projects, meet new people and serve those that need served!  These trips are 5-6 days, having amazing experiences, bonding with our group and making memories that will last a lifetime!`}
+          <br />
+          {`This Summer, we took  27 Teens and 6 Adults to Niagara Falls…and had an amazing week!`}
+        </div>
+        <h3>Check out our Videos…</h3>
+        <div>
+          <a
+            href="https://youtu.be/Z-I8qhwYmQk"
+            target="_blank"
+            rel="noopener noreferrer"
+          >{`Niagara Falls (#1)`}</a>
+        </div>
+        <div>
+          <a
+            href="https://youtu.be/durLC2647Xs"
+            target="_blank"
+            rel="noopener noreferrer"
+          >{`Niagara Falls (#2)`}</a>
+        </div>
       </Section>
-    </Layout>
-  )
-}
+    </>
+  );
+};
 
-export default teens
+export default teens;

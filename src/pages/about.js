@@ -1,23 +1,22 @@
-import React from "react"
-import { graphql } from "gatsby"
-import styled from "styled-components"
+import React from 'react';
+import { graphql } from 'gatsby';
+import styled from 'styled-components';
 
-import Layout from "../components/Layout"
-import Seo from "../components/Seo"
-import StyledHeroImage from "../components/HeroImage"
-import Section from "../components/Section"
-import Title from "../components/Title"
-import TeamCard from "../components/TeamCard"
-import { List, ListItem } from "../components/List"
-import Accordion from "../components/Accordion"
+import Seo from '../components/Seo';
+import StyledHeroImage from '../components/HeroImage';
+import Section from '../components/Section';
+import Title from '../components/Title';
+import TeamCard from '../components/TeamCard';
+import { List, ListItem } from '../components/List';
+import Accordion from '../components/Accordion';
 
-import staff from "../utils/staff"
-import elders from "../utils/elders"
-import deacons from "../utils/deacons"
-import beliefs from "../utils/beliefs"
+import staff from '../utils/staff';
+import elders from '../utils/elders';
+import deacons from '../utils/deacons';
+import beliefs from '../utils/beliefs';
 
 const about = ({ data }) => (
-  <Layout>
+  <>
     <Seo title="About"></Seo>
     <StyledHeroImage image={data.heroImage.childImageSharp.fluid}>
       About
@@ -58,8 +57,8 @@ const about = ({ data }) => (
       <Accordion beliefs={beliefs}></Accordion>
     </Section>
     <Section></Section>
-  </Layout>
-)
+  </>
+);
 
 const FlexContainer = styled.div`
   width: 100%;
@@ -67,9 +66,9 @@ const FlexContainer = styled.div`
   flex-wrap: wrap;
   justify-content: space-evenly;
   align-items: flex-start;
-`
+`;
 
-export default about
+export default about;
 
 export const data = graphql`
   {
@@ -116,4 +115,4 @@ export const data = graphql`
       }
     }
   }
-`
+`;

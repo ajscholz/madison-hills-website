@@ -1,17 +1,16 @@
-import React from "react"
-import { graphql } from "gatsby"
-import styled from "styled-components"
+import React from 'react';
+import { graphql } from 'gatsby';
+import styled from 'styled-components';
 
-import Layout from "../components/Layout"
-import HeroImage from "../components/HeroImage"
-import SEO from "../components/Seo"
-import Title from "../components/Title"
-import Section from "../components/Section"
-import Icon from "../components/Icon"
-import ContactForm from "../components/ContactForm"
-import EventCard from "../components/EventCard"
+import HeroImage from '../components/HeroImage';
+import SEO from '../components/Seo';
+import Title from '../components/Title';
+import Section from '../components/Section';
+import Icon from '../components/Icon';
+import ContactForm from '../components/ContactForm';
+import EventCard from '../components/EventCard';
 
-import { FaClock, FaMapMarkerAlt } from "react-icons/fa"
+import { FaClock, FaMapMarkerAlt } from 'react-icons/fa';
 
 export const data = graphql`
   query MyQuery {
@@ -37,7 +36,7 @@ export const data = graphql`
       }
     }
   }
-`
+`;
 
 // const getAge = birthday => {
 //   const diff = Date.now() - birthday.getTime()
@@ -51,7 +50,7 @@ const IndexPage = ({ data, className }) => {
   // const cohenAge = getAge(new Date(2017, 4, 3))
 
   return (
-    <Layout>
+    <>
       <SEO title="Home" />
       <HeroImage image={data.file.childImageSharp.fluid} full>
         For Richmond.
@@ -98,9 +97,9 @@ const IndexPage = ({ data, className }) => {
         <Title>Contact Us</Title>
         <ContactForm />
       </Section>
-    </Layout>
-  )
-}
+    </>
+  );
+};
 
 const InfoWrapper = styled.div`
   display: flex;
@@ -109,7 +108,7 @@ const InfoWrapper = styled.div`
   @media (min-width: 576px) {
     align-items: center;
   }
-`
+`;
 
 const InfoContainer = styled.div`
   display: flex;
@@ -117,18 +116,18 @@ const InfoContainer = styled.div`
   :first-of-type {
     margin-bottom: 0.75rem;
   }
-`
+`;
 
 const StyledIcon = styled(Icon)`
   font-size: 2rem;
   color: var(--primary);
   margin-right: 20px;
-`
+`;
 
 const H3 = styled.h3`
   font-size: 1.25rem;
   margin: 0;
-`
+`;
 
 const EventList = styled.ul`
   width: 100%;
@@ -137,12 +136,12 @@ const EventList = styled.ul`
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-`
+`;
 
 const Event = styled.li`
   width: 100%;
   height: 100px;
-`
+`;
 // const PastorContainer = styled.div`
 //   display: flex;
 //   align-items: center;
@@ -183,4 +182,4 @@ const Event = styled.li`
 //   margin-bottom: 0;
 // `
 
-export default IndexPage
+export default IndexPage;

@@ -1,11 +1,10 @@
-import React from "react"
-import { graphql } from "gatsby"
+import React from 'react';
+import { graphql } from 'gatsby';
 
-import Layout from "../components/Layout"
-import Seo from "../components/Seo"
-import StyledHeroImage from "../components/HeroImage"
-import Section from "../components/Section"
-import Title from "../components/Title"
+import Seo from '../components/Seo';
+import StyledHeroImage from '../components/HeroImage';
+import Section from '../components/Section';
+import Title from '../components/Title';
 
 export const data = graphql`
   {
@@ -17,11 +16,11 @@ export const data = graphql`
       }
     }
   }
-`
+`;
 
 const about = ({ data }) => {
   return (
-    <Layout>
+    <>
       <Seo title=""></Seo>
       <StyledHeroImage image={data.heroImage.childImageSharp.fluid}>
         Messages
@@ -29,8 +28,8 @@ const about = ({ data }) => {
       <Section>
         <Title>Section</Title>
       </Section>
-    </Layout>
-  )
-}
+    </>
+  );
+};
 
-export default about
+export default about;
