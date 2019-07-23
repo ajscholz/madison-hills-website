@@ -1,9 +1,9 @@
-import React from "react"
-import styled from "styled-components"
+import React from 'react';
+import styled from 'styled-components';
 
-import Navigation from "./Navigation"
+import Navigation from './Navigation';
 
-import { FaTimes } from "react-icons/fa"
+import { FaTimes } from 'react-icons/fa';
 
 const SideDrawer = props => (
   <StyledSideDrawer open={props.open}>
@@ -13,9 +13,9 @@ const SideDrawer = props => (
       </span>
     </StyledButton>
 
-    <Navigation />
+    <Navigation click={props.drawerClickHandler} />
   </StyledSideDrawer>
-)
+);
 
 const StyledSideDrawer = styled.nav`
   height: 100%;
@@ -31,11 +31,11 @@ const StyledSideDrawer = styled.nav`
   flex-direction: column;
   align-items: flex-end;
   transition: transform 0.3s ease-out;
-  transform: ${props => (props.open ? "translateX(0)" : "translateX(105%)")};
+  transform: ${props => (props.open ? 'translateX(0)' : 'translateX(105%)')};
   @media (min-width: 663px) {
     display: none;
   }
-`
+`;
 
 const StyledButton = styled.button`
   padding: 0;
@@ -45,11 +45,11 @@ const StyledButton = styled.button`
   &:focus {
     outline: none;
   }
-`
+`;
 
 const StyledIcon = styled(FaTimes)`
   font-size: 2rem;
   color: var(--primary);
-`
+`;
 
-export default SideDrawer
+export default SideDrawer;

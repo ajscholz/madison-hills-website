@@ -1,12 +1,12 @@
-import React from "react"
-import { Link, graphql, useStaticQuery } from "gatsby"
-import Img from "gatsby-image"
-import styled from "styled-components"
-import PropTypes from "prop-types"
+import React from 'react';
+import { Link, graphql, useStaticQuery } from 'gatsby';
+import Img from 'gatsby-image';
+import styled from 'styled-components';
+import PropTypes from 'prop-types';
 
-import DrawerToggleButton from "./DrawerToggleButton"
-import Navigation from "./Navigation"
-import { useBrowserWidth } from "../context/BrowserWidthContext"
+import DrawerToggleButton from './DrawerToggleButton';
+import Navigation from './Navigation';
+import { useBrowserWidth } from '../context/BrowserWidthContext';
 
 const data = graphql`
   {
@@ -18,12 +18,12 @@ const data = graphql`
       }
     }
   }
-`
+`;
 
 const Header = ({ siteTitle, drawerClickHandler }) => {
-  const { logo } = useStaticQuery(data)
+  const { logo } = useStaticQuery(data);
 
-  const width = useBrowserWidth()
+  const width = useBrowserWidth();
 
   return (
     <StyledHeader>
@@ -36,8 +36,8 @@ const Header = ({ siteTitle, drawerClickHandler }) => {
       {width > 662 ? <Navigation /> : null}
       {width < 663 ? <DrawerToggleButton click={drawerClickHandler} /> : null}
     </StyledHeader>
-  )
-}
+  );
+};
 
 const StyledHeader = styled.header`
   margin: 0;
@@ -49,26 +49,26 @@ const StyledHeader = styled.header`
     flex-direction: column;
     align-items: center;
   }
-`
+`;
 
 const StyledLogoLink = styled(Link)`
   color: var(--white);
   text-decoration: none;
-`
+`;
 
 const StyledImage = styled(Img)`
   width: 100px;
   @media (min-width: 663px) {
     margin-bottom: 1rem;
   }
-`
+`;
 
 Header.propTypes = {
   siteTitle: PropTypes.string,
-}
+};
 
 Header.defaultProps = {
   siteTitle: ``,
-}
+};
 
-export default Header
+export default Header;

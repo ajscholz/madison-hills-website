@@ -1,16 +1,22 @@
-import React from "react"
-import styled from "styled-components"
-import { Link } from "gatsby"
+import React from 'react';
+import styled from 'styled-components';
+import { Link } from 'gatsby';
 
-import links from "../utils/links"
+import links from '../utils/links';
 
-const Navigation = () => {
+const Navigation = props => {
+  const handleClick = () => {
+    console.log('test');
+    props.click();
+    return 'hello';
+  };
+
   return (
     <nav>
       <StyledList>
         {links.map(link => (
           <StyledListItem key={link.name}>
-            {link.name !== "give" ? (
+            {link.name !== 'give' ? (
               <StyledLink to={link.path} alt={link.name}>
                 {link.name}
               </StyledLink>
@@ -20,6 +26,7 @@ const Navigation = () => {
                 href={link.path}
                 target="_blank"
                 rel="noopener noreferrer"
+                onClick={() => handleClick}
               >
                 {link.name}
               </StyledLink>
@@ -28,8 +35,8 @@ const Navigation = () => {
         ))}
       </StyledList>
     </nav>
-  )
-}
+  );
+};
 
 const StyledList = styled.ul`
   margin: 0;
@@ -42,13 +49,13 @@ const StyledList = styled.ul`
     justify-content: space-evenly;
     padding: 0;
   }
-`
+`;
 const StyledListItem = styled.li`
   margin-bottom: 0.75rem;
   @media (min-width: 663px) {
     margin: 0 1.75rem 0 1.75rem;
   }
-`
+`;
 
 const StyledLink = styled(Link)`
   text-transform: capitalize;
@@ -60,6 +67,9 @@ const StyledLink = styled(Link)`
   @media (min-width: 663px) {
     font-size: 1rem;
   }
-`
+  &[aria-current='page'] {
+    color: var(--primaryDark);
+  }
+`;
 
-export default Navigation
+export default Navigation;
