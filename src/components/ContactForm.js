@@ -43,21 +43,29 @@ export default () => {
         }
         return errors;
       }}
-      onSubmit={async (values, { setSubmitting }) => {
-        await setTimeout(() => {
-          alert(JSON.stringify(values, null, 2));
-          setSubmitting(false);
-        }, 400);
-        await fetch('/.netlify/functions/contact', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            ...values,
-            siteEmail: siteEmail,
-          }),
-        });
+      onSubmit={async (values, { setSubmitting, resetForm }) => {
+        try {
+          const response = await fetch('/.netlify/functions/contact', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+              ...values,
+              siteEmail: siteEmail,
+            }),
+          });
+          const data = await response.json();
+          if (response.ok) {
+            alert(data.msg);
+            resetForm();
+          } else {
+            throw data.msg;
+          }
+        } catch (err) {
+          alert(err);
+          console.log(err);
+        }
       }}
     >
       {({ isSubmitting }) => (

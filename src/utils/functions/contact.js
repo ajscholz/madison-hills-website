@@ -70,9 +70,7 @@ To reply to your message simply reply to this email directly.`,
     }
     return {
       statusCode: 200,
-      body: JSON.stringify({
-        msg: 'Message submitted successfully.',
-      }),
+      body: JSON.stringify({ msg: 'Message submitted successfully.' }),
     };
   } catch (err) {
     console.log(err);
