@@ -1,8 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import { useStaticQuery, graphql } from 'gatsby';
 import SpinnerIcon from './SpinnerIcon';
+
+import { FaRegCheckCircle, FaRegTimesCircle } from 'react-icons/fa';
 
 const emailData = graphql`
   {
@@ -15,6 +17,9 @@ const emailData = graphql`
 `;
 
 export default () => {
+  const [submitted, setSubmitted] = useState(false);
+  const [accepted, setAccepted] = useState(false);
+
   const {
     site: {
       siteMetadata: { siteEmail },
@@ -58,17 +63,22 @@ export default () => {
           });
           const data = await response.json();
           if (response.ok) {
-            alert(data.msg);
-            resetForm();
-            return;
+            setAccepted(true);
           } else {
+            setAccepted(false);
             throw data.msg;
           }
         } catch (err) {
-          alert(err);
           console.log(err);
         }
-        setSubmitting(false);
+        setSubmitted(true);
+        setTimeout(() => {
+          if (accepted) resetForm();
+          setSubmitting(false);
+        }, 2000);
+        setTimeout(() => {
+          setSubmitted(false);
+        }, 5000);
       }}
     >
       {({ isSubmitting }) => (
@@ -94,6 +104,19 @@ export default () => {
             {isSubmitting && <SpinnerIcon margin="0 1rem 0 0" top="2px" />}
             {isSubmitting ? `Submitting` : 'Submit'}
           </StyledButton>
+          {submitted && (
+            <SubmitMessage>
+              <Icon
+                as={accepted ? FaRegCheckCircle : FaRegTimesCircle}
+                accepted={accepted}
+              />
+              <h4>
+                {accepted
+                  ? 'Message submitted successfully!'
+                  : 'Message submission failed. Please try again.'}
+              </h4>
+            </SubmitMessage>
+          )}
         </StyledForm>
       )}
     </Formik>
@@ -103,6 +126,7 @@ export default () => {
 const StyledForm = styled(Form)`
   width: 100%;
   max-width: 600px;
+  position: relative;
 `;
 
 const FieldContainer = styled.div`
@@ -158,4 +182,41 @@ const StyledButton = styled.button`
     opacity: 0.9;
     cursor: default;
   }
+`;
+
+const SubmitMessage = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 500;
+  min-height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  text-align: center;
+  opacity: 0;
+  background: var(--white);
+  animation: fade 5s;
+  @keyframes fade {
+    0% {
+      opacity: 0;
+    }
+    10% {
+      opacity: 1;
+    }
+    90% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0;
+    }
+  }
+`;
+
+const Icon = styled.svg`
+  display: block;
+  font-size: 10rem;
+  color: ${props => (props.accepted ? 'var(--primary)' : 'tomato')};
 `;
