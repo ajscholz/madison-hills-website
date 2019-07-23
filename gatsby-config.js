@@ -1,3 +1,5 @@
+var proxy = require('http-proxy-middleware');
+
 module.exports = {
   siteMetadata: {
     title: `Madison Hills Christian Church`,
@@ -12,6 +14,17 @@ module.exports = {
     city: `Richmond`,
     state: `KY`,
     zip: `40475`,
+  },
+  developMiddleware: app => {
+    app.use(
+      '/.netlify/functions',
+      proxy({
+        target: 'http://localhost:9000',
+        pathRewrite: {
+          '/.netlify/functions/': '',
+        },
+      })
+    );
   },
   plugins: [
     {
@@ -36,10 +49,10 @@ module.exports = {
         places: [`citynorthonline`], // Can be either a numeric ID or the URL ID
         params: {
           fields:
-            "videos {title, created_time,description,embed_html,live_status,picture,source,thumbnails}", // See Facebooks API to see what you can query for
+            'videos {title, created_time,description,embed_html,live_status,picture,source,thumbnails}', // See Facebooks API to see what you can query for
         },
         key:
-          "EAAiSJe3aTfcBAAtnGZCifUZB4wzLOFyaNUUc418uLNhlb4MCZCbYwJHOw33P1cZAS0v4MGeNMDDIVLz7wg8OAbROwyLoVVZCOD2CkPuvSsvSFgS94iU0tVccxn3kO39vNccWZBgPGplylf63NHk4ZBPMOZAi44RLWMk6SD8RLihtzgOmYPuwlFZBS874hqLW2uWEZD", // You will need to create a Facebook application and go through review in order to get an API token.
+          'EAAiSJe3aTfcBAAtnGZCifUZB4wzLOFyaNUUc418uLNhlb4MCZCbYwJHOw33P1cZAS0v4MGeNMDDIVLz7wg8OAbROwyLoVVZCOD2CkPuvSsvSFgS94iU0tVccxn3kO39vNccWZBgPGplylf63NHk4ZBPMOZAi44RLWMk6SD8RLihtzgOmYPuwlFZBS874hqLW2uWEZD', // You will need to create a Facebook application and go through review in order to get an API token.
       },
     },
     {
@@ -58,4 +71,4 @@ module.exports = {
     // To learn more, visit: https://gatsby.dev/offline
     // `gatsby-plugin-offline`,
   ],
-}
+};
