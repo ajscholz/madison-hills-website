@@ -1,37 +1,63 @@
-import React from "react"
-import styled from "styled-components"
-import { Formik, Form, Field, ErrorMessage } from "formik"
+import React from 'react';
+import styled from 'styled-components';
+import { Formik, Form, Field, ErrorMessage } from 'formik';
+import { useStaticQuery, graphql } from 'gatsby';
+
+const emailData = graphql`
+  {
+    site {
+      siteMetadata {
+        siteEmail: email
+      }
+    }
+  }
+`;
 
 export default () => {
+  const {
+    site: {
+      siteMetadata: { siteEmail },
+    },
+  } = useStaticQuery(emailData);
   return (
     <Formik
       initialValues={{
-        name: "",
-        email: "",
-        message: "",
+        name: 'andrew',
+        email: 'andrew@citynorth.chuerch',
+        message: `let's get this going`,
       }}
       validate={values => {
-        let errors = {}
+        let errors = {};
         if (!values.name) {
-          errors.name = "Required"
+          errors.name = 'Required';
         }
         if (!values.email) {
-          errors.email = "Required"
+          errors.email = 'Required';
         } else if (
           !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)
         ) {
-          errors.email = "Invalid email address"
+          errors.email = 'Invalid email address';
         }
         if (!values.message) {
-          errors.message = "Required"
+          errors.message = 'Required';
         }
-        return errors
+        return errors;
       }}
-      onSubmit={(values, { setSubmitting }) => {
-        setTimeout(() => {
-          alert(JSON.stringify(values, null, 2))
-          setSubmitting(false)
-        }, 400)
+      onSubmit={async (values, { setSubmitting }) => {
+        await setTimeout(() => {
+          alert(JSON.stringify(values, null, 2));
+          setSubmitting(false);
+        }, 400);
+        await fetch('/.netlify/functions/contact', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            ...values,
+            siteEmail: siteEmail,
+          }),
+        });
       }}
     >
       {({ isSubmitting }) => (
@@ -59,18 +85,18 @@ export default () => {
         </StyledForm>
       )}
     </Formik>
-  )
-}
+  );
+};
 
 const StyledForm = styled(Form)`
   width: 100%;
   max-width: 600px;
-`
+`;
 
 const FieldContainer = styled.div`
   position: relative;
   width: 100%;
-`
+`;
 
 const StyledField = styled(Field)`
   width: 100%;
@@ -87,7 +113,7 @@ const StyledField = styled(Field)`
   :focus {
     border-bottom: 1px solid var(--primaryDark);
   }
-`
+`;
 
 const StyledErrorMessage = styled(ErrorMessage)`
   position: absolute;
@@ -98,7 +124,7 @@ const StyledErrorMessage = styled(ErrorMessage)`
   padding: 0.4rem 0.8rem;
   border-radius: 5px;
   color: var(--white);
-`
+`;
 
 const StyledButton = styled.button`
   background: var(--primary);
@@ -113,4 +139,4 @@ const StyledButton = styled.button`
   &:hover {
     background: var(--primaryDark);
   }
-`
+`;
