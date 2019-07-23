@@ -19,7 +19,18 @@ export default ({ beliefs }) => {
             </AccordionItemHeading>
             <StyledAccordionItemPanel>
               <Text>{belief.text}</Text>
-              <Reference>{belief.references}</Reference>
+              <Reference>
+                {belief.references.map(reference => (
+                  <StyledLink
+                    href={reference.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    index={reference.ref}
+                  >
+                    {reference.ref}
+                  </StyledLink>
+                ))}
+              </Reference>
             </StyledAccordionItemPanel>
           </StyledAccordionItem>
         )
@@ -90,4 +101,10 @@ const Reference = styled(AccordionItemPanel)`
   font-size: 0.8rem;
   text-transform: capitalize;
   opacity: 0.8;
+`
+
+const StyledLink = styled.a`
+  :not(:last-of-type):after {
+    content: ", ";
+  }
 `
