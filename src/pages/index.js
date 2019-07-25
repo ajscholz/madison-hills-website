@@ -62,9 +62,17 @@ const IndexPage = ({ data, className }) => {
           </InfoContainer>
         </InfoWrapper>
       </Section>
-      <Section dark>
+      <Section dark wide>
         <Title>Upcoming Events</Title>
         <EventsContainer>
+          <EventCard
+            image={data.kickball.childImageSharp.fluid}
+            title="family kickball"
+          />
+          <EventCard
+            image={data.kickball.childImageSharp.fluid}
+            title="family kickball"
+          />
           <EventCard
             image={data.kickball.childImageSharp.fluid}
             title="family kickball"
@@ -107,13 +115,16 @@ const H3 = styled.h3`
   margin: 0;
 `;
 
-const EventsContainer = styled.ul`
+const EventsContainer = styled.div`
   width: 100%;
-  list-style: none;
-  padding: 0;
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
+  max-width: 700px;
+  justify-content: space-between;
+  align-items: center;
+  @media (min-width: 920px) {
+    max-width: 860px;
+  }
 `;
 
 export default IndexPage;
