@@ -1,58 +1,59 @@
+// https://medium.com/@nickroach_50526/sending-emails-with-node-js-using-smtp-gmail-and-oauth2-316fe9c790a1
+
 const nodemailer = require('nodemailer');
+const { google } = require('googleapis');
 
 exports.handler = async event => {
+  const OAuth2 = google.auth.OAuth2;
+
   const { body } = event;
   let data = JSON.parse(body);
 
-  // check for all data (should have been handled within the form)
-  if (data.name === undefined) {
-    return {
-      statusCode: 500,
-      body: JSON.stringify({
-        msg: 'A name is required. Please try again.',
-      }),
-    };
-  } else if (data.email === undefined) {
-    return {
-      statusCode: 500,
-      body: JSON.stringify({
-        msg: 'An email is required. Please try again.',
-      }),
-    };
-  } else if (data.message === undefined) {
-    return {
-      statusCode: 500,
-      body: JSON.stringify({
-        msg: 'A message is required. Please try again.',
-      }),
-    };
-  }
+  // ------------- Google OAuth2 authorization -------------
+  const oauth2Client = new OAuth2(
+    process.env.GMAIL_CLIENT_ID, // ClientID
+    process.env.GMAIL_CLIENT_SECRET // Client Secret
+  );
+  oauth2Client.setCredentials({
+    refresh_token: process.env.GMAIL_REFRESH_TOKEN,
+  });
+  const accessToken = oauth2Client.getAccessToken(); // Original article had deprecated access token method
+  // ------------- End Google OAuth2 authorization -------------
 
-  let transporter = nodemailer.createTransport({
-    host: 'smtp.mailtrap.io',
-    port: 2525,
+  const transporter = nodemailer.createTransport({
+    service: 'gmail',
     auth: {
-      user: 'a949c930869b32',
-      pass: '00f4db531864a8',
+      type: 'OAuth2',
+      user: 'andrew@citynorth.church',
+      clientId: process.env.GMAIL_CLIENT_ID,
+      clientSecret: process.env.GMAIL_CLIENT_SECRET,
+      refreshToken: process.env.GMAIL_REFRESH_TOKEN,
+      accessToken: accessToken,
     },
   });
+
+  //MAILTRAP
+
+  // let transporter = nodemailer.createTransport({
+  //   host: 'smtp.mailtrap.io',
+  //   port: 2525,
+  //   auth: {
+  // user: process.env.MAILTRAP_USERNAME,
+  // pass: process.env.MAILTRAP_PASSWORD,
+  //     user: 'a949c930869b32',
+  //     pass: '00f4db531864a8',
+  //   },
+  // });
 
   const message = {
     from: {
       name: 'AJSolutions',
       address: 'andrew@citynorth.church',
     },
-    // replyTo: data.values.email,
     replyTo: data.email,
     to: data.siteEmail,
     subject: 'Website Form Submission',
-    text: `You've received a new form submission!
-    
-    Name: ${data.name}
-    Email: ${data.email}
-    Message: ${data.message}
-
-To reply to your message simply reply to this email directly.`,
+    generateTextFromHTML: true,
     html: `<h1>You've recieved a new form submission!</h1><hr><p><b>Name: </b>${data.name}</p><p><b>Email: </b>${data.email}</p><p><b>Message: </b>${data.message}</p><hr><h4>To reply to your message simply reply to this email directly!</h4>`,
   };
 
