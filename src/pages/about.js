@@ -7,12 +7,12 @@ import StyledHeroImage from '../components/HeroImage';
 import Section from '../components/Section';
 import Title from '../components/Title';
 import TeamCard from '../components/TeamCard';
-import { List, ListItem } from '../components/List';
+// import { List, ListItem } from '../components/List';
 import Accordion from '../components/Accordion';
 
 import staff from '../utils/staff';
-import elders from '../utils/elders';
-import deacons from '../utils/deacons';
+// import elders from '../utils/elders';
+// import deacons from '../utils/deacons';
 import beliefs from '../utils/beliefs';
 
 const about = ({ data }) => (
@@ -36,7 +36,7 @@ const about = ({ data }) => (
         ))}
       </FlexContainer>
     </Section>
-    <Section dark>
+    {/* <Section dark>
       <Title>Our Elders</Title>
       <List>
         {elders.map(elder => (
@@ -51,7 +51,7 @@ const about = ({ data }) => (
           <ListItem key={deacon}>{deacon}</ListItem>
         ))}
       </List>
-    </Section>
+    </Section> */}
     <Section dark wide>
       <Title>What We Believe</Title>
       <Accordion items={beliefs} />
