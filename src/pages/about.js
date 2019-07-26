@@ -53,12 +53,8 @@ const about = ({ data }) => (
       </List>
     </Section>
     <Section dark wide>
-      <Title>Our Beliefs</Title>
-      <AccordionContainer>
-        {beliefs.map((belief, index) => {
-          return <Accordion belief={belief} key={index} />;
-        })}
-      </AccordionContainer>
+      <Title>What We Believe</Title>
+      <Accordion items={beliefs} />
     </Section>
     <Section></Section>
   </>
@@ -70,13 +66,6 @@ const FlexContainer = styled.div`
   flex-wrap: wrap;
   justify-content: space-evenly;
   align-items: flex-start;
-`;
-
-const AccordionContainer = styled.div`
-  max-width: 100%;
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-  grid-gap: 1rem;
 `;
 
 export default about;
