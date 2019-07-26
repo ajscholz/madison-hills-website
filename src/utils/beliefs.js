@@ -42,7 +42,7 @@ export default [
     ],
   },
   {
-    title: `Elders and Leadership`,
+    title: `Elders & Leadership`,
     text: `It is God’s plan for the elders to shepherd the local church.`,
     references: [
       {
@@ -171,4 +171,4 @@ export default [
       },
     ],
   },
-]
+];

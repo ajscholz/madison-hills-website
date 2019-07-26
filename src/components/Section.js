@@ -14,6 +14,10 @@ export default styled.section`
   ${props =>
     props.wide &&
     css`
+      @media (min-width: 600px) {
+        padding-left: 7.5vw;
+        padding-right: 7.5vw;
+      }
       @media (min-width: 767px) {
         padding-left: 5vw;
         padding-right: 5vw;
