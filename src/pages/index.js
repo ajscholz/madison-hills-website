@@ -14,7 +14,7 @@ import { FaClock, FaMapMarkerAlt } from 'react-icons/fa';
 
 export const data = graphql`
   query MyQuery {
-    file(name: { eq: "index-banner" }) {
+    hero: file(name: { eq: "index-banner" }) {
       childImageSharp {
         fluid {
           ...GatsbyImageSharpFluid
@@ -27,8 +27,21 @@ export const data = graphql`
         city
       }
     }
-
     kickball: file(name: { eq: "kickball" }) {
+      childImageSharp {
+        fluid {
+          ...GatsbyImageSharpFluid
+        }
+      }
+    }
+    larosas: file(name: { eq: "larosas" }) {
+      childImageSharp {
+        fluid {
+          ...GatsbyImageSharpFluid
+        }
+      }
+    }
+    theOffice: file(name: { eq: "the-office" }) {
       childImageSharp {
         fluid {
           ...GatsbyImageSharpFluid
@@ -42,7 +55,7 @@ const IndexPage = ({ data, className }) => {
   return (
     <>
       <SEO title="Home" />
-      <HeroImage image={data.file.childImageSharp.fluid} full>
+      <HeroImage image={data.hero.childImageSharp.fluid} full>
         For Richmond.
         <br />
         For You.
@@ -70,12 +83,12 @@ const IndexPage = ({ data, className }) => {
             title="family kickball"
           />
           <EventCard
-            image={data.kickball.childImageSharp.fluid}
-            title="family kickball"
+            title="office trivia"
+            image={data.theOffice.childImageSharp.fluid}
           />
           <EventCard
-            image={data.kickball.childImageSharp.fluid}
-            title="family kickball"
+            title="pizza night"
+            image={data.larosas.childImageSharp.fluid}
           />
         </EventsContainer>
       </Section>
