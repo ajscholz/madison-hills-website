@@ -3,6 +3,8 @@ import styled from 'styled-components';
 import { useSpring, animated } from 'react-spring';
 import Img from 'gatsby-image';
 
+import { FaLongArrowAltRight } from 'react-icons/fa';
+
 const EventCard = props => {
   const [flipped, set] = useState(false);
   const { transform } = useSpring({
@@ -17,6 +19,7 @@ const EventCard = props => {
           style={{ height: '100%', width: '100%', position: 'relative' }}
         ></Img>
         <Text>{props.title}</Text>
+        <Icon />
       </CardFront>
       <CardBack
         style={{
@@ -122,6 +125,22 @@ const Text = styled.div`
   @media (min-width: 900px) {
     font-size: 1.8em;
     padding: 2.5rem;
+  }
+`;
+
+const Icon = styled(FaLongArrowAltRight)`
+  position: absolute;
+  bottom: 0.4rem;
+  right: 0.8rem;
+  font-size: 1em;
+  @media (min-width: 500px) {
+    font-size: 1.1em;
+  }
+  @media (min-width: 662px) {
+    font-size: 1.3em;
+  }
+  @media (min-width: 900px) {
+    font-size: 1.5em;
   }
 `;
 
