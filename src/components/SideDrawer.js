@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { useSpring, animated } from 'react-spring';
+import { useSpring, animated, config } from 'react-spring';
 
 import Navigation from './Navigation';
 
@@ -9,6 +9,7 @@ import { FaTimes } from 'react-icons/fa';
 const SideDrawer = ({ click, open }) => {
   const toggle = useSpring({
     transform: open ? 'translateX(0)' : 'translateX(105%)',
+    config: { clamp: true, mass: 1, tension: 120, friction: 16 },
   });
   return (
     <StyledSideDrawer style={toggle}>
