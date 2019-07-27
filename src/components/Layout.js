@@ -5,19 +5,19 @@
  * See: https://www.gatsbyjs.org/docs/use-static-query/
  */
 
-import React, { useState } from "react"
-import PropTypes from "prop-types"
-import { useStaticQuery, graphql } from "gatsby"
-import styled from "styled-components"
-import { useBrowserWidth } from "../context/BrowserWidthContext"
+import React, { useState } from 'react';
+import PropTypes from 'prop-types';
+import { useStaticQuery, graphql } from 'gatsby';
+import styled from 'styled-components';
+import { useBrowserWidth } from '../context/BrowserWidthContext';
 
-import Header from "./Header"
-import Footer from "./Footer"
-import GlobalStyles from "../components/GlobalStyles"
-import SideDrawer from "./SideDrawer"
-import Backdrop from "./Backdrop"
+import Header from './Header';
+import Footer from './Footer';
+import GlobalStyles from '../components/GlobalStyles';
+import SideDrawer from './SideDrawer';
+import Backdrop from './Backdrop';
 
-import links from "../utils/links"
+import links from '../utils/links';
 
 const Layout = ({ children }) => {
   const data = useStaticQuery(graphql`
@@ -28,14 +28,14 @@ const Layout = ({ children }) => {
         }
       }
     }
-  `)
+  `);
 
-  const width = useBrowserWidth()
+  const width = useBrowserWidth();
 
-  const [sideDrawerOpen, drawerToggleHandler] = useState(false)
+  const [sideDrawerOpen, drawerToggleHandler] = useState(false);
 
   if (width > 662 && sideDrawerOpen) {
-    drawerToggleHandler(false)
+    drawerToggleHandler(false);
   }
 
   return (
@@ -64,7 +64,7 @@ const Layout = ({ children }) => {
         <SideDrawer
           links={links}
           open={sideDrawerOpen}
-          drawerClickHandler={() => drawerToggleHandler(!sideDrawerOpen)}
+          click={drawerToggleHandler}
         />
       ) : null}
       {sideDrawerOpen ? (
@@ -75,29 +75,29 @@ const Layout = ({ children }) => {
 
       <Footer title={data.site.siteMetadata.title} />
     </FlexContainer>
-  )
-}
+  );
+};
 
 const FlexContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: stretch;
   min-height: 100%;
-`
+`;
 
 const StyledBackdrop = styled(Backdrop)`
   @media (min-width: 663px) {
     display: none;
   }
-`
+`;
 
 const Main = styled.main`
   flex-grow: 1;
   background: var(--white);
-`
+`;
 
 Layout.propTypes = {
   children: PropTypes.node.isRequired,
-}
+};
 
-export default Layout
+export default Layout;

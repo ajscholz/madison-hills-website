@@ -1,23 +1,29 @@
 import React from 'react';
 import styled from 'styled-components';
+import { useSpring, animated } from 'react-spring';
 
 import Navigation from './Navigation';
 
 import { FaTimes } from 'react-icons/fa';
 
-const SideDrawer = props => (
-  <StyledSideDrawer open={props.open}>
-    <StyledButton onClick={props.drawerClickHandler} open={props.open}>
-      <span>
-        <StyledIcon alt="close nav" />
-      </span>
-    </StyledButton>
+const SideDrawer = ({ click, open }) => {
+  const toggle = useSpring({
+    transform: open ? 'translateX(0)' : 'translateX(105%)',
+  });
+  return (
+    <StyledSideDrawer style={toggle}>
+      <StyledButton onClick={() => click(false)}>
+        <span>
+          <StyledIcon alt="close nav" />
+        </span>
+      </StyledButton>
 
-    <Navigation click={props.drawerClickHandler} />
-  </StyledSideDrawer>
-);
+      <Navigation click={click} />
+    </StyledSideDrawer>
+  );
+};
 
-const StyledSideDrawer = styled.nav`
+const StyledSideDrawer = styled(animated.div)`
   height: 100%;
   background: var(--white);
   box-shadow: 1px 0px 7px rgba(0, 0, 0, 0.5);
@@ -30,8 +36,9 @@ const StyledSideDrawer = styled.nav`
   display: flex;
   flex-direction: column;
   align-items: flex-end;
-  transition: transform 0.3s ease-out;
-  transform: ${props => (props.open ? 'translateX(0)' : 'translateX(105%)')};
+  /* transition: transform 0.3s ease-out; */
+  /* transform: ${props =>
+    props.open ? 'translateX(0)' : 'translateX(105%)'}; */
   @media (min-width: 663px) {
     display: none;
   }

@@ -4,18 +4,12 @@ import { Link } from 'gatsby';
 
 import links from '../utils/links';
 
-const Navigation = props => {
-  const handleClick = () => {
-    console.log('test');
-    props.click();
-    return 'hello';
-  };
-
+const Navigation = ({ click }) => {
   return (
     <nav>
       <StyledList>
         {links.map(link => (
-          <StyledListItem key={link.name}>
+          <StyledListItem key={link.name} onClick={() => click(false)}>
             {link.name !== 'give' ? (
               <StyledLink to={link.path} alt={link.name}>
                 {link.name}
@@ -26,7 +20,6 @@ const Navigation = props => {
                 href={link.path}
                 target="_blank"
                 rel="noopener noreferrer"
-                onClick={() => handleClick}
               >
                 {link.name}
               </StyledLink>
