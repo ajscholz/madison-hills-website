@@ -6,7 +6,7 @@ import Img from 'gatsby-image';
 const EventCard = props => {
   const [flipped, set] = useState(false);
   const { transform } = useSpring({
-    transform: `perspective(600px) rotateY(${flipped ? 180 : 0}deg)`,
+    transform: `perspective(800px) rotateY(${flipped ? 180 : 0}deg)`,
     config: { mass: 5, tension: 500, friction: 80 },
   });
   return (
@@ -60,7 +60,7 @@ const CardBack = styled(Card)`
 const StyledDiv = styled.div`
   width: 100%;
   height: 80px;
-  margin: 0 2rem 0 2rem;
+  /* margin: 0 2rem 0 2rem; */
   display: flex;
   align-items: center;
   justify-content: center;

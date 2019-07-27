@@ -75,7 +75,7 @@ const IndexPage = ({ data, className }) => {
           </InfoContainer>
         </InfoWrapper>
       </Section>
-      <Section dark wide>
+      <Section dark padSide="5vw">
         <Title>Upcoming Events</Title>
         <EventsContainer>
           <EventCard
