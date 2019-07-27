@@ -4,12 +4,15 @@ import { Link } from 'gatsby';
 
 import links from '../utils/links';
 
-const Navigation = ({ click }) => {
+const Navigation = ({ click, sideDrawer }) => {
   return (
     <nav>
       <StyledList>
         {links.map(link => (
-          <StyledListItem key={link.name} onClick={() => click(false)}>
+          <StyledListItem
+            key={link.name}
+            onClick={sideDrawer ? () => click(false) : null}
+          >
             {link.name !== 'give' ? (
               <StyledLink to={link.path} alt={link.name}>
                 {link.name}

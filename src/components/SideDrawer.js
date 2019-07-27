@@ -18,7 +18,7 @@ const SideDrawer = ({ click, open }) => {
         </span>
       </StyledButton>
 
-      <Navigation click={click} />
+      <Navigation click={click} sideDrawer />
     </StyledSideDrawer>
   );
 };
