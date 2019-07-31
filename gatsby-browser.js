@@ -10,6 +10,7 @@ import React from 'react';
 import Layout from './src/components/Layout';
 
 import BrowserWidthProvider from './src/context/BrowserWidthContext';
+import GlobalStyles from './src/components/GlobalStyles';
 
 require('typeface-nunito-sans');
 
@@ -18,5 +19,8 @@ export const wrapRootElement = ({ element }) => (
 );
 
 export const wrapPageElement = ({ element, props }) => (
-  <Layout {...props}>{element}</Layout>
+  <Layout {...props}>
+    <GlobalStyles />
+    {element}
+  </Layout>
 );
