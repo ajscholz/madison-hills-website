@@ -1,8 +1,8 @@
-import React from "react"
-import styled from "styled-components"
-import BackgroundImage from "gatsby-background-image"
+import React from 'react';
+import styled from 'styled-components';
+import BackgroundImage from 'gatsby-background-image';
 
-import Banner from "./Banner"
+import Banner from './Banner';
 
 const HeroImage = ({ className, image, children, full }) => {
   // adds overlay
@@ -15,7 +15,7 @@ const HeroImage = ({ className, image, children, full }) => {
     : [
         image,
         `linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6))`,
-      ].reverse()
+      ].reverse();
 
   return (
     <StyledBackgroundImage
@@ -25,15 +25,16 @@ const HeroImage = ({ className, image, children, full }) => {
     >
       <Banner>{children}</Banner>
     </StyledBackgroundImage>
-  )
-}
+  );
+};
 
 const StyledHeroImage = styled(HeroImage)`
-  height: ${props => (props.full ? "70vh" : "40vh")};
+  height: ${props => (props.full ? '70vh' : '40vh')};
+  background-position: ${props => props.backgroundPosition};
   @media (min-width: 577px) {
-    height: ${props => (props.full ? "70vh" : "40vh")};
+    height: ${props => (props.full ? '70vh' : '40vh')};
   }
-`
+`;
 
 const StyledBackgroundImage = styled(BackgroundImage)`
   display: flex;
@@ -42,6 +43,6 @@ const StyledBackgroundImage = styled(BackgroundImage)`
   justify-content: center;
   align-items: center;
   z-index: 0;
-`
+`;
 
-export default StyledHeroImage
+export default StyledHeroImage;
