@@ -15,6 +15,7 @@ import Header from './Header';
 import Footer from './Footer';
 import SideDrawer from './SideDrawer';
 import Backdrop from './Backdrop';
+import GlobalStyles from './GlobalStyles';
 
 import links from '../utils/links';
 
@@ -38,8 +39,10 @@ const Layout = ({ children }) => {
   }
 
   return (
-    <FlexContainer>
-      {/* <h3
+    <>
+      <GlobalStyles />
+      <FlexContainer>
+        {/* <h3
         style={{
           margin: "0",
           position: "absolute",
@@ -53,25 +56,28 @@ const Layout = ({ children }) => {
         {width}
       </h3> */}
 
-      <Header
-        siteTitle={data.site.siteMetadata.title}
-        drawerClickHandler={() => drawerToggleHandler(!sideDrawerOpen)}
-      />
-      {width <= 662 ? (
-        <SideDrawer
-          links={links}
-          open={sideDrawerOpen}
-          click={drawerToggleHandler}
+        <Header
+          siteTitle={data.site.siteMetadata.title}
+          drawerClickHandler={() => drawerToggleHandler(!sideDrawerOpen)}
         />
-      ) : null}
-      {sideDrawerOpen ? (
-        <StyledBackdrop onClick={() => drawerToggleHandler(!sideDrawerOpen)} />
-      ) : null}
+        {width <= 662 ? (
+          <SideDrawer
+            links={links}
+            open={sideDrawerOpen}
+            click={drawerToggleHandler}
+          />
+        ) : null}
+        {sideDrawerOpen ? (
+          <StyledBackdrop
+            onClick={() => drawerToggleHandler(!sideDrawerOpen)}
+          />
+        ) : null}
 
-      <Main>{children}</Main>
+        <Main>{children}</Main>
 
-      <Footer title={data.site.siteMetadata.title} />
-    </FlexContainer>
+        <Footer title={data.site.siteMetadata.title} />
+      </FlexContainer>
+    </>
   );
 };
 

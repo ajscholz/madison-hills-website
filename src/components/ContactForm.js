@@ -28,9 +28,12 @@ export default () => {
   return (
     <Formik
       initialValues={{
-        name: 'andrew',
-        email: 'andrew@citynorth.chuerch',
-        message: `let's get this going`,
+        // name: 'andrew',
+        // email: 'andrew@citynorth.chuerch',
+        // message: `let's get this going`,
+        name: '',
+        email: '',
+        message: ``,
       }}
       validate={values => {
         let errors = {};

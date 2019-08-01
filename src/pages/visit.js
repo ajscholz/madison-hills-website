@@ -4,6 +4,9 @@ import { graphql } from 'gatsby';
 import Seo from '../components/Seo';
 import HeroImage from '../components/HeroImage';
 import Section from '../components/Section';
+import Title from '../components/Title';
+import ContactForm from '../components/ContactForm';
+// import Subtitle from '../components/Subtitle';
 
 export const data = graphql`
   {
@@ -27,7 +30,18 @@ const visit = ({ data }) => {
       >
         Visit
       </HeroImage>
-      <Section>hello from visit page</Section>
+      <Section>
+        <Title>What To Expect</Title>
+      </Section>
+      <Section dark>
+        <Title>Not Sure?</Title>
+        {/* <Subtitle>{`Here's one of our best messages to help you decide.`}</Subtitle> */}
+      </Section>
+      <Section>
+        <Title>Have Questions?</Title>
+        {/* <Subtitle>{`Send us a message and we'll get back to you.`}</Subtitle> */}
+        <ContactForm />
+      </Section>
     </>
   );
 };
