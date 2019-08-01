@@ -14,7 +14,7 @@ import { FaClock, FaMapMarkerAlt } from 'react-icons/fa';
 
 export const data = graphql`
   query MyQuery {
-    hero: file(name: { eq: "index-banner" }) {
+    hero: file(name: { eq: "index-hero" }) {
       childImageSharp {
         fluid {
           ...GatsbyImageSharpFluid
