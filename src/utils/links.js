@@ -8,10 +8,6 @@ export default [
     path: '/jesus',
   },
   {
-    name: 'ministries',
-    path: '/ministries',
-  },
-  {
     name: 'messages',
     path: '/messages',
   },

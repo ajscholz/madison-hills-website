@@ -2,7 +2,6 @@ import React from 'react';
 import { graphql } from 'gatsby';
 
 import HeroImage from '../../../components/HeroImage';
-import Banner from '../../../components/Banner';
 import Section from '../../../components/Section';
 import Title from '../../../components/Title';
 
@@ -22,7 +21,7 @@ const teens = ({ data }) => {
   return (
     <>
       <HeroImage image={data.heroImage.childImageSharp.fluid}>
-        <Banner>Teen Ministry</Banner>
+        Teen Ministry
       </HeroImage>
       <Section>
         <Title>Who We Are</Title>

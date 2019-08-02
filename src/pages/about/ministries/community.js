@@ -1,15 +1,13 @@
 import React from 'react';
 import { graphql } from 'gatsby';
-import styled from 'styled-components';
 
 import HeroImage from '../../../components/HeroImage';
-import Banner from '../../../components/Banner';
 import Section from '../../../components/Section';
 import Seo from '../../../components/Seo';
 import Title from '../../../components/Title';
 import MinistryCard from '../../../components/MinistryCard';
-import GridContainer from '../../../components/GridContainer';
 import FlexContainer from '../../../components/FlexContainer';
+import Subtitle from '../../../components/Subtitle';
 
 export const data = graphql`
   {
@@ -48,12 +46,11 @@ const teens = ({ data }) => {
         image="src/images/community-banner.jpg"
       />
       <HeroImage image={data.heroImage.childImageSharp.fluid}>
-        <Banner>Community Ministries</Banner>
+        Community Ministries
       </HeroImage>
       <Section>
         <Title>For Richmond</Title>
         <Subtitle>{`We aren't interested in building our own kingdom. We're interested in building God's Kingdom. Here are some of our partners in Richmond that are making a huge difference.`}</Subtitle>
-        {/* <GridContainer> */}
         <FlexContainer>
           {data.ministries.edges.map(({ ministry }) => (
             <MinistryCard
@@ -65,16 +62,9 @@ const teens = ({ data }) => {
             ></MinistryCard>
           ))}
         </FlexContainer>
-        {/* </GridContainer> */}
       </Section>
     </>
   );
 };
-
-const Subtitle = styled.div`
-  text-align: center;
-  margin-bottom: 3rem;
-  max-width: 650px;
-`;
 
 export default teens;
