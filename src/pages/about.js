@@ -1,5 +1,5 @@
 import React from 'react';
-import { graphql } from 'gatsby';
+import { graphql, Link } from 'gatsby';
 import styled from 'styled-components';
 
 import Seo from '../components/Seo';
@@ -9,11 +9,13 @@ import Title from '../components/Title';
 import TeamCard from '../components/TeamCard';
 // import { List, ListItem } from '../components/List';
 import Accordion from '../components/Accordion';
+import Button from '../components/Button';
 
 import staff from '../utils/staff';
 // import elders from '../utils/elders';
 // import deacons from '../utils/deacons';
 import beliefs from '../utils/beliefs';
+import ministries from '../utils/ministries';
 
 const about = ({ data }) => (
   <>
@@ -36,6 +38,16 @@ const about = ({ data }) => (
         ))}
       </FlexContainer>
     </Section>
+    <Section dark>
+      <Title>Our Ministries</Title>
+      <GridContainer>
+        {ministries.map(ministry => (
+          <Link to={ministry.path} key={ministry.name}>
+            <Button>{ministry.name}</Button>
+          </Link>
+        ))}
+      </GridContainer>
+    </Section>
     {/* <Section dark>
       <Title>Our Elders</Title>
       <List>
@@ -52,11 +64,10 @@ const about = ({ data }) => (
         ))}
       </List>
     </Section> */}
-    <Section dark wide>
+    <Section wide>
       <Title>What We Believe</Title>
       <Accordion items={beliefs} />
     </Section>
-    <Section></Section>
   </>
 );
 
@@ -66,6 +77,14 @@ const FlexContainer = styled.div`
   flex-wrap: wrap;
   justify-content: space-evenly;
   align-items: flex-start;
+`;
+
+const GridContainer = styled.div`
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-gap: 1rem;
+  justify-items: center;
 `;
 
 export default about;
