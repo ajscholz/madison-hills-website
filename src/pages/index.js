@@ -8,7 +8,7 @@ import Title from '../components/Title';
 import Section from '../components/Section';
 import Icon from '../components/Icon';
 import ContactForm from '../components/ContactForm';
-import EventCard from '../components/EventCard';
+import FlipCard from '../components/FlipCard';
 
 import { FaClock, FaMapMarkerAlt } from 'react-icons/fa';
 
@@ -78,15 +78,15 @@ const IndexPage = ({ data, className }) => {
       <Section dark padSide="5vw">
         <Title>Upcoming Events</Title>
         <EventsContainer>
-          <EventCard
+          <FlipCard
             image={data.kickball.childImageSharp.fluid}
             title="family kickball"
           />
-          <EventCard
+          <FlipCard
             title="office trivia"
             image={data.theOffice.childImageSharp.fluid}
           />
-          <EventCard
+          <FlipCard
             title="pizza night"
             image={data.larosas.childImageSharp.fluid}
           />
