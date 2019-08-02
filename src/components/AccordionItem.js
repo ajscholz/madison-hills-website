@@ -84,7 +84,7 @@ export default memo(({ isOpen, item, click, index }) => {
 const Frame = styled.div`
   width: 100%;
   height: auto;
-  border: 1px solid var(--primaryDark);
+  border: 1px solid var(--primary);
   border-radius: 5px;
   overflow: hidden;
   position: relative;
@@ -103,7 +103,7 @@ const Head = styled.button`
   cursor: pointer;
   outline: none;
   padding: 1rem 1.5rem;
-  background: var(--primaryDark);
+  background: var(--primary);
 `;
 
 const Icon = styled(a.span)`
