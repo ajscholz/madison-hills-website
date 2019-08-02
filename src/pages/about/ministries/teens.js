@@ -1,10 +1,10 @@
 import React from 'react';
 import { graphql } from 'gatsby';
 
-import HeroImage from '../../components/HeroImage';
-import Banner from '../../components/Banner';
-import Section from '../../components/Section';
-import Title from '../../components/Title';
+import HeroImage from '../../../components/HeroImage';
+import Banner from '../../../components/Banner';
+import Section from '../../../components/Section';
+import Title from '../../../components/Title';
 
 export const data = graphql`
   {
