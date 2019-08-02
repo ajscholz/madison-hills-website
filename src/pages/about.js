@@ -19,7 +19,7 @@ import ministries from '../utils/ministries';
 
 const about = ({ data }) => (
   <>
-    <Seo title="About"></Seo>
+    <Seo title="About" image="src/images/about-banner.jpg"></Seo>
     <StyledHeroImage image={data.heroImage.childImageSharp.fluid}>
       About
     </StyledHeroImage>
