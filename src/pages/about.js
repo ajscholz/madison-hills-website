@@ -10,7 +10,6 @@ import TeamCard from '../components/TeamCard';
 import Accordion from '../components/Accordion';
 import Button from '../components/Button';
 
-import staff from '../utils/staff';
 import ministries from '../utils/ministries';
 
 const about = ({ data }) => (
@@ -22,14 +21,13 @@ const about = ({ data }) => (
     <Section>
       <Title>Our Team</Title>
       <FlexContainer>
-        {/* render a team card for each staff member in the staff array, and dynamically load the graphql image based on their name (key) */}
-        {Object.keys(staff).map(key => (
+        {data.team.edges.map(({ member }) => (
           <TeamCard
-            key={key}
-            name={staff[key].name}
-            jobTitle={staff[key].title}
-            image={data[key].childImageSharp.fluid}
-            description={staff[key].description}
+            key={member.contentful_id}
+            name={member.name}
+            jobTitle={member.title}
+            image={member.image.fluid}
+            description={member.description}
           />
         ))}
       </FlexContainer>
@@ -44,22 +42,6 @@ const about = ({ data }) => (
         ))}
       </GridContainer>
     </Section>
-    {/* <Section dark>
-      <Title>Our Elders</Title>
-      <List>
-        {elders.map(elder => (
-          <ListItem key={elder}>{elder}</ListItem>
-        ))}
-      </List>
-    </Section>
-    <Section>
-      <Title>Our Deacons</Title>
-      <List>
-        {deacons.map(deacon => (
-          <ListItem key={deacon}>{deacon}</ListItem>
-        ))}
-      </List>
-    </Section> */}
     <Section wide>
       <Title>What We Believe</Title>
       <Accordion beliefs={data.beliefs.edges} />
@@ -94,41 +76,6 @@ export const data = graphql`
         }
       }
     }
-    ben: file(name: { eq: "team-ben" }) {
-      childImageSharp {
-        fluid {
-          ...GatsbyImageSharpFluid
-        }
-      }
-    }
-    lawrence: file(name: { eq: "team-lawrence" }) {
-      childImageSharp {
-        fluid {
-          ...GatsbyImageSharpFluid
-        }
-      }
-    }
-    jeremy: file(name: { eq: "team-jeremy" }) {
-      childImageSharp {
-        fluid {
-          ...GatsbyImageSharpFluid
-        }
-      }
-    }
-    steveTerry: file(name: { eq: "team-steveterry" }) {
-      childImageSharp {
-        fluid {
-          ...GatsbyImageSharpFluid
-        }
-      }
-    }
-    kim: file(name: { eq: "team-kim" }) {
-      childImageSharp {
-        fluid {
-          ...GatsbyImageSharpFluid
-        }
-      }
-    }
     beliefs: allContentfulBeliefs(sort: { fields: createdAt, order: ASC }) {
       edges {
         belief: node {
@@ -137,6 +84,23 @@ export const data = graphql`
           references
           description: beliefDescription {
             description: beliefDescription
+          }
+        }
+      }
+    }
+    team: allContentfulTeamMember(
+      filter: { type: { eq: "staff" } }
+      sort: { fields: createdAt, order: DESC }
+    ) {
+      edges {
+        member: node {
+          contentful_id
+          name
+          title
+          image {
+            fluid {
+              ...GatsbyContentfulFluid
+            }
           }
         }
       }
