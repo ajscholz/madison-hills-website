@@ -7,14 +7,10 @@ import StyledHeroImage from '../components/HeroImage';
 import Section from '../components/Section';
 import Title from '../components/Title';
 import TeamCard from '../components/TeamCard';
-// import { List, ListItem } from '../components/List';
 import Accordion from '../components/Accordion';
 import Button from '../components/Button';
 
 import staff from '../utils/staff';
-// import elders from '../utils/elders';
-// import deacons from '../utils/deacons';
-import beliefs from '../utils/beliefs';
 import ministries from '../utils/ministries';
 
 const about = ({ data }) => (
@@ -66,7 +62,7 @@ const about = ({ data }) => (
     </Section> */}
     <Section wide>
       <Title>What We Believe</Title>
-      <Accordion items={beliefs} />
+      <Accordion beliefs={data.beliefs.edges} />
     </Section>
   </>
 );
@@ -130,6 +126,18 @@ export const data = graphql`
       childImageSharp {
         fluid {
           ...GatsbyImageSharpFluid
+        }
+      }
+    }
+    beliefs: allContentfulBeliefs(sort: { fields: createdAt, order: ASC }) {
+      edges {
+        belief: node {
+          title: beliefTitle
+          contentful_id
+          references
+          description: beliefDescription {
+            description: beliefDescription
+          }
         }
       }
     }

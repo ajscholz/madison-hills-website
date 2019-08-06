@@ -24,7 +24,7 @@ export function useMeasure() {
   return [{ ref }, bounds];
 }
 
-export default memo(({ isOpen, item, click, index }) => {
+export default memo(({ isOpen, belief, click, index }) => {
   const previous = usePrevious(isOpen);
   const [bind, { height: viewHeight }] = useMeasure();
   const turn = useSpring({
@@ -44,13 +44,15 @@ export default memo(({ isOpen, item, click, index }) => {
     },
   });
 
+  console.log(belief);
+
   return (
     <Frame>
       <Head onClick={isOpen ? () => click(null) : () => click(index)}>
         <Icon style={{ transform: turn.transform }}>
           <FaChevronRight></FaChevronRight>
         </Icon>
-        <div>{item.title}</div>
+        <div>{belief.title}</div>
       </Head>
       <a.div
         style={{
@@ -60,19 +62,26 @@ export default memo(({ isOpen, item, click, index }) => {
       >
         <a.div style={{ transform }} {...bind}>
           <Container>
-            <Text>{item.text}</Text>
+            <Text>{belief.description.description}</Text>
             <Reference>
-              {item.references.map(reference => (
-                <StyledLink
-                  href={reference.link}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  index={reference.ref}
-                  key={reference.ref}
-                >
-                  {reference.ref}
-                </StyledLink>
-              ))}
+              {belief.references.map(reference => {
+                const url = 'https://biblia.com/bible/niv/';
+                let ref = reference
+                  .replace(' ', '%20')
+                  .replace(':', '.')
+                  .replace('-', '%E2%80%93');
+                return (
+                  <StyledLink
+                    href={`${url}${ref}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    index={reference}
+                    key={reference}
+                  >
+                    {reference}
+                  </StyledLink>
+                );
+              })}
             </Reference>
           </Container>
         </a.div>
@@ -119,7 +128,6 @@ const Container = styled.div`
 const Text = styled.div`
   font-size: 0.8rem;
   font-weight: 300;
-  margin-bottom: 1rem;
 `;
 
 const Reference = styled.div`
@@ -130,6 +138,7 @@ const Reference = styled.div`
   font-style: italic;
   display: flex;
   flex-wrap: wrap;
+  margin-top: 1rem;
 `;
 
 const StyledLink = styled.a`
