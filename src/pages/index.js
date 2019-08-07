@@ -25,6 +25,7 @@ export const data = graphql`
       siteMetadata {
         address
         city
+        state
       }
     }
     kickball: file(name: { eq: "kickball" }) {
@@ -58,22 +59,28 @@ const IndexPage = ({ data, className }) => {
     <>
       <SEO title="Home" />
       <HeroImage image={data.hero.image.fluid} full>
-        For Richmond.
+        For Richmond
         <br />
-        For You.
+        For You
       </HeroImage>
       <Section large>
         <Title>Helping people find and follow Jesus</Title>
         <InfoWrapper>
           <InfoContainer>
             <StyledIcon icon={FaClock} className={className} />
-            <H3>{`Sundays, 9:30 & 10:45a`}</H3>
+            <InfoText>
+              {`Sundays`}
+              <br />
+              {`9:30 & 10:45a`}
+            </InfoText>
           </InfoContainer>
           <InfoContainer>
             <StyledIcon icon={FaMapMarkerAlt} className={className} />
-            <H3>
-              {data.site.siteMetadata.address}, {data.site.siteMetadata.city}
-            </H3>
+            <InfoText>
+              {data.site.siteMetadata.address}
+              <br />
+              {data.site.siteMetadata.city}, {data.site.siteMetadata.state}
+            </InfoText>
           </InfoContainer>
         </InfoWrapper>
       </Section>
@@ -103,31 +110,49 @@ const IndexPage = ({ data, className }) => {
 };
 
 const InfoWrapper = styled.div`
+  width: 100%;
+  max-width: 650px;
+  margin: 0 auto;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  @media (min-width: 576px) {
-    align-items: center;
+  justify-content: center;
+  @media (min-width: 768px) {
+    flex-direction: row;
   }
 `;
 
 const InfoContainer = styled.div`
+  width: 100%;
+  position: relative;
   display: flex;
   align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 1.5rem;
   :first-of-type {
-    margin-bottom: 0.75rem;
+    padding-bottom: 2rem;
+    margin-bottom: 1rem;
+  }
+  @media (min-width: 768px) {
+    :first-of-type {
+      padding-bottom: 0;
+      margin-bottom: 0;
+    }
   }
 `;
 
 const StyledIcon = styled(Icon)`
-  font-size: 2rem;
+  font-size: 1.5rem;
   color: var(--primary);
-  margin-right: 20px;
+  width: 100%;
+  margin-bottom: 1rem;
 `;
 
-const H3 = styled.h3`
-  font-size: 1.25rem;
+const InfoText = styled.h3`
+  font-size: 1rem;
   margin: 0;
+  text-align: center;
 `;
 
 const EventsContainer = styled.div`
