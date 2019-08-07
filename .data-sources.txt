@@ -1,0 +1,4 @@
+Google Calendar
+- Google apps scripts are sending build webhooks when events change and when an event has ended in the last hour
+- This is dependent on me having access to their calendar with minimum view all details access
+- There is a custom trigger set up from the calendar id (looks like an email address)

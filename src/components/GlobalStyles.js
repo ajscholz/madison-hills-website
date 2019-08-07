@@ -15,7 +15,7 @@ export default createGlobalStyle`
   * {
     box-sizing: border-box;
     font-family: "Nunito Sans";
-    font-weight: 500;
+    font-weight: 400;
     letter-spacing:.08rem;
   }
 
@@ -28,6 +28,10 @@ export default createGlobalStyle`
   body {
     height: 100%;
     margin: 0;
+    font-size: .95rem;
+    @media(min-width: 500px) {
+      font-size: 1rem;
+    }
   }
 
   #___gatsby {
