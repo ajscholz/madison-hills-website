@@ -1,16 +1,19 @@
 import React from 'react';
-import { graphql } from 'gatsby';
+import { graphql, Link } from 'gatsby';
 
 import HeroImage from '../../../components/HeroImage';
 import Section from '../../../components/Section';
 import Title from '../../../components/Title';
+import Seo from '../../../components/Seo';
+import Button from '../../../components/Button';
 
 export const data = graphql`
   {
-    heroImage: file(name: { eq: "teens-banner" }) {
-      childImageSharp {
+    hero: contentfulPageBannerImages(page: { eq: "Teens" }) {
+      image: pageBannerImage {
         fluid {
-          ...GatsbyImageSharpFluid
+          ...GatsbyContentfulFluid
+          src
         }
       }
     }
@@ -20,9 +23,8 @@ export const data = graphql`
 const teens = ({ data }) => {
   return (
     <>
-      <HeroImage image={data.heroImage.childImageSharp.fluid}>
-        Teen Ministry
-      </HeroImage>
+      <Seo title="Madison Hills Teen Ministry" image={data.hero.image.src} />
+      <HeroImage image={data.hero.image.fluid}>Teen Ministry</HeroImage>
       <Section>
         <Title>Who We Are</Title>
         <div>{`We lead teens to a closer relationship with Jesus Christ.`}</div>
@@ -100,6 +102,12 @@ const teens = ({ data }) => {
             rel="noopener noreferrer"
           >{`Niagara Falls (#2)`}</a>
         </div>
+      </Section>
+      <Section dark>
+        <Title>What About My Children?</Title>
+        <Button as={Link} to="/about/ministries/kids">
+          Kids Page
+        </Button>
       </Section>
     </>
   );

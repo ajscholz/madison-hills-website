@@ -7,10 +7,11 @@ import Section from '../components/Section';
 
 export const data = graphql`
   {
-    heroImage: file(name: { eq: "jesus-hero" }) {
-      childImageSharp {
+    hero: contentfulPageBannerImages(page: { eq: "Jesus" }) {
+      image: pageBannerImage {
         fluid {
-          ...GatsbyImageSharpFluid
+          ...GatsbyContentfulFluid
+          src
         }
       }
     }
@@ -20,11 +21,8 @@ export const data = graphql`
 const jesus = ({ data }) => {
   return (
     <>
-      <Seo title="Jesus" image="/src/images/jesus-hero.jpg"></Seo>
-      <HeroImage
-        image={data.heroImage.childImageSharp.fluid}
-        backgroundPosition="51% 78%"
-      >
+      <Seo title="Jesus" image={data.hero.image.src}></Seo>
+      <HeroImage image={data.hero.image.fluid} backgroundPosition="51% 78%">
         Jesus
       </HeroImage>
       <Section>hello from jesus page</Section>

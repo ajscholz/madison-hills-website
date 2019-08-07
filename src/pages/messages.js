@@ -8,10 +8,11 @@ import Title from '../components/Title';
 
 export const data = graphql`
   {
-    heroImage: file(name: { eq: "messages-banner" }) {
-      childImageSharp {
+    hero: contentfulPageBannerImages(page: { eq: "Messages" }) {
+      image: pageBannerImage {
         fluid {
-          ...GatsbyImageSharpFluid
+          ...GatsbyContentfulFluid
+          src
         }
       }
     }
@@ -21,10 +22,8 @@ export const data = graphql`
 const about = ({ data }) => {
   return (
     <>
-      <Seo title=""></Seo>
-      <StyledHeroImage image={data.heroImage.childImageSharp.fluid}>
-        Messages
-      </StyledHeroImage>
+      <Seo title="Message" image={data.hero.image.src}></Seo>
+      <StyledHeroImage image={data.hero.image.fluid}>Messages</StyledHeroImage>
       <Section>
         <Title>Section</Title>
       </Section>

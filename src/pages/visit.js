@@ -6,14 +6,14 @@ import HeroImage from '../components/HeroImage';
 import Section from '../components/Section';
 import Title from '../components/Title';
 import ContactForm from '../components/ContactForm';
-// import Subtitle from '../components/Subtitle';
 
 export const data = graphql`
   {
-    heroImage: file(name: { eq: "visit-hero" }) {
-      childImageSharp {
+    hero: contentfulPageBannerImages(page: { eq: "Visit" }) {
+      image: pageBannerImage {
         fluid {
-          ...GatsbyImageSharpFluid
+          ...GatsbyContentfulFluid
+          src
         }
       }
     }
@@ -23,11 +23,8 @@ export const data = graphql`
 const visit = ({ data }) => {
   return (
     <>
-      <Seo title="Visit" image="/src/images/visit-hero.jpg"></Seo>
-      <HeroImage
-        image={data.heroImage.childImageSharp.fluid}
-        backgroundPosition="51% 78%"
-      >
+      <Seo title="Visit" image={data.hero.image.src}></Seo>
+      <HeroImage image={data.hero.image.fluid} backgroundPosition="51% 78%">
         Visit
       </HeroImage>
       <Section>

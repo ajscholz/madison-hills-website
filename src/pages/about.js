@@ -14,10 +14,8 @@ import ministries from '../utils/ministries';
 
 const about = ({ data }) => (
   <>
-    <Seo title="About" image="src/images/about-banner.jpg"></Seo>
-    <StyledHeroImage image={data.heroImage.childImageSharp.fluid}>
-      About
-    </StyledHeroImage>
+    <Seo title="About" image={data.hero.image.src}></Seo>
+    <StyledHeroImage image={data.hero.image.fluid}>About</StyledHeroImage>
     <Section>
       <Title>Our Team</Title>
       <FlexContainer>
@@ -69,10 +67,11 @@ export default about;
 
 export const data = graphql`
   {
-    heroImage: file(name: { eq: "about-banner" }) {
-      childImageSharp {
+    hero: contentfulPageBannerImages(page: { eq: "About" }) {
+      image: pageBannerImage {
         fluid {
-          ...GatsbyImageSharpFluid
+          ...GatsbyContentfulFluid
+          src
         }
       }
     }

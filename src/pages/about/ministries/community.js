@@ -11,10 +11,10 @@ import Subtitle from '../../../components/Subtitle';
 
 export const data = graphql`
   {
-    heroImage: file(name: { eq: "community-banner" }) {
-      childImageSharp {
+    hero: contentfulPageBannerImages(page: { eq: "Community" }) {
+      image: pageBannerImage {
         fluid {
-          ...GatsbyImageSharpFluid
+          ...GatsbyContentfulFluid
         }
       }
     }
@@ -41,13 +41,8 @@ export const data = graphql`
 const teens = ({ data }) => {
   return (
     <>
-      <Seo
-        title="Community Ministries"
-        image="src/images/community-banner.jpg"
-      />
-      <HeroImage image={data.heroImage.childImageSharp.fluid}>
-        Community Ministries
-      </HeroImage>
+      <Seo title="Community Ministries" image={data.hero.image.src} />
+      <HeroImage image={data.hero.image.fluid}>Community Ministries</HeroImage>
       <Section>
         <Title>For Richmond</Title>
         <Subtitle>{`We aren't interested in building our own kingdom. We're interested in building God's Kingdom. Here are some of our partners in Richmond that are making a huge difference.`}</Subtitle>

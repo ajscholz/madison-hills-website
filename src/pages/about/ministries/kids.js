@@ -1,15 +1,19 @@
 import React from 'react';
-import { graphql } from 'gatsby';
+import { graphql, Link } from 'gatsby';
 
 import HeroImage from '../../../components/HeroImage';
 import Section from '../../../components/Section';
+import Seo from '../../../components/Seo';
+import Title from '../../../components/Title';
+import Button from '../../../components/Button';
 
 export const data = graphql`
   {
-    heroImage: file(name: { eq: "teens-banner" }) {
-      childImageSharp {
+    hero: contentfulPageBannerImages(page: { eq: "Kids" }) {
+      image: pageBannerImage {
         fluid {
-          ...GatsbyImageSharpFluid
+          ...GatsbyContentfulFluid
+          src
         }
       }
     }
@@ -19,10 +23,15 @@ export const data = graphql`
 const teens = ({ data }) => {
   return (
     <>
-      <HeroImage image={data.heroImage.childImageSharp.fluid}>
-        Kids Ministry
-      </HeroImage>
+      <Seo title="Madison Hills Kids Ministry" image={data.hero.image.src} />
+      <HeroImage image={data.hero.image.fluid}>Kids Ministry</HeroImage>
       <Section>Hello from kids page</Section>
+      <Section dark>
+        <Title>What about my teens?</Title>
+        <Button as={Link} to="/about/ministries/teens">
+          Teens Page
+        </Button>
+      </Section>
     </>
   );
 };

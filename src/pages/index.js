@@ -14,10 +14,10 @@ import { FaClock, FaMapMarkerAlt } from 'react-icons/fa';
 
 export const data = graphql`
   query MyQuery {
-    hero: file(name: { eq: "index-hero" }) {
-      childImageSharp {
+    hero: contentfulPageBannerImages(page: { eq: "Home" }) {
+      image: pageBannerImage {
         fluid {
-          ...GatsbyImageSharpFluid
+          ...GatsbyContentfulFluid
         }
       }
     }
@@ -52,10 +52,12 @@ export const data = graphql`
 `;
 
 const IndexPage = ({ data, className }) => {
+  console.log(data.hero);
+
   return (
     <>
       <SEO title="Home" />
-      <HeroImage image={data.hero.childImageSharp.fluid} full>
+      <HeroImage image={data.hero.image.fluid} full>
         For Richmond.
         <br />
         For You.
