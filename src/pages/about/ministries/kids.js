@@ -113,11 +113,11 @@ export default ({ data }) => {
 
       <Section dark>
         <Title>Stay In the Loop</Title>
-        <div style={{ textAlign: 'center' }}>
+        <div>
           Text "mhcckidn" to 81010 or click the button below to join our text
           list.
         </div>
-        <TextMessageLink href="sms://+81010?body=%64mhcckidn">
+        <TextMessageLink href="sms://81010?body=%40mhcckidn">
           <Button style={{ margin: '1rem' }}>Text Us Now</Button>
         </TextMessageLink>
       </Section>
