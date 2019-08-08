@@ -1,5 +1,7 @@
 import React from 'react';
 import { graphql, Link } from 'gatsby';
+import styled, { css } from 'styled-components';
+import Img from 'gatsby-image';
 
 import HeroImage from '../../../components/HeroImage';
 import Section from '../../../components/Section';
@@ -17,58 +19,110 @@ export const data = graphql`
         }
       }
     }
+    nursery: file(name: { eq: "nursery" }) {
+      image: childImageSharp {
+        fluid {
+          ...GatsbyImageSharpFluid
+        }
+      }
+    }
+    preK: file(name: { eq: "pre-k" }) {
+      image: childImageSharp {
+        fluid {
+          ...GatsbyImageSharpFluid
+        }
+      }
+    }
+    firstFifth: file(name: { eq: "1st-5th" }) {
+      image: childImageSharp {
+        fluid {
+          ...GatsbyImageSharpFluid
+        }
+      }
+    }
   }
 `;
 
-const teens = ({ data }) => {
+export default ({ data }) => {
   return (
     <>
       <Seo title="Madison Hills Kids Ministry" image={data.hero.image.src} />
       <HeroImage image={data.hero.image.fluid}>Kids Ministry</HeroImage>
+
       <Section>
         <Title>Nursery</Title>
-        <p>
-          We have a wonderful nursery for babies and young children, staffed
-          with loving and compassionate adults! Our nursery is brand new, with
-          age appropriate toys and a comfortable environment for the youngest
-          children.
-        </p>
-        <p>
-          The nursery is located on the main level of the building, just off the
-          main lobby.
-        </p>
+        <MinistrySection>
+          <Image fluid={data.nursery.image.fluid} />
+          <MinistryInfo>
+            <div style={{ fontWeight: 'bold' }}>
+              Location: Main level. Off main lobby
+            </div>
+            <div style={{ fontWeight: 'bold' }}>Ages: Lit'l ones</div>
+          </MinistryInfo>
+          <MinistryDescription>
+            We have a wonderful nursery for babies and young children, staffed
+            with loving and compassionate adults! Our nursery is brand new, with
+            age appropriate toys and a comfortable environment for the youngest
+            children.
+          </MinistryDescription>
+        </MinistrySection>
       </Section>
+
       <Section dark>
         <Title>Preschool {`&`} Kindergarten</Title>
-        <p>
-          This is where children are first introduced to the Bible, in the most
-          simplistic and innocent ways. We have two newly renovated classrooms
-          set up for children more suited for a learning experience, led by one
-          of the sweetest teachers! Kim Masters has been leading this class for
-          over 10 years and truly loves to teach bright-eyed children about the
-          love that God has for the world!
-        </p>
-        <p>
-          The Preschool/Kindergarten Class is located in the basement of the
-          church.
-        </p>
+        <MinistrySection flip>
+          <Image fluid={data.preK.image.fluid} />
+          <MinistryInfo>
+            <div style={{ fontWeight: 'bold', color: 'var(--primaryLight)' }}>
+              Location: Basement level
+            </div>
+            <div style={{ fontWeight: 'bold', color: 'var(--primaryLight)' }}>
+              Ages: 3 years - Kindergarten
+            </div>
+          </MinistryInfo>
+          <MinistryDescription>
+            This is where children are first introduced to the Bible, in the
+            most simplistic and innocent ways. We have two newly renovated
+            classrooms set up for children more suited for a learning
+            experience, led by one of the sweetest teachers! Kim Masters has
+            been leading this class for over 10 years and truly loves to teach
+            bright-eyed children about the love that God has for the world!
+          </MinistryDescription>
+        </MinistrySection>
       </Section>
+
       <Section>
         <Title>{`1st - 5th Grade`}</Title>
-        <p>
-          Children that are in school will love the experiences they have when
-          they arrive for their weekly program! Students will learn more about
-          the Bible, while singing great songs and playing exciting games. We
-          have three age specific rooms set up for our school age children; The
-          Pet Shop, The Warehouse, and the Game Room! Steve and Terry Marino
-          have loved and ministered to school age children for over 7 years and
-          are truly are a special couple!
-        </p>
-        <p>
-          The 1st – 5th grade classes are located in the basement of the church.
-        </p>
+        <MinistrySection>
+          <Image fluid={data.firstFifth.image.fluid} />
+          <MinistryInfo>
+            <div style={{ fontWeight: 'bold' }}>Location: Basement level</div>
+            <div style={{ fontWeight: 'bold' }}>Ages: First - fifth grade</div>
+          </MinistryInfo>
+          <MinistryDescription>
+            Children that are in school will love the experiences they have when
+            they arrive for their weekly program! Students will learn more about
+            the Bible, while singing great songs and playing exciting games. We
+            have three age specific rooms set up for our school age children;
+            The Pet Shop, The Warehouse, and the Game Room! Steve and Terry
+            Marino have loved and ministered to school age children for over 7
+            years and are truly are a special couple!
+          </MinistryDescription>
+        </MinistrySection>
       </Section>
+
       <Section dark>
+        <Title>Stay In the Loop</Title>
+        <div>
+          Text "mhcckidn" to 81010 or click the button below to join our text
+          list.
+        </div>
+        <TextMessageLink href="sms://81010?body=%40mhcckidn">
+          <Button style={{ margin: '1rem' }}>Text Us Now</Button>
+        </TextMessageLink>
+      </Section>
+
+      <Section>
         <Title>What about my teens?</Title>
         <Button as={Link} to="/about/ministries/teens">
           Teens Page
@@ -78,4 +132,54 @@ const teens = ({ data }) => {
   );
 };
 
-export default teens;
+const MinistrySection = styled.div`
+  display: grid;
+  grid-template-areas:
+    'picture'
+    'info'
+    'description';
+  grid-gap: 1rem;
+  width: 100%;
+  max-width: 700px;
+  @media (min-width: 660px) {
+    grid-template-columns: 40% 1fr;
+    grid-column-gap: 2rem;
+    grid-template-rows: auto auto;
+    grid-template-areas:
+      'picture info'
+      'picture description';
+
+    ${props =>
+      props.flip &&
+      css`
+        grid-template-columns: 1fr 40%;
+        grid-template-areas:
+          'info picture'
+          'description picture';
+        text-align: right;
+      `}
+  }
+`;
+
+const Image = styled(Img)`
+  grid-area: picture;
+  width: 100%;
+`;
+
+const MinistryInfo = styled.div`
+  font-weight: bold;
+  color: var(--primaryDark);
+  font-size: 0.9rem;
+  grid-area: info;
+`;
+
+const MinistryDescription = styled.div`
+  font-size: 0.9rem;
+  grid-area: description;
+`;
+
+const TextMessageLink = styled.a`
+  /* @media (min-width: 600px) {
+    display: none;
+  } */
+`;
