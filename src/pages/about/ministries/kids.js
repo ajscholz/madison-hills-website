@@ -72,6 +72,7 @@ export default ({ data }) => {
           </MinistrySection>
         </Section>
       ))}
+<<<<<<< HEAD
 
       {/* <Section>
         <Title>Nursery</Title>
@@ -134,6 +135,8 @@ export default ({ data }) => {
           </MinistryDescription>
         </MinistrySection>
       </Section> */}
+=======
+>>>>>>> @{-1}
 
       <Section dark>
         <Title>Stay In the Loop</Title>
