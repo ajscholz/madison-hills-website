@@ -1,4 +1,4 @@
-import styled from "styled-components"
+import styled from 'styled-components';
 
 export default styled.button`
   font-size: 0.9rem;
@@ -7,10 +7,11 @@ export default styled.button`
   color: var(--white);
   text-transform: uppercase;
   letter-spacing: 0.25em;
-  border-radius: 8px;
+  border-radius: ${props =>
+    props.circle ? '50%' : props.square ? '0' : '8px'};
   transition: var(--mainTransition);
   border: none;
   :hover {
     transform: scale(1.05);
   }
-`
+`;

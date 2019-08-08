@@ -1,5 +1,6 @@
 import React from 'react';
 import { graphql, Link } from 'gatsby';
+import styled from 'styled-components';
 
 import HeroImage from '../../../components/HeroImage';
 import Section from '../../../components/Section';
@@ -7,6 +8,8 @@ import Title from '../../../components/Title';
 import Seo from '../../../components/Seo';
 import Button from '../../../components/Button';
 import MinistryList from '../../../components/MinistryList';
+import TextMessageButton from '../../../components/TextMessageButton';
+import SocialLinks from '../../../components/SocialLinks';
 
 export const data = graphql`
   {
@@ -45,14 +48,32 @@ export const data = graphql`
   }
 `;
 
-const teens = ({ data }) => {
+const Teens = ({ data }) => {
+  const socialMedia = [
+    {
+      platform: 'facebook',
+      link: 'https://www.facebook.com/madisonhillsteens',
+    },
+    {
+      platform: 'twitter',
+      link: 'https://www.twitter.com/mhteens',
+    },
+    {
+      platform: 'instagram',
+      link: 'https://www.instagram.com/mh_teens',
+    },
+  ];
+
   return (
     <>
-      <Seo title="Madison Hills Teen Ministry" image={data.hero.image.src} />
-      <HeroImage image={data.hero.image.fluid} backgroundPosition="45% 27%;">
+      <Seo
+        title="Teen Ministry  |  Madison Hills Christian Church"
+        image={data.hero.image.src}
+      />
+      <HeroImage image={data.hero.image.fluid} backgroundPosition="45% 27%">
         Teen Ministry
       </HeroImage>
-      <Section>
+      <Section style={{ paddingTop: '6rem' }}>
         <Title>Who We Are</Title>
         <div>{`We lead teens to a closer relationship with Jesus Christ.`}</div>
         <h3>Ages</h3>
@@ -98,6 +119,18 @@ const teens = ({ data }) => {
           memory making at least one a month, sometimes more!
         </div>
       </Section>
+
+      <Section>
+        <Title>Stay In the Loop</Title>
+        <div>
+          Text "@TeensMHCC" to 81010 or click the button below to join our text
+          list.
+        </div>
+        <TextMessageButton link="sms://81010?body=%40TeensMHCC">
+          Text Us Now
+        </TextMessageButton>
+      </Section>
+
       <Section>
         <Title>What's Coming</Title>
         <h3>Check Out our 2018-2019 Theme</h3>
@@ -139,8 +172,14 @@ const teens = ({ data }) => {
           Kids Page
         </Button>
       </Section>
+      <SocialLinks accounts={socialMedia} />
     </>
   );
 };
 
-export default teens;
+export default styled(Teens)`
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;

@@ -1,6 +1,5 @@
 import React from 'react';
 import { graphql, Link } from 'gatsby';
-import styled from 'styled-components';
 
 import HeroImage from '../../../components/HeroImage';
 import Section from '../../../components/Section';
@@ -8,6 +7,7 @@ import Seo from '../../../components/Seo';
 import Title from '../../../components/Title';
 import Button from '../../../components/Button';
 import MinistryList from '../../../components/MinistryList';
+import TextMessageButton from '../../../components/TextMessageButton';
 
 export const data = graphql`
   {
@@ -57,12 +57,12 @@ export default ({ data }) => {
       <Section dark>
         <Title>Stay In the Loop</Title>
         <div>
-          Text "mhcckidn" to 81010 or click the button below to join our text
+          Text "@mhcckidn" to 81010 or click the button below to join our text
           list.
         </div>
-        <TextMessageLink href="sms://81010?body=%40mhcckidn">
-          <Button style={{ margin: '1rem' }}>Text Us Now</Button>
-        </TextMessageLink>
+        <TextMessageButton link="sms://81010?body=%40mhcckidn">
+          Text Us Now
+        </TextMessageButton>
       </Section>
 
       <Section>
@@ -74,9 +74,3 @@ export default ({ data }) => {
     </>
   );
 };
-
-const TextMessageLink = styled.a`
-  /* @media (min-width: 600px) {
-    display: none;
-  } */
-`;
