@@ -19,24 +19,27 @@ export const data = graphql`
         }
       }
     }
-    nursery: file(name: { eq: "nursery" }) {
-      image: childImageSharp {
-        fluid {
-          ...GatsbyImageSharpFluid
-        }
-      }
-    }
-    preK: file(name: { eq: "pre-k" }) {
-      image: childImageSharp {
-        fluid {
-          ...GatsbyImageSharpFluid
-        }
-      }
-    }
-    firstFifth: file(name: { eq: "1st-5th" }) {
-      image: childImageSharp {
-        fluid {
-          ...GatsbyImageSharpFluid
+    programs: allContentfulPrograms(
+      filter: { ministryArea: { eq: "Kids" } }
+      sort: { fields: createdAt, order: ASC }
+    ) {
+      edges {
+        program: node {
+          id
+          title
+          dayOfWeek
+          startTime
+          endTime
+          location
+          ageRange
+          description {
+            description
+          }
+          image {
+            fluid {
+              ...GatsbyContentfulFluid
+            }
+          }
         }
       }
     }
@@ -49,7 +52,28 @@ export default ({ data }) => {
       <Seo title="Madison Hills Kids Ministry" image={data.hero.image.src} />
       <HeroImage image={data.hero.image.fluid}>Kids Ministry</HeroImage>
 
-      <Section>
+      {data.programs.edges.map(({ program }, index) => (
+        <Section dark={index % 2 === 1} key={program.id}>
+          <Title>{program.title}</Title>
+          <MinistrySection>
+            <Image fluid={program.image.fluid} />
+            <MinistryInfo>
+              <div style={{ fontWeight: 'bold' }}>
+                {program.dayOfWeek} {program.startTime}-{program.endTime}
+              </div>
+              <div style={{ fontWeight: 'bold' }}>
+                Location: {program.location}
+              </div>
+              <div style={{ fontWeight: 'bold' }}>Ages: {program.ageRange}</div>
+            </MinistryInfo>
+            <MinistryDescription>
+              {program.description.description}
+            </MinistryDescription>
+          </MinistrySection>
+        </Section>
+      ))}
+
+      {/* <Section>
         <Title>Nursery</Title>
         <MinistrySection>
           <Image fluid={data.nursery.image.fluid} />
@@ -109,7 +133,7 @@ export default ({ data }) => {
             years and are truly are a special couple!
           </MinistryDescription>
         </MinistrySection>
-      </Section>
+      </Section> */}
 
       <Section dark>
         <Title>Stay In the Loop</Title>
