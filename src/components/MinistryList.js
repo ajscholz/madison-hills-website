@@ -9,9 +9,9 @@ export default props => {
   return (
     <>
       {props.programs.map(({ program }, index) => (
-        <Section dark={index % 2 === 1} key={program.id}>
+        <MinistrySection key={program.id}>
           <Title>{program.title}</Title>
-          <MinistrySection>
+          <GridContainer>
             <Image
               fluid={program.image.fluid}
               imgStyle={{ objectFit: 'contain' }}
@@ -28,14 +28,14 @@ export default props => {
             <MinistryDescription>
               {program.description.description}
             </MinistryDescription>
-          </MinistrySection>
-        </Section>
+          </GridContainer>
+        </MinistrySection>
       ))}
     </>
   );
 };
 
-const MinistrySection = styled.div`
+const GridContainer = styled.div`
   display: grid;
   justify-items: center;
   grid-template-areas:
@@ -45,6 +45,7 @@ const MinistrySection = styled.div`
   grid-gap: 1rem;
   width: 100%;
   max-width: 700px;
+  text-align: center;
 
   @media (min-width: 660px) {
     max-height: 250px;
@@ -55,16 +56,19 @@ const MinistrySection = styled.div`
       'picture info'
       'picture description';
     justify-items: start;
+    text-align: left;
+  }
+`;
 
-    ${props =>
-      props.flip &&
-      css`
-        grid-template-columns: 1fr 40%;
-        grid-template-areas:
-          'info picture'
-          'description picture';
-        text-align: right;
-      `}
+const MinistrySection = styled(Section)`
+  &:nth-of-type(even) > ${GridContainer} {
+    @media (min-width: 660px) {
+      grid-template-columns: 1fr 40%;
+      grid-template-areas:
+        'info picture'
+        'description picture';
+      text-align: right;
+    }
   }
 `;
 
@@ -77,21 +81,14 @@ const Image = styled(Img)`
 `;
 
 const MinistryInfo = styled.div`
+  width: 100%;
   font-weight: bold;
   color: var(--primaryDark);
   font-size: 0.9rem;
   grid-area: info;
-  text-align: center;
-  @media (min-width: 660px) {
-    text-align: left;
-  }
 `;
 
 const MinistryDescription = styled.div`
   font-size: 0.9rem;
   grid-area: description;
-  text-align: center;
-  @media (min-width: 660px) {
-    text-align: left;
-  }
 `;
