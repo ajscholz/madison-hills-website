@@ -10,20 +10,23 @@ const platforms = {
 };
 
 export default props => {
-  console.log(props.accounts);
+  const accounts = Object.entries(props.accounts);
+
+  console.log(accounts);
 
   return (
-    <SocialLinks size={props.accounts.length}>
-      {props.accounts.map(account => (
-        <SocialButton account={account} key={account.platform} />
-      ))}
+    <SocialLinks size={accounts.length}>
+      {accounts.map(account => {
+        if (account[1] === null) return null;
+        return <SocialButton account={account} key={account[0]} />;
+      })}
     </SocialLinks>
   );
 };
 
 const SocialLinks = styled.div`
   display: grid;
-  grid-template-columns: repeat(${props => props.size}, max-content);
+  grid-auto-flow: column;
   grid-gap: 1.5rem;
   justify-items: center;
   position: absolute;
@@ -37,14 +40,14 @@ const SocialLinks = styled.div`
 `;
 
 const SocialButton = props => (
-  <SingleButton background={platforms[props.account.platform].color}>
+  <SingleButton background={platforms[props.account[0]].color}>
     <a
-      href={props.account.link}
+      href={`https://www.${props.account[0]}.com/${props.account[1]}`}
       target="_blank"
       rel="noopener noreferrer"
-      aria-label={`Visit our ${props.account.platform} page`}
+      aria-label={`Visit our ${props.account[0]} page`}
     >
-      <Icon as={platforms[props.account.platform].icon} />
+      <Icon as={platforms[props.account[0]].icon} />
     </a>
   </SingleButton>
 );

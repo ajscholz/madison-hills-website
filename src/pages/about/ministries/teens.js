@@ -45,25 +45,15 @@ export const data = graphql`
         }
       }
     }
+    socialMedia: contentfulSocialMedia(ministryArea: { eq: "Teens" }) {
+      facebook
+      instagram
+      twitter
+    }
   }
 `;
 
 const Teens = ({ data }) => {
-  const socialMedia = [
-    {
-      platform: 'facebook',
-      link: 'https://www.facebook.com/madisonhillsteens',
-    },
-    {
-      platform: 'twitter',
-      link: 'https://www.twitter.com/mhteens',
-    },
-    {
-      platform: 'instagram',
-      link: 'https://www.instagram.com/mh_teens',
-    },
-  ];
-
   return (
     <>
       <Seo
@@ -172,7 +162,7 @@ const Teens = ({ data }) => {
           Kids Page
         </Button>
       </Section>
-      <SocialLinks accounts={socialMedia} />
+      <SocialLinks accounts={data.socialMedia} />
     </>
   );
 };
