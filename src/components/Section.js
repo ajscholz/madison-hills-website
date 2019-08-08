@@ -5,13 +5,17 @@ export default styled.section`
   padding-bottom: ${props => (props.large ? '6rem' : '4rem')};
   padding-left: ${props => (props.padSide ? props.padSide : '5vw')};
   padding-right: ${props => (props.padSide ? props.padSide : '5vw')};
-  background: ${props => (props.dark ? 'var(--black)' : 'var(--white)')};
-  color: ${props => (props.dark ? 'var(--white)' : 'var(--black)')};
+  /* background: ${props => (props.dark ? 'var(--black)' : 'var(--white)')};
+  color: ${props => (props.dark ? 'var(--white)' : 'var(--black)')}; */
   display: flex;
   flex-direction: column;
   align-items: center;
   @media (min-width: 1200px) {
     padding: ${props => (props.large ? '6rem' : '4rem')} 5vw;
+  }
+  &:nth-of-type(odd) {
+    background: var(--black);
+    color: var(--white);
   }
 
   ${props =>
