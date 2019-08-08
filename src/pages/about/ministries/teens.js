@@ -6,6 +6,7 @@ import Section from '../../../components/Section';
 import Title from '../../../components/Title';
 import Seo from '../../../components/Seo';
 import Button from '../../../components/Button';
+import MinistryList from '../../../components/MinistryList';
 
 export const data = graphql`
   {
@@ -17,6 +18,30 @@ export const data = graphql`
         }
       }
     }
+    programs: allContentfulPrograms(
+      filter: { ministryArea: { eq: "Teens" } }
+      sort: { fields: createdAt, order: ASC }
+    ) {
+      edges {
+        program: node {
+          id
+          title
+          dayOfWeek
+          startTime
+          endTime
+          location
+          ageRange
+          description {
+            description
+          }
+          image {
+            fluid {
+              ...GatsbyContentfulFluid
+            }
+          }
+        }
+      }
+    }
   }
 `;
 
@@ -24,7 +49,9 @@ const teens = ({ data }) => {
   return (
     <>
       <Seo title="Madison Hills Teen Ministry" image={data.hero.image.src} />
-      <HeroImage image={data.hero.image.fluid}>Teen Ministry</HeroImage>
+      <HeroImage image={data.hero.image.fluid} backgroundPosition="45% 27%;">
+        Teen Ministry
+      </HeroImage>
       <Section>
         <Title>Who We Are</Title>
         <div>{`We lead teens to a closer relationship with Jesus Christ.`}</div>
@@ -48,6 +75,9 @@ const teens = ({ data }) => {
           our Teen Ministry!
         </div>
       </Section>
+
+      <MinistryList programs={data.programs.edges} />
+
       <Section dark>
         <Title>What We Do</Title>
         <div>{`#MHTeens would like to invite all Teens to join some of our Weekly Programming:`}</div>
