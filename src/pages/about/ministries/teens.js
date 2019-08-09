@@ -60,59 +60,28 @@ const Teens = ({ data }) => {
         title="Teen Ministry  |  Madison Hills Christian Church"
         image={data.hero.image.src}
       />
+
       <HeroImage image={data.hero.image.fluid} backgroundPosition="45% 27%">
         Teen Ministry
       </HeroImage>
+
       <Section style={{ paddingTop: '6rem' }}>
-        <Title>Who We Are</Title>
-        <div>{`We lead teens to a closer relationship with Jesus Christ.`}</div>
-        <h3>Ages</h3>
-        <div>{`
-        Middle School: 6th-8th grade
-        `}</div>
-        <div>{`High School: 9th-12th grade`}</div>
-        <div>
-          {`I Timothy 4:12-13
-12 Don’t let anyone look down on you because you are young, but set an example for the believers in speech, in conduct, in love, in faith and in purity. 13 Until I come, devote yourself to the public reading of Scripture, to preaching and to teaching.”`}
-        </div>
-        <h3>Follow us</h3>
-        <div>Facebook: madisonhillsteens </div>
-        <div>Twitter: @mhteens</div>
-        <div>Instagram: MH_Teens</div>
-        <div>– or –</div>
-        <div>Email the Teen Minister: jeremy@madisonhills.org</div>
-        <div>
-          We are very excited to get to know you teen(s) and welcome them into
-          our Teen Ministry!
-        </div>
-      </Section>
+        <Title as="div" style={{ textTransform: 'none' }}>
+          {`We lead teens to a closer relationship with Jesus Christ`}
+        </Title>
 
-      <MinistryList programs={data.programs.edges} />
-
-      <Section dark>
-        <Title>What We Do</Title>
-        <div>{`#MHTeens would like to invite all Teens to join some of our Weekly Programming:`}</div>
-        <h3>SYNC – 10:45 am</h3>
-        <div>
-          {`Every Sunday Morning we have a fun and exciting time of Bonding, Bible Study, Food for All Teens!<br>Most Sundays, we will have opportunities for Middle School Students to be With other Middle Schools and High School students to be with other High School Students!  The first Sunday of every month, ALL Teens will enjoy some time in one large Group!`}
-        </div>
-        <h3>Growth Groups</h3>
-        <div>6:30 pm – 7:30 pm</div>
-        <div>
-          Wednesdays are about Growing closer to God and to each other! Students
-          will experience a “light” Dinner, along with a Small Group Experience!
-        </div>
-        <h3>Special Activities</h3>
-        <div>
-          We love to spend time together and welcome ALL teens to join in our
-          special events! We have something fun, exciting, friendship building,
-          memory making at least one a month, sometimes more!
-        </div>
+        <MissionVerse>
+          <Scripture>
+            {`
+Don’t let anyone look down on you because you are young, but set an example for the believers in speech, in conduct, in love, in faith and in purity. Until I come, devote yourself to the public reading of Scripture, to preaching and to teaching.`}
+          </Scripture>
+          <MissionVerseReference>I Timothy 4:12-13</MissionVerseReference>
+        </MissionVerse>
       </Section>
 
       <Section>
         <Title>Stay In the Loop</Title>
-        <div>
+        <div style={{ textAlign: 'center' }}>
           Text "@TeensMHCC" to 81010 or click the button below to join our text
           list.
         </div>
@@ -120,6 +89,8 @@ const Teens = ({ data }) => {
           Text Us Now
         </TextMessageButton>
       </Section>
+
+      <MinistryList programs={data.programs.edges} />
 
       <Section>
         <Title>What's Coming</Title>
@@ -172,4 +143,30 @@ export default styled(Teens)`
   display: flex;
   flex-direction: column;
   align-items: center;
+`;
+
+const Mission = styled.div`
+  font-size: 1.5rem;
+  margin-bottom: 1.5rem;
+  text-align: center;
+`;
+
+const MissionVerse = styled.div`
+  max-width: 600px;
+`;
+
+const Scripture = styled.div`
+  margin-bottom: 0;
+  text-align: center;
+`;
+
+const MissionVerseReference = styled.div`
+  width: 100%;
+  text-transform: uppercase;
+  font-size: 0.8rem;
+  color: rgb(150, 150, 150);
+  display: flex;
+  font-weight: bold;
+  justify-content: flex-end;
+  margin-top: 1rem;
 `;

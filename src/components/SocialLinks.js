@@ -30,7 +30,7 @@ const SocialLinks = styled.div`
   grid-gap: 1.5rem;
   justify-items: center;
   position: absolute;
-  top: calc(98.25px + 40vh - 19.19px);
+  top: calc(98.25px + 40vh - calc(35.19px / 2));
   transform: translateX(-50%);
   left: 50%;
   @media (min-width: 660px) {
@@ -53,10 +53,10 @@ const SocialButton = props => (
 );
 
 const SingleButton = styled.button`
-  padding: 0rem;
+  padding: 0.6rem;
   background: ${props => props.background};
-  border: 0;
   border-radius: 50%;
+  border: 0;
   outline: 0;
   color: white;
   transition: var(--mainTransition);
