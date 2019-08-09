@@ -12,8 +12,6 @@ const platforms = {
 export default props => {
   const accounts = Object.entries(props.accounts);
 
-  console.log(accounts);
-
   return (
     <SocialLinks size={accounts.length}>
       {accounts.map(account => {

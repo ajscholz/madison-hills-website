@@ -1,4 +1,4 @@
-import { createGlobalStyle } from "styled-components"
+import { createGlobalStyle } from 'styled-components';
 
 export default createGlobalStyle`
   :root {
@@ -15,6 +15,7 @@ export default createGlobalStyle`
   * {
     box-sizing: border-box;
     font-family: "Nunito Sans";
+    font-display: fallback;
     font-weight: 400;
     letter-spacing:.08rem;
   }
@@ -55,4 +56,4 @@ export default createGlobalStyle`
   button, a {
     cursor: pointer;
   }
-`
+`;

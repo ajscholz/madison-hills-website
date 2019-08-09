@@ -10,6 +10,19 @@ import Button from '../../../components/Button';
 import MinistryList from '../../../components/MinistryList';
 import TextMessageButton from '../../../components/TextMessageButton';
 import SocialLinks from '../../../components/SocialLinks';
+import VideoPlayer from '../../../components/VideoPlayer/VideoPlayer';
+import PlaylistPlayer from '../../../components/VideoPlayer/PlaylistPlayer';
+
+const playlist = [
+  {
+    src: 'https://youtu.be/Z-I8qhwYmQk',
+    label: 'Niagra Falls Video 1',
+  },
+  {
+    src: 'https://youtu.be/durLC2647Xs',
+    label: 'Niagra Falls Video 2',
+  },
+];
 
 export const data = graphql`
   {
@@ -61,9 +74,13 @@ const Teens = ({ data }) => {
         image={data.hero.image.src}
       />
 
+      <PlaylistPlayer playlist={playlist} />
+
       <HeroImage image={data.hero.image.fluid} backgroundPosition="45% 27%">
         Teen Ministry
       </HeroImage>
+
+      {/* <VideoPlayer src="https://youtube.com/embed/Z-I8qhwYmQk" /> */}
 
       <Section style={{ paddingTop: '6rem' }}>
         <Title as="div" style={{ textTransform: 'none' }}>
@@ -93,39 +110,32 @@ Don’t let anyone look down on you because you are young, but set an example fo
       <MinistryList programs={data.programs.edges} />
 
       <Section>
-        <Title>What's Coming</Title>
-        <h3>Check Out our 2018-2019 Theme</h3>
-        <div>{`We are very excited about our New Theme…which kicks off the end of August!  We are currently planning so many wonderful events, lessons, experiences that will help Students identify who they are!`}</div>
-        <h3>
-          <a
-            href="https://drive.google.com/open?id=19jMRPwwi_eqz7sLDNbf5DdiNkwp0jfja"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Teen Ministry Brochure
-          </a>
-        </h3>
-        <h3>Mission Trip</h3>
+        <Title>Making A Difference</Title>
         <div>
           {`Every Summer we go to a wonderful city and do amazing projects, meet new people and serve those that need served!  These trips are 5-6 days, having amazing experiences, bonding with our group and making memories that will last a lifetime!`}
           <br />
           {`This Summer, we took  27 Teens and 6 Adults to Niagara Falls…and had an amazing week!`}
         </div>
-        <h3>Check out our Videos…</h3>
-        <div>
-          <a
-            href="https://youtu.be/Z-I8qhwYmQk"
-            target="_blank"
-            rel="noopener noreferrer"
-          >{`Niagara Falls (#1)`}</a>
-        </div>
-        <div>
+
+        {/* <Media>
+          <div>
+            <MediaPlayer>
+              <Player src="https://youtu.be/Z-I8qhwYmQk?controls=0" vendor="youtube"/>
+            </MediaPlayer>
+            <MediaControls>
+              <PlayPause />
+              <MuteUnmute />
+            </MediaControls>
+          </div>
+        </Media> */}
+
+        {/* <div>
           <a
             href="https://youtu.be/durLC2647Xs"
             target="_blank"
             rel="noopener noreferrer"
           >{`Niagara Falls (#2)`}</a>
-        </div>
+        </div> */}
       </Section>
       <Section dark>
         <Title>What About My Children?</Title>
@@ -169,4 +179,18 @@ const MissionVerseReference = styled.div`
   font-weight: bold;
   justify-content: flex-end;
   margin-top: 1rem;
+`;
+
+const MediaPlayer = styled.div`
+  width: 100%;
+  max-width: 640px;
+  position: relative;
+`;
+
+const MediaControls = styled.div`
+  display: flex;
+  align-items: center;
+  padding: 12px;
+  background-color: #282f31;
+  color: #fff;
 `;
