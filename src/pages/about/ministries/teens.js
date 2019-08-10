@@ -64,6 +64,8 @@ export const data = graphql`
 `;
 
 const Teens = ({ data }) => {
+  console.log(data.hero.image);
+
   const {
     videos: { playlist },
   } = data;
@@ -71,7 +73,7 @@ const Teens = ({ data }) => {
     <>
       <Seo
         title="Teen Ministry  |  Madison Hills Christian Church"
-        image={data.hero.image.fluid.src}
+        image={`https:${data.hero.image.fluid.src}`}
       />
 
       {/* <PlaylistPlayer playlist={playlist} /> */}
