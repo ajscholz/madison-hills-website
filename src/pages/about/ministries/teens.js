@@ -71,7 +71,7 @@ const Teens = ({ data }) => {
     <>
       <Seo
         title="Teen Ministry  |  Madison Hills Christian Church"
-        image={data.hero.image.src}
+        image={data.hero.image.fluid.src}
       />
 
       {/* <PlaylistPlayer playlist={playlist} /> */}
