@@ -12,17 +12,6 @@ import TextMessageButton from '../../../components/TextMessageButton';
 import SocialLinks from '../../../components/SocialLinks';
 import PlaylistPlayer from '../../../components/VideoPlayer/PlaylistPlayer';
 
-// const playlist = [
-//   {
-//     src: 'https://youtu.be/Z-I8qhwYmQk',
-//     label: 'Niagra Falls Video 1',
-//   },
-//   {
-//     src: 'https://youtu.be/durLC2647Xs',
-//     label: 'Niagra Falls Video 2',
-//   },
-// ];
-
 export const data = graphql`
   {
     hero: contentfulPageBannerImages(page: { eq: "Teens" }) {

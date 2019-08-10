@@ -18,6 +18,7 @@ import Backdrop from './Backdrop';
 import GlobalStyles from './GlobalStyles';
 
 import links from '../utils/links';
+import PreFooter from './PreFooter';
 
 const Layout = ({ children }) => {
   const data = useStaticQuery(graphql`
@@ -42,20 +43,6 @@ const Layout = ({ children }) => {
     <>
       <GlobalStyles />
       <FlexContainer>
-        {/* <h3
-        style={{
-          margin: "0",
-          position: "absolute",
-          top: "0",
-          left: "0",
-          padding: ".5rem",
-          background: "red",
-          zIndex: "1000",
-        }}
-      >
-        {width}
-      </h3> */}
-
         <Header
           siteTitle={data.site.siteMetadata.title}
           drawerClickHandler={() => drawerToggleHandler(!sideDrawerOpen)}
@@ -75,6 +62,7 @@ const Layout = ({ children }) => {
 
         <Main>{children}</Main>
 
+        <PreFooter />
         <Footer title={data.site.siteMetadata.title} />
       </FlexContainer>
     </>

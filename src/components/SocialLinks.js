@@ -1,5 +1,5 @@
 import React from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 import { FaFacebookF, FaTwitter, FaInstagram } from 'react-icons/fa';
 
@@ -13,10 +13,16 @@ export default props => {
   const accounts = Object.entries(props.accounts);
 
   return (
-    <SocialLinks size={accounts.length}>
+    <SocialLinks size={accounts.length} normal={props.normal}>
       {accounts.map(account => {
         if (account[1] === null) return null;
-        return <SocialButton account={account} key={account[0]} />;
+        return (
+          <SocialButton
+            account={account}
+            key={account[0]}
+            muted={props.muted}
+          />
+        );
       })}
     </SocialLinks>
   );
@@ -27,18 +33,28 @@ const SocialLinks = styled.div`
   grid-auto-flow: column;
   grid-gap: 1.5rem;
   justify-items: center;
-  position: absolute;
-  top: calc(98.25px + 40vh - calc(35.19px / 2));
-  transform: translateX(-50%);
-  left: 50%;
+  ${props =>
+    !props.normal &&
+    css`
+      position: absolute;
+      top: calc(98.25px + 40vh - calc(35.19px / 2));
+      transform: translateX(-50%);
+      left: 50%;
+      @media (min-width: 660px) {
+        top: calc(136.05px + 40vh - 27.59px);
+      }
+    `}
   @media (min-width: 660px) {
-    top: calc(136.05px + 40vh - 27.59px);
     grid-gap: 2.5rem;
   }
 `;
 
 const SocialButton = props => (
-  <SingleButton background={platforms[props.account[0]].color}>
+  <SingleButton
+    background={
+      props.muted ? 'var(--secondary)' : platforms[props.account[0]].color
+    }
+  >
     <a
       href={`https://www.${props.account[0]}.com/${props.account[1]}`}
       target="_blank"

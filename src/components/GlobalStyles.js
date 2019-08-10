@@ -5,8 +5,10 @@ export default createGlobalStyle`
     --primary: #2db34b;
     --primaryLight: #69e679;
     --primaryDark: #00821d;
-    --white: #F2EEEE;
+    --white: #DAD2D8;
     --black: #252323;
+    --secondary: #3A4E48;
+    --tertiary: #6A7B76;
     --danger: tomato;
     --mainTransition: all .3s ease;
 
