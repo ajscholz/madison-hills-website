@@ -24,11 +24,13 @@ export default props => {
             tabIndex="0"
           >
             <MediaPlayerElement onClick={() => mediaProps.playPause()}>
-              <Player
-                src={src}
-                autoPlay={autoPlay}
-                onEnded={() => props.updateTrack(1)}
-              />
+              <PlayerWrapper>
+                <StyledPlayer
+                  src={src}
+                  autoPlay={autoPlay}
+                  onEnded={() => props.updateTrack(1)}
+                />
+              </PlayerWrapper>
             </MediaPlayerElement>
             <MediaControls fullscreen={mediaProps.isFullscreen}>
               <MediaControl as={PlayPause} />
@@ -49,6 +51,23 @@ export default props => {
     </Media>
   );
 };
+
+const PlayerWrapper = styled.div`
+  position: relative;
+  width: 90vw;
+  height: calc(90vw * 0.5625);
+  max-width: 640px;
+  max-height: calc(640px * 0.5625);
+`;
+
+const StyledPlayer = styled(Player)`
+  position: absolute;
+  top: 0;
+  left: 0;
+  /* max-height: calc(500px * 0.5625); */
+  height: 100%;
+  width: 100%;
+`;
 
 const MediaPlayer = styled.div`
   width: 100%;
