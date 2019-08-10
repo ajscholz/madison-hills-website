@@ -10,19 +10,18 @@ import Button from '../../../components/Button';
 import MinistryList from '../../../components/MinistryList';
 import TextMessageButton from '../../../components/TextMessageButton';
 import SocialLinks from '../../../components/SocialLinks';
-import VideoPlayer from '../../../components/VideoPlayer/VideoPlayer';
 import PlaylistPlayer from '../../../components/VideoPlayer/PlaylistPlayer';
 
-const playlist = [
-  {
-    src: 'https://youtu.be/Z-I8qhwYmQk',
-    label: 'Niagra Falls Video 1',
-  },
-  {
-    src: 'https://youtu.be/durLC2647Xs',
-    label: 'Niagra Falls Video 2',
-  },
-];
+// const playlist = [
+//   {
+//     src: 'https://youtu.be/Z-I8qhwYmQk',
+//     label: 'Niagra Falls Video 1',
+//   },
+//   {
+//     src: 'https://youtu.be/durLC2647Xs',
+//     label: 'Niagra Falls Video 2',
+//   },
+// ];
 
 export const data = graphql`
   {
@@ -63,10 +62,22 @@ export const data = graphql`
       instagram
       twitter
     }
+    videos: contentfulVideoPlaylist(
+      title: { eq: "Niagra Falls Teen Mission Trip" }
+    ) {
+      playlist: videos {
+        title
+        contentful_id
+        link
+      }
+    }
   }
 `;
 
 const Teens = ({ data }) => {
+  const {
+    videos: { playlist },
+  } = data;
   return (
     <>
       <Seo
@@ -74,13 +85,11 @@ const Teens = ({ data }) => {
         image={data.hero.image.src}
       />
 
-      <PlaylistPlayer playlist={playlist} />
+      {/* <PlaylistPlayer playlist={playlist} /> */}
 
       <HeroImage image={data.hero.image.fluid} backgroundPosition="45% 27%">
         Teen Ministry
       </HeroImage>
-
-      {/* <VideoPlayer src="https://youtube.com/embed/Z-I8qhwYmQk" /> */}
 
       <Section style={{ paddingTop: '6rem' }}>
         <Title as="div" style={{ textTransform: 'none' }}>
@@ -111,31 +120,16 @@ Don’t let anyone look down on you because you are young, but set an example fo
 
       <Section>
         <Title>Making A Difference</Title>
-        <div>
-          {`Every Summer we go to a wonderful city and do amazing projects, meet new people and serve those that need served!  These trips are 5-6 days, having amazing experiences, bonding with our group and making memories that will last a lifetime!`}
-          <br />
-          {`This Summer, we took  27 Teens and 6 Adults to Niagara Falls…and had an amazing week!`}
+        <div
+          style={{
+            textAlign: 'center',
+            maxWidth: '800px',
+            marginBottom: '2rem',
+          }}
+        >
+          {`Every Summer we go to a wonderful city and do amazing projects, meet new people and serve those that need served!  These trips are 5-6 days, having amazing experiences, bonding with our group and making memories that will last a lifetime! This Summer, we took  27 Teens and 6 Adults to Niagara Falls…and had an amazing week!`}
         </div>
-
-        {/* <Media>
-          <div>
-            <MediaPlayer>
-              <Player src="https://youtu.be/Z-I8qhwYmQk?controls=0" vendor="youtube"/>
-            </MediaPlayer>
-            <MediaControls>
-              <PlayPause />
-              <MuteUnmute />
-            </MediaControls>
-          </div>
-        </Media> */}
-
-        {/* <div>
-          <a
-            href="https://youtu.be/durLC2647Xs"
-            target="_blank"
-            rel="noopener noreferrer"
-          >{`Niagara Falls (#2)`}</a>
-        </div> */}
+        <PlaylistPlayer playlist={playlist} />
       </Section>
       <Section dark>
         <Title>What About My Children?</Title>
@@ -155,11 +149,11 @@ export default styled(Teens)`
   align-items: center;
 `;
 
-const Mission = styled.div`
-  font-size: 1.5rem;
-  margin-bottom: 1.5rem;
-  text-align: center;
-`;
+// const Mission = styled.div`
+//   font-size: 1.5rem;
+//   margin-bottom: 1.5rem;
+//   text-align: center;
+// `;
 
 const MissionVerse = styled.div`
   max-width: 600px;
@@ -181,16 +175,16 @@ const MissionVerseReference = styled.div`
   margin-top: 1rem;
 `;
 
-const MediaPlayer = styled.div`
-  width: 100%;
-  max-width: 640px;
-  position: relative;
-`;
+// const MediaPlayer = styled.div`
+//   width: 100%;
+//   max-width: 640px;
+//   position: relative;
+// `;
 
-const MediaControls = styled.div`
-  display: flex;
-  align-items: center;
-  padding: 12px;
-  background-color: #282f31;
-  color: #fff;
-`;
+// const MediaControls = styled.div`
+//   display: flex;
+//   align-items: center;
+//   padding: 12px;
+//   background-color: #282f31;
+//   color: #fff;
+// `;

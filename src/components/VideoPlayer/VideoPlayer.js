@@ -1,12 +1,6 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
-import {
-  Media,
-  Player,
-  withMediaProps,
-  withKeyboardControls,
-  controls,
-} from 'react-media-player';
+import { Media, Player, controls } from 'react-media-player';
 import PlayPause from './PlayPause';
 import MuteUnmute from './MuteUnmute';
 import Fullscreen from './Fullscreen';

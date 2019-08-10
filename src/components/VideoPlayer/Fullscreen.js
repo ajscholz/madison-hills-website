@@ -13,7 +13,7 @@ class Fullscreen extends Component {
   };
 
   render() {
-    const { isFullscreen, fullscreen } = this.context;
+    const { isFullscreen } = this.context;
     return (
       <svg
         width="36px"

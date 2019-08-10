@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import { withMediaProps } from 'react-media-player';
 import Transition from 'react-motion-ui-pack';
 
@@ -20,7 +19,7 @@ class MuteUnmute extends Component {
 
   render() {
     const {
-      media: { isMuted, volume },
+      media: { volume },
       className,
     } = this.props;
     return (

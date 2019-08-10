@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import Playlist from './Playlist';
 import MediaPlayer from './MediaPlayer';
+import styled from 'styled-components';
 
-import './main.scss';
+// import './main.scss';
 
 export default props => {
   const { playlist } = props;
@@ -26,11 +27,11 @@ export default props => {
   };
 
   return (
-    <div>
+    <PlaylistPlayer>
       <MediaPlayer
         // ref={c => (this._mediaPlayer = c)}
-        src={playlist[currentTrack].src}
-        currentTrack={playlist[currentTrack].label}
+        src={playlist[currentTrack].link}
+        currentTrack={playlist[currentTrack].title}
         updateTrack={navigatePlaylist}
         autoPlay={autoPlay}
       />
@@ -39,6 +40,14 @@ export default props => {
         currentTrack={currentTrack}
         onTrackClick={handleTrackClick}
       />
-    </div>
+    </PlaylistPlayer>
   );
 };
+
+const PlaylistPlayer = styled.div`
+  width: 100%;
+  max-width: 640px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
