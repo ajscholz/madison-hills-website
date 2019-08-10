@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Media, Player, controls, utils } from 'react-media-player';
 import styled, { css } from 'styled-components';
 
@@ -7,6 +7,16 @@ import MuteUnmute from './MuteUnmute';
 import Fullscreen from './Fullscreen';
 
 import './main.scss';
+
+import {
+  FaPlay,
+  FaPause,
+  FaVolumeMute,
+  FaVolumeUp,
+  FaExpand,
+} from 'react-icons/fa';
+
+// import './main.scss';
 
 const { CurrentTime, Progress, SeekBar, Duration, Volume } = controls;
 const { keyboardControls } = utils;
@@ -73,14 +83,16 @@ export default props => {
           </MediaControlsFull> */
             <MediaControls fullscreen={mediaProps.isFullscreen}>
               <MediaControl as={PlayPause} />
-              <MediaControl as={CurrentTime} />
-              <Seek>
-                <ProgressBar as={Progress} />
-                <StyledSeekBar />
-              </Seek>
-              <MediaControl as={Duration} />
+              <StatusBar>
+                <TimeLabel as={CurrentTime} />
+                <Wrapper>
+                  <ProgressBar as={Progress} />
+                  <StyledSeekBar />
+                </Wrapper>
+                <TimeLabel as={Duration} />
+              </StatusBar>
               <MediaControl as={MuteUnmute} />
-              <VolumeControl as={Volume} />
+              {/* <VolumeControl as={Volume} /> */}
               <MediaControl as={Fullscreen} />
             </MediaControls>
           }
@@ -90,28 +102,11 @@ export default props => {
   );
 };
 
-// const MediaControls = styled.div`
-//   display: flex;
-//   align-items: center;
-//   padding: 12px;
-//   background-color: #282f31;
-//   color: #fff;
-
-//   svg,
-//   path,
-//   polygon {
-//     transform-origin: 50% 50%;
-//   }
-// `;
-
-// const MediaControlsFull = styled(MediaControls)`
-//   flex-direction: column;
-// `;
-
 const MediaPlayer = styled.div`
   width: 100%;
   /* max-width: 640px; */
   position: relative;
+  outline: none;
 
   /* hide native controls */
   video::-webkit-media-controls {
@@ -141,6 +136,147 @@ const MediaPlayerElement = styled.div`
   overflow: hidden;
   background-color: #d4d4d4;
 `;
+
+const MediaControls = styled.div`
+  display: grid;
+  grid-template-columns: auto 1fr auto auto;
+  /* grid-gap: 1rem; */
+  padding: 0.5rem;
+  background-color: var(--black);
+  color: var(--white);
+
+  svg,
+  path,
+  polygon {
+    transform-origin: 50% 50%;
+  }
+  ${props =>
+    props.fullscreen &&
+    css`
+      width: 100%;
+      position: absolute;
+      bottom: 0;
+      left: 0;
+
+      /* push controls above fullscreen video */
+      z-index: 2147483647;
+    `}
+  @media(min-width: 576px) {
+    padding: 0.75rem;
+  }
+`;
+
+const MediaControlGroup = styled.div`
+  display: flex;
+  align-items: center;
+  position: relative;
+`;
+
+const StatusBar = styled(MediaControlGroup)`
+  flex: 1;
+  margin: 0 10px;
+`;
+
+const MediaControl = styled.div`
+  /* margin: 0 12px; */
+`;
+
+const Wrapper = styled.div`
+  width: 100%;
+  height: 3px;
+  position: relative;
+  display: flex;
+  /* justify-content: stretch; */
+  align-items: center;
+`;
+
+const ProgressBar = styled(MediaControl)`
+  -webkit-appearance: none;
+  height: 100%;
+  border: 0;
+  width: calc(100% - 12px);
+  margin: 0 6px;
+  position: absolute;
+  left: 0;
+
+  /* bar */
+  background-color: var(--black);
+  &::-webkit-progress-bar {
+    background-color: var(--black);
+  }
+`;
+
+const StyledSeekBar = styled(SeekBar)`
+  height: 100%;
+  margin: 0;
+  background-color: transparent;
+  position: relative;
+  z-index: 5;
+  width: 100%;
+  margin: 0;
+  display: flex;
+  align-items: center;
+
+  &::-webkit-slider-runnable-track {
+    -webkit-appearance: none;
+    position: relative;
+    z-index: 1;
+    height: 3px;
+
+    &::after {
+      content: '';
+      display: block;
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: inherit;
+      height: inherit;
+      border-radius: inherit;
+      z-index: -1;
+    }
+  }
+  &::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    position: relative;
+    z-index: -1;
+    height: 7px;
+    width: 7px;
+    border-radius: 50%;
+
+    &::before {
+      content: '';
+      transform: translateX(-100%);
+      display: block;
+      z-index: -1;
+    }
+  }
+`;
+
+const VolumeControl = styled(MediaControl)`
+  max-width: 120px;
+`;
+
+const TimeLabel = styled.div`
+  font-size: 0.7rem;
+`;
+
+// const MediaControls = styled.div`
+//   display: flex;
+//   align-items: center;
+//   padding: 12px;
+//   background-color: #282f31;
+//   color: #fff;
+
+//   svg,
+//   path,
+//   polygon {
+//     transform-origin: 50% 50%;
+//   }
+// `;
+
+// const MediaControlsFull = styled(MediaControls)`
+//   flex-direction: column;
+// `;
 
 // const MediaRow = styled.div`
 //   display: flex;
@@ -206,70 +342,3 @@ const MediaPlayerElement = styled.div`
 // const NextTrackButton = styled(MediaControl)`
 //   margin-left: 6px;
 // `;
-
-const MediaControls = styled.div`
-  display: flex;
-  align-items: center;
-  padding: 12px;
-  background-color: var(--black);
-  color: var(--white);
-
-  svg,
-  path,
-  polygon {
-    transform-origin: 50% 50%;
-  }
-  ${props =>
-    props.fullscreen &&
-    css`
-      width: 100%;
-      position: absolute;
-      bottom: 0;
-      left: 0;
-
-      /* push controls above fullscreen video */
-      z-index: 2147483647;
-    `}
-`;
-
-const MediaControlGroup = styled.div`
-  display: flex;
-  align-items: center;
-  position: relative;
-`;
-
-const Seek = styled(MediaControlGroup)`
-  flex: 1;
-`;
-
-const MediaControl = styled.div`
-  margin: 0 12px;
-`;
-
-const ProgressBar = styled(MediaControl)`
-  -webkit-appearance: none;
-  width: calc(100% - 24px);
-  height: 3px;
-  margin: 0 12px;
-  border: 0;
-  position: absolute;
-  top: 7px;
-  left: 0;
-
-  /* bar */
-  background-color: var(--black);
-  &::-webkit-progress-bar {
-    background-color: var(--black);
-  }
-`;
-
-const StyledSeekBar = styled(SeekBar)`
-  position: relative;
-  z-index: 5;
-  width: 100%;
-  margin: 0;
-`;
-
-const VolumeControl = styled(MediaControl)`
-  max-width: 120px;
-`;
