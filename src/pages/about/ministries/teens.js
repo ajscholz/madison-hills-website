@@ -16,9 +16,11 @@ export const data = graphql`
   {
     hero: contentfulPageBannerImages(page: { eq: "Teens" }) {
       image: pageBannerImage {
+        file {
+          url
+        }
         fluid {
           ...GatsbyContentfulFluid
-          src
         }
       }
     }
@@ -64,7 +66,7 @@ export const data = graphql`
 `;
 
 const Teens = ({ data }) => {
-  console.log(data.hero.image);
+  console.log('image', `https:${data.hero.image.file.url}`);
 
   const {
     videos: { playlist },
@@ -73,7 +75,7 @@ const Teens = ({ data }) => {
     <>
       <Seo
         title="Teen Ministry  |  Madison Hills Christian Church"
-        image={`https:${data.hero.image.fluid.src}`}
+        image={`https:${data.hero.image.file.url}`}
       />
 
       {/* <PlaylistPlayer playlist={playlist} /> */}
