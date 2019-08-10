@@ -4,9 +4,11 @@ import { withMediaProps } from 'react-media-player';
 import { FaExpand, FaCompress } from 'react-icons/fa';
 import IconButton from '../IconButton';
 
-const Fullscreen2 = props => {
+const Fullscreen = props => {
+  // const [isFullscreen, setFullscreen] = React.useState(false);
   const handleFullscreen = () => {
     props.media.fullscreen();
+    // setFullscreen(!isFullscreen);
   };
 
   const {
@@ -30,4 +32,4 @@ const Fullscreen2 = props => {
   );
 };
 
-export default withMediaProps(Fullscreen2);
+export default withMediaProps(Fullscreen);

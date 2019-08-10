@@ -118,7 +118,7 @@ Don’t let anyone look down on you because you are young, but set an example fo
 
       <MinistryList programs={data.programs.edges} />
 
-      <Section>
+      <Section className="video">
         <Title>Making A Difference</Title>
         <div
           style={{
@@ -131,7 +131,7 @@ Don’t let anyone look down on you because you are young, but set an example fo
         </div>
         <PlaylistPlayer playlist={playlist} />
       </Section>
-      <Section dark>
+      <Section>
         <Title>What About My Children?</Title>
         <Button as={Link} to="/about/ministries/kids">
           Kids Page
