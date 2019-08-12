@@ -18,11 +18,11 @@ const PlayPause = props => {
     <IconButton>
       {isPlaying ? (
         <FaPause
-          className={props.className}
+          className={className}
           onClick={() => handlePlayPause()}
         />
       ) : (
-        <FaPlay className={props.className} onClick={() => handlePlayPause()} />
+        <FaPlay className={className} onClick={() => handlePlayPause()} />
       )}
     </IconButton>
   );

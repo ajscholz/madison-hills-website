@@ -16,6 +16,15 @@ export const data = graphql`
   query MyQuery {
     hero: contentfulPageBannerImages(page: { eq: "Home" }) {
       image: pageBannerImage {
+        file {
+          url
+          details {
+            image {
+              height
+              width
+            }
+          }
+        }
         fluid {
           ...GatsbyContentfulFluid
         }
@@ -53,11 +62,11 @@ export const data = graphql`
 `;
 
 const IndexPage = ({ data, className }) => {
-  console.log(data.hero);
+  const image = {src: data.hero.image.file.url, height: data.hero.image.file.details.image.height, width: data.hero.image.file.details.image.width}
 
   return (
     <>
-      <SEO title="Home" />
+      <SEO title="Home" image={image} />
       <HeroImage image={data.hero.image.fluid} full>
         For Richmond
         <br />

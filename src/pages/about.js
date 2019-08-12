@@ -12,9 +12,11 @@ import Button from '../components/Button';
 
 import ministries from '../utils/ministries';
 
-const about = ({ data }) => (
+const about = ({ data }) => {
+  const image = {src: data.hero.image.file.url, height: data.hero.image.file.details.image.height, width: data.hero.image.file.details.image.width}
+  return (
   <>
-    <Seo title="About" image={data.hero.image.src}></Seo>
+    <Seo title="About" image={image}/>
     <StyledHeroImage image={data.hero.image.fluid}>About</StyledHeroImage>
     <Section>
       <Title>Our Team</Title>
@@ -45,7 +47,7 @@ const about = ({ data }) => (
       <Accordion beliefs={data.beliefs.edges} />
     </Section>
   </>
-);
+)};
 
 const FlexContainer = styled.div`
   width: 100%;
@@ -69,6 +71,15 @@ export const data = graphql`
   {
     hero: contentfulPageBannerImages(page: { eq: "About" }) {
       image: pageBannerImage {
+        file {
+          url
+          details {
+            image {
+              height
+              width
+            }
+          }
+        }
         fluid {
           ...GatsbyContentfulFluid
           src

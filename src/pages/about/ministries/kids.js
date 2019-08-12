@@ -13,6 +13,15 @@ export const data = graphql`
   {
     hero: contentfulPageBannerImages(page: { eq: "Kids" }) {
       image: pageBannerImage {
+        file {
+          url
+          details {
+            image {
+              height
+              width
+            }
+          }
+        }
         fluid {
           ...GatsbyContentfulFluid
           src
@@ -47,9 +56,10 @@ export const data = graphql`
 `;
 
 export default ({ data }) => {
+  const image = {src: data.hero.image.file.url, height: data.hero.image.file.details.image.height, width: data.hero.image.file.details.image.width}
   return (
     <>
-      <Seo title="Madison Hills Kids Ministry" image={data.hero.image.src} />
+      <Seo title="Madison Hills Kids Ministry" image={image} />
       <HeroImage image={data.hero.image.fluid}>Kids Ministry</HeroImage>
 
       <MinistryList programs={data.programs.edges} />
