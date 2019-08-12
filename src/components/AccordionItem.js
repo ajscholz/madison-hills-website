@@ -44,8 +44,6 @@ export default memo(({ isOpen, belief, click, index }) => {
     },
   });
 
-  console.log(belief);
-
   return (
     <Frame>
       <Head onClick={isOpen ? () => click(null) : () => click(index)}>

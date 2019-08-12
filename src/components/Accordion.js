@@ -4,7 +4,6 @@ import AccordionItem from './AccordionItem';
 
 export default props => {
   const [openItem, setOpenItem] = React.useState(null);
-  console.log(props.beliefs);
   return (
     <Accordion>
       {props.beliefs.map(({ belief }, index) => {

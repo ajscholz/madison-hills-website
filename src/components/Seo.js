@@ -23,9 +23,6 @@ const Seo = ({ description, meta, image, title, lang }) => {
   const metaDescription = description || site.metadata.description;
   const img = image ? image.src : site.metadata.logo;
 
-  console.log("image",image)
-  console.log("img", img)
-
   return (
     <Helmet
       htmlAttributes={{
@@ -78,14 +75,14 @@ const Seo = ({ description, meta, image, title, lang }) => {
                   property: 'og:image',
                   content: `https:${img}`,
                 },
-                {
-                  property: 'og:image:width',
-                  content: image.width,
-                },
-                {
-                  property: 'og:image:height',
-                  content: image.height,
-                },
+                // {
+                //   property: 'og:image:width',
+                //   content: image.width,
+                // },
+                // {
+                //   property: 'og:image:height',
+                //   content: image.height,
+                // },
                 {
                   name: 'twitter:card',
                   content: 'summary_large_image',
@@ -112,8 +109,8 @@ Seo.propTypes = {
   description: PropTypes.string,
   image: PropTypes.shape({
     src: PropTypes.string.isRequired,
-    height: PropTypes.string.isRequired,
-    width: PropTypes.string.isRequired,
+    // height: PropTypes.string.isRequired,
+    // width: PropTypes.string.isRequired,
   }),
 };
 Seo.defaultProps = {
