@@ -76,12 +76,11 @@ const Teens = ({ data }) => {
     videos: { playlist },
   } = data;
 
-  const image = {src: data.hero.image.file.url, height: data.hero.image.file.details.image.height, width: data.hero.image.file.details.image.height}
+  const image = {src: data.hero.image.file.url, height: data.hero.image.file.details.image.height, width: data.hero.image.file.details.image.width}
 
-  console.log(image)
   return (
     <>
-      <Seo title="Teen Ministry" image={`https:${data.hero.image.file.url}`} description={`The teen ministry of Madison Hills Christian Church.`} />
+      <Seo title="Teen Ministry" image={image} description={`The teen ministry of Madison Hills Christian Church.`} />
 
       {/* <PlaylistPlayer playlist={playlist} /> */}
 

@@ -13,6 +13,7 @@ const Seo = ({ description, meta, image, title, lang }) => {
             description
             keywords
             url
+            logo
           }
         }
       }
@@ -20,7 +21,10 @@ const Seo = ({ description, meta, image, title, lang }) => {
   );
 
   const metaDescription = description || site.metadata.description;
-  const img = image && image.src ? `${site.metadata.url}${image.src}` : image;
+  const img = image.src || site.metadata.logo;
+
+  console.log("image",image)
+  console.log("img", img)
 
   return (
     <Helmet
@@ -71,16 +75,16 @@ const Seo = ({ description, meta, image, title, lang }) => {
           image
             ? [
                 {
-                  propery: 'og:image',
-                  content: img,
+                  property: 'og:image',
+                  content: `https:${img}`,
                 },
                 {
                   property: 'og:image:width',
-                  content: img.width,
+                  content: image.width,
                 },
                 {
                   property: 'og:image:height',
-                  content: img.height,
+                  content: image.height,
                 },
                 {
                   name: 'twitter:card',
