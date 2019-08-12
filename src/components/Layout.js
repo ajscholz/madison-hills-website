@@ -10,6 +10,7 @@ import PropTypes from 'prop-types';
 import { useStaticQuery, graphql } from 'gatsby';
 import styled from 'styled-components';
 import { useBrowserWidth } from '../context/BrowserWidthContext';
+import 'typeface-nunito-sans';
 
 import Header from './Header';
 import Footer from './Footer';

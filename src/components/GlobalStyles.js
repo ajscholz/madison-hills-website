@@ -17,7 +17,7 @@ export default createGlobalStyle`
   * {
     box-sizing: border-box;
     font-family: "Nunito Sans";
-    font-display: fallback;
+    font-display: swap;
     font-weight: 400;
     letter-spacing:.08rem;
   }
