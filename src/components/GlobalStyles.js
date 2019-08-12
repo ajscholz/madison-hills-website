@@ -17,15 +17,14 @@ export default createGlobalStyle`
   * {
     box-sizing: border-box;
     font-family: "Nunito Sans";
-    font-display: swap;
     font-weight: 400;
     letter-spacing:.08rem;
   }
 
   html {
     height: 100%;
-      -ms-text-size-adjust: 100%;
-  -webkit-text-size-adjust: 100%;
+    -ms-text-size-adjust: 100%;
+    -webkit-text-size-adjust: 100%;
   }
 
   body {
