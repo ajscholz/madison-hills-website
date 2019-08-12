@@ -18,6 +18,12 @@ export const data = graphql`
       image: pageBannerImage {
         file {
           url
+          details {
+            image {
+              height
+              width
+            }
+          }
         }
         fluid {
           ...GatsbyContentfulFluid
@@ -66,17 +72,16 @@ export const data = graphql`
 `;
 
 const Teens = ({ data }) => {
-  console.log('image', `https:${data.hero.image.file.url}`);
-
   const {
     videos: { playlist },
   } = data;
+
+  const image = {src: data.hero.image.file.url, height: data.hero.image.file.details.image.height, width: data.hero.image.file.details.image.height}
+
+  console.log(image)
   return (
     <>
-      <Seo
-        title="Teen Ministry  |  Madison Hills Christian Church"
-        image={`https:${data.hero.image.file.url}`}
-      />
+      <Seo title="Teen Ministry" image={`https:${data.hero.image.file.url}`} description={`The teen ministry of Madison Hills Christian Church.`} />
 
       {/* <PlaylistPlayer playlist={playlist} /> */}
 

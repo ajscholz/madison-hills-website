@@ -1,30 +1,26 @@
-/**
- * SEO component that queries for data with
- *  Gatsby's useStaticQuery React hook
- *
- * See: https://www.gatsbyjs.org/docs/use-static-query/
- */
+import React from 'react';
+import PropTypes from 'prop-types';
+import Helmet from 'react-helmet';
+import { useStaticQuery, graphql } from 'gatsby';
 
-import React from "react"
-import PropTypes from "prop-types"
-import Helmet from "react-helmet"
-import { useStaticQuery, graphql } from "gatsby"
-
-function SEO({ description, lang, meta, title }) {
+const Seo = ({ description, meta, image, title, lang }) => {
   const { site } = useStaticQuery(
     graphql`
       query {
         site {
-          siteMetadata {
+          metadata: siteMetadata {
             title
             description
+            keywords
+            url
           }
         }
       }
     `
-  )
+  );
 
-  const metaDescription = description || site.siteMetadata.description
+  const metaDescription = description || site.metadata.description;
+  const img = image && image.src ? `${site.metadata.url}${image.src}` : image;
 
   return (
     <Helmet
@@ -32,11 +28,15 @@ function SEO({ description, lang, meta, title }) {
         lang,
       }}
       title={title}
-      titleTemplate={`%s | ${site.siteMetadata.title}`}
+      titleTemplate={`%s | ${site.metadata.title}`}
       meta={[
         {
           name: `description`,
           content: metaDescription,
+        },
+        {
+          name: `keywords`,
+          content: site.metadata.keywords.join(','),
         },
         {
           property: `og:title`,
@@ -54,10 +54,10 @@ function SEO({ description, lang, meta, title }) {
           name: `twitter:card`,
           content: `summary`,
         },
-        {
-          name: `twitter:creator`,
-          // content: site.siteMetadata.author,
-        },
+        // {
+        //   name: `twitter:creator`,
+        //   content: site.siteMetadata.author,
+        // },
         {
           name: `twitter:title`,
           content: title,
@@ -66,22 +66,56 @@ function SEO({ description, lang, meta, title }) {
           name: `twitter:description`,
           content: metaDescription,
         },
-      ].concat(meta)}
+      ]
+        .concat(
+          image
+            ? [
+                {
+                  propery: 'og:image',
+                  content: img,
+                },
+                {
+                  property: 'og:image:width',
+                  content: img.width,
+                },
+                {
+                  property: 'og:image:height',
+                  content: img.height,
+                },
+                {
+                  name: 'twitter:card',
+                  content: 'summary_large_image',
+                },
+              ]
+            : [
+                {
+                  name: 'twitter:card',
+                  content: 'summary',
+                },
+              ]
+        )
+        .concat(meta)}
     />
-  )
-}
+  );
+};
 
-SEO.defaultProps = {
-  lang: `en`,
-  meta: [],
-  description: ``,
-}
+export default Seo
 
-SEO.propTypes = {
-  description: PropTypes.string,
+Seo.propTypes = {
   lang: PropTypes.string,
   meta: PropTypes.arrayOf(PropTypes.object),
   title: PropTypes.string.isRequired,
-}
-
-export default SEO
+  description: PropTypes.string,
+  image: PropTypes.shape({
+    src: PropTypes.string.isRequired,
+    height: PropTypes.string.isRequired,
+    width: PropTypes.string.isRequired,
+  }),
+};
+Seo.defaultProps = {
+  lang: `en`,
+  meta: [],
+  title: null,
+  description: null,
+  image: null,
+};

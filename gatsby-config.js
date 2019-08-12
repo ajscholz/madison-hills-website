@@ -17,6 +17,12 @@ module.exports = {
     city: `Richmond`,
     state: `KY`,
     zip: `40475`,
+    logo: `/images/logo.png`,
+    url: `https://madison-hills.netlify.com`,
+    twitterUsername: `madisonhillschr`,
+    facebookUsername: `madisonhills`,
+    instagramUsername: `madison.hills`,
+    keywords: [`Richmond`, `church`, `christian`, `Jesus`]
   },
   developMiddleware: app => {
     app.use(
