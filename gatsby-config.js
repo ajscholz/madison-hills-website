@@ -22,7 +22,7 @@ module.exports = {
     twitterUsername: `madisonhillschr`,
     facebookUsername: `madisonhills`,
     instagramUsername: `madison.hills`,
-    keywords: [`Richmond`, `church`, `christian`, `Jesus`]
+    keywords: [`Richmond`, `church`, `christian`, `Jesus`],
   },
   developMiddleware: app => {
     app.use(
@@ -44,12 +44,7 @@ module.exports = {
         accessToken: process.env.CONTENTFUL_ACCESS_TOKEN,
       },
     },
-    {
-      resolve: `gatsby-plugin-styled-components`,
-      options: {
-        displayName: true,
-      },
-    },
+    `gatsby-plugin-styled-components`,
     `gatsby-plugin-react-helmet`,
     {
       resolve: `gatsby-source-filesystem`,
