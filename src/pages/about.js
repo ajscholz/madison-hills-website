@@ -8,7 +8,6 @@ import Section from '../components/Section';
 import Title from '../components/Title';
 import TeamCard from '../components/TeamCard';
 import Accordion from '../components/Accordion';
-import Button from '../components/Button';
 import ImageButton from '../components/ImageButton';
 
 const about = ({ data }) => {
@@ -18,7 +17,6 @@ const about = ({ data }) => {
     width: data.hero.image.file.details.image.width,
   };
 
-  console.log(data.ministries.edges);
   return (
     <>
       <Seo title="About" image={image} />
