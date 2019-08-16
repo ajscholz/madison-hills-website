@@ -1,7 +1,3 @@
-import { FaAddressCard } from 'react-icons/fa';
-
-import icon from '../images/icon.svg';
-
 import styled, { css } from 'styled-components';
 
 export default styled.button`
@@ -18,6 +14,8 @@ export default styled.button`
   outline: none;
   display: flex;
   align-items: center;
+  flex-wrap: nowrap;
+  white-space: nowrap;
   position: relative;
   svg {
     transition: var(--mainTransition);

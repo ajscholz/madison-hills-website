@@ -42,7 +42,7 @@ const about = ({ data }) => {
       <Seo title="Message" image={image} />
       <StyledHeroImage image={data.hero.image.fluid}>Messages</StyledHeroImage>
 
-      <div
+      {/* <div
         style={{
           flexDirection: 'row',
           justifyContent: 'center',
@@ -66,7 +66,7 @@ const about = ({ data }) => {
         >
           Series
         </ToggleButton>
-      </div>
+      </div> */}
 
       <Section>
         {view === 'messages' ? <MessagesView /> : <SeriesView />}
