@@ -40,33 +40,29 @@ const about = ({ data }) => {
   return (
     <>
       <Seo title="Message" image={image} />
-      <StyledHeroImage image={data.hero.image.fluid}>Messages</StyledHeroImage>
-
-      {/* <div
-        style={{
-          flexDirection: 'row',
-          justifyContent: 'center',
-          padding: '2rem 1rem 0 1rem',
-        }}
-      >
+      <StyledHeroImage image={data.hero.image.fluid}>
+        Messages{' '}
         <div
-          style={{ width: '100%', marginBottom: '1rem', textAlign: 'center' }}
+          style={{
+            flexDirection: 'row',
+            justifyContent: 'center',
+            padding: '.5rem 1rem 0 1rem',
+          }}
         >
-          View:
+          <ToggleButton
+            onClick={() => setView('messages')}
+            disabled={view === 'messages'}
+          >
+            Messages
+          </ToggleButton>
+          <ToggleButton
+            onClick={() => setView('series')}
+            disabled={view === 'series'}
+          >
+            Series
+          </ToggleButton>
         </div>
-        <ToggleButton
-          onClick={() => setView('messages')}
-          disabled={view === 'messages'}
-        >
-          Messages
-        </ToggleButton>
-        <ToggleButton
-          onClick={() => setView('series')}
-          disabled={view === 'series'}
-        >
-          Series
-        </ToggleButton>
-      </div> */}
+      </StyledHeroImage>
 
       <Section>
         {view === 'messages' ? <MessagesView /> : <SeriesView />}
