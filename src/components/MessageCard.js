@@ -64,7 +64,6 @@ const PlayIcon = styled.div`
 
 export default styled(MessageCard)`
   height: 275.84px;
-  /* width: 100%; */
   display: grid;
   grid-template-columns: 100%;
   grid-template-rows: auto auto;
