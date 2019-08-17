@@ -24,6 +24,7 @@ const SeriesTemplate = props => {
     messages,
   } = series;
 
+  console.log(series);
   // parses the rich text description to keep formatting
   const descriptionText = json.content // querying for json
     .map((paragraph, index) => {

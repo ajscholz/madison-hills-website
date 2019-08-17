@@ -11,8 +11,14 @@ const MessageCard = ({ className, message }) => {
   const { title, communicator, date, image, series } = message;
   const seriesSlug =
     series &&
-    `/messages/series/${series.title.replace(/ /g, '-').toLowerCase()}`;
-  const messageSlug = `/messages/${title.replace(/ /g, '-').toLowerCase()}`;
+    `/messages/series/${series.title
+      .replace(/ /g, '-')
+      .replace(/[?!,/^*%$@#()'"`|]/g, '')
+      .toLowerCase()}`;
+  const messageSlug = `/messages/${title
+    .replace(/ /g, '-')
+    .replace(/[?!,/^*%$@#()'"`|]/g, '')
+    .toLowerCase()}`;
 
   return (
     <Link className={className} to={messageSlug}>

@@ -9,7 +9,7 @@ const MessageCard = ({ className, series }) => {
   const { title, start, end, year, image, length } = series;
   const seriesSlug = `/messages/series/${title
     .replace(/ /g, '-')
-    .replace(/[[:punct:]]/g, '')
+    .replace(/[?!,/^*%$@#()'"`|]/g, '')
     .toLowerCase()}`;
 
   return (

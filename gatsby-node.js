@@ -36,7 +36,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
       path: `messages/series/${series.title
         .toLowerCase()
         .replace(/ /g, '-')
-        .replace(/[[:punct:]]/g, '')}`,
+        .replace(/[?!,/^*%$@#()'"`|]/g, '')}`,
       component: seriesTemplate,
       context: {
         id: series.id,
@@ -49,7 +49,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
       path: `messages/${message.title
         .toLowerCase()
         .replace(/ /g, '-')
-        .replace(/[[:punct:]]/g, '')}`,
+        .replace(/[?!,/^*%$@#()'"`|]/g, '')}`,
       component: messageTemplate,
       context: {
         id: message.id,
