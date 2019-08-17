@@ -15,11 +15,48 @@ import { FaCalendar } from 'react-icons/fa';
 
 const SeriesTemplate = props => {
   const { series } = props.data;
-  const { title, start, end, image, description, messages } = series;
+  const {
+    title,
+    start,
+    end,
+    image,
+    description: { json },
+    messages,
+  } = series;
+
+  // parses the rich text description to keep formatting
+  const descriptionText = json.content // querying for json
+    .map((paragraph, index) => {
+      return (
+        <p key={index} style={{ fontWeight: '200' }}>
+          {paragraph.content.map((text, index) => {
+            // if there are no marks (see below) give me the text
+            // 'marks' is what gives styling from contentful
+            if (text.marks.length === 0) {
+              return text.value;
+            } else {
+              // create array of styles
+              const styles = text.marks.map(mark => mark.type);
+              return (
+                <span
+                  key={index}
+                  style={{
+                    fontWeight: styles.includes('bold') && 'bold',
+                    fontStyle: styles.includes('italic') && 'italic',
+                  }}
+                >
+                  {text.value}
+                </span>
+              );
+            }
+          })}
+        </p>
+      );
+    });
+
   return (
     <>
       <SEO title={title} />
-      {/* <StyledHeroImage image={image.fluid} /> */}
 
       <SeriesSection>
         <Img fluid={image.fluid} />
@@ -30,7 +67,8 @@ const SeriesTemplate = props => {
             <FaCalendar style={{ display: 'inline-block' }} />
             {start} - {end}
           </h5>
-          <p>{description.content[0].content[0].description}</p>
+
+          {descriptionText.map(paragraph => paragraph)}
         </Info>
       </SeriesSection>
 
@@ -121,12 +159,8 @@ export const query = graphql`
           src
         }
       }
-      description: seriesDescription {
-        content {
-          content {
-            description: value
-          }
-        }
+      description: childContentfulMessageSeriesSeriesDescriptionRichTextNode {
+        json
       }
       messages: message {
         id: contentful_id

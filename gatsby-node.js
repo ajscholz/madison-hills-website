@@ -33,7 +33,10 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
 
   result.data.allSeries.nodes.forEach(series => {
     createPage({
-      path: `messages/series/${series.title.toLowerCase().replace(/ /g, '-')}`,
+      path: `messages/series/${series.title
+        .toLowerCase()
+        .replace(/ /g, '-')
+        .replace(/[[:punct:]]/g, '')}`,
       component: seriesTemplate,
       context: {
         id: series.id,
@@ -43,7 +46,10 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
 
   result.data.allMessages.nodes.forEach(message => {
     createPage({
-      path: `messages/${message.title.toLowerCase().replace(/ /g, '-')}`,
+      path: `messages/${message.title
+        .toLowerCase()
+        .replace(/ /g, '-')
+        .replace(/[[:punct:]]/g, '')}`,
       component: messageTemplate,
       context: {
         id: message.id,

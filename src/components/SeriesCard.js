@@ -9,6 +9,7 @@ const MessageCard = ({ className, series }) => {
   const { title, start, end, year, image, length } = series;
   const seriesSlug = `/messages/series/${title
     .replace(/ /g, '-')
+    .replace(/[[:punct:]]/g, '')
     .toLowerCase()}`;
 
   return (
@@ -19,7 +20,7 @@ const MessageCard = ({ className, series }) => {
           alt={`${title} series graphic`}
           style={{ width: '100%' }}
         />
-        <PlayIcon>View Series</PlayIcon>
+        {/* <PlayIcon>View Series</PlayIcon> */}
       </Header>
       <Body>
         <Metadata>

@@ -4,7 +4,8 @@ import { Link } from 'gatsby';
 import PropTypes from 'prop-types';
 import Img from 'gatsby-image';
 
-import { FaRegPlayCircle, FaAngleDoubleRight } from 'react-icons/fa';
+// import { FaRegPlayCircle } from 'react-icons/fa';
+import { FaAngleDoubleRight } from 'react-icons/fa';
 
 const MessageCard = ({ className, message }) => {
   const { title, communicator, date, image, series } = message;
@@ -21,9 +22,9 @@ const MessageCard = ({ className, message }) => {
           alt="preaching photo"
           style={{ width: '100%' }}
         />
-        <PlayIcon>
+        {/* <PlayIcon>
           <FaRegPlayCircle />
-        </PlayIcon>
+        </PlayIcon> */}
       </Header>
       <Body>
         <Metadata>
@@ -31,31 +32,18 @@ const MessageCard = ({ className, message }) => {
           <h6>{date}</h6>
         </Metadata>
         <h3>{title}</h3>
-        {series ? (
-          <Link to={`${seriesSlug}`}>
-            View more from this series{' '}
-            <FaAngleDoubleRight
-              style={{
-                display: 'inline-block',
-                position: 'relative',
-                top: '2px',
-                opacity: '.8',
-              }}
-            />
-          </Link>
-        ) : (
-          <div className="footer">
-            View message{' '}
-            <FaAngleDoubleRight
-              style={{
-                display: 'inline-block',
-                position: 'relative',
-                top: '2px',
-                opacity: '.8',
-              }}
-            />
-          </div>
-        )}
+
+        <div className="footer">
+          View message{' '}
+          <FaAngleDoubleRight
+            style={{
+              display: 'inline-block',
+              position: 'relative',
+              top: '2px',
+              opacity: '.8',
+            }}
+          />
+        </div>
       </Body>
     </Link>
   );
