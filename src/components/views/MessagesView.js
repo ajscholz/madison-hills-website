@@ -5,6 +5,7 @@ import { graphql, useStaticQuery } from 'gatsby';
 import MessageCard from '../MessageCard';
 import Title from '../Title';
 import Chip from '../Chip';
+import CardGridContainer from '../CardGridContainer';
 
 import { FaPlus } from 'react-icons/fa';
 
@@ -92,11 +93,11 @@ export default () => {
           );
         })}
       </div>
-      <GridContainer>
+      <CardGridContainer>
         {paginatedMessages.map(message => {
           return <MessageCard message={message} key={message.id} />;
         })}
-      </GridContainer>
+      </CardGridContainer>
       <Pagination>
         {[...Array(pages)].map((item, index) => {
           const thisPage = index + 1;
@@ -105,6 +106,7 @@ export default () => {
               onClick={() => setPage(thisPage)}
               selected={page === thisPage}
               disabled={page === thisPage}
+              key={index}
             >
               {thisPage}
             </PaginationButton>
@@ -121,15 +123,6 @@ const MessageView = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-`;
-
-const GridContainer = styled.div`
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(275.83px, 1fr));
-  grid-gap: 2rem;
-  width: 100%;
-  max-width: 1110px;
-  margin-bottom: 3rem;
 `;
 
 const CloseIcon = styled.span`

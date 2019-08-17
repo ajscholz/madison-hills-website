@@ -7,7 +7,9 @@ import { FaAngleDoubleRight } from 'react-icons/fa';
 
 const MessageCard = ({ className, series }) => {
   const { title, start, end, year, image, length } = series;
-  const seriesSlug = `/series/${title.replace(/ /g, '-').toLowerCase()}`;
+  const seriesSlug = `/messages/series/${title
+    .replace(/ /g, '-')
+    .toLowerCase()}`;
 
   return (
     <Link className={className} to={`${seriesSlug}`}>

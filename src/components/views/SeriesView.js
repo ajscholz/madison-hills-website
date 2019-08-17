@@ -4,6 +4,7 @@ import { graphql, useStaticQuery } from 'gatsby';
 
 import Title from '../Title';
 import SeriesCard from '../SeriesCard';
+import CardGridContainer from '../CardGridContainer';
 
 const query = graphql`
   {
@@ -35,11 +36,11 @@ export default () => {
   return (
     <SeriesView>
       <Title>Recent Series</Title>
-      <GridContainer>
+      <CardGridContainer>
         {allSeries.edges.map(({ series }) => {
           return <SeriesCard series={series} key={series.id} />;
         })}
-      </GridContainer>
+      </CardGridContainer>
     </SeriesView>
   );
 };
@@ -50,13 +51,4 @@ const SeriesView = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-`;
-
-const GridContainer = styled.div`
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(275.83px, 1fr));
-  grid-gap: 2rem;
-  width: 100%;
-  max-width: 1110px;
-  margin-bottom: 3rem;
 `;

@@ -8,10 +8,13 @@ import { FaRegPlayCircle, FaAngleDoubleRight } from 'react-icons/fa';
 
 const MessageCard = ({ className, message }) => {
   const { title, communicator, date, image, series } = message;
-  const seriesSlug = `/series/${series.title.replace(/ /g, '-').toLowerCase()}`;
+  const seriesSlug =
+    series &&
+    `/messages/series/${series.title.replace(/ /g, '-').toLowerCase()}`;
+  const messageSlug = `/messages/${title.replace(/ /g, '-').toLowerCase()}`;
 
   return (
-    <div className={className}>
+    <Link className={className} to={messageSlug}>
       <Header>
         <Img
           fluid={image.fluid}
@@ -28,19 +31,33 @@ const MessageCard = ({ className, message }) => {
           <h6>{date}</h6>
         </Metadata>
         <h3>{title}</h3>
-        <Link to={`${seriesSlug}`}>
-          View more from this series{' '}
-          <FaAngleDoubleRight
-            style={{
-              display: 'inline-block',
-              position: 'relative',
-              top: '2px',
-              opacity: '.8',
-            }}
-          />
-        </Link>
+        {series ? (
+          <Link to={`${seriesSlug}`}>
+            View more from this series{' '}
+            <FaAngleDoubleRight
+              style={{
+                display: 'inline-block',
+                position: 'relative',
+                top: '2px',
+                opacity: '.8',
+              }}
+            />
+          </Link>
+        ) : (
+          <div className="footer">
+            View message{' '}
+            <FaAngleDoubleRight
+              style={{
+                display: 'inline-block',
+                position: 'relative',
+                top: '2px',
+                opacity: '.8',
+              }}
+            />
+          </div>
+        )}
       </Body>
-    </div>
+    </Link>
   );
 };
 
@@ -106,7 +123,7 @@ const Body = styled.div`
     text-overflow: ellipsis;
     overflow: hidden;
   }
-  a {
+  .footer {
     font-size: 0.8rem;
     margin-bottom: 0;
     opacity: 0.6;
@@ -139,8 +156,5 @@ MessageCard.propTypes = {
     }).isRequired,
     communicator: PropTypes.string.isRequired,
     date: PropTypes.string.isRequired,
-    series: PropTypes.shape({
-      title: PropTypes.string.isRequired,
-    }).isRequired,
   }).isRequired,
 };
