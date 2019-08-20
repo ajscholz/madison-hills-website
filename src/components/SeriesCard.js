@@ -3,6 +3,8 @@ import styled from 'styled-components';
 import { Link } from 'gatsby';
 import Img from 'gatsby-image';
 
+import Date from './Metadata/Date';
+
 import { FaAngleDoubleRight } from 'react-icons/fa';
 
 const MessageCard = ({ className, series }) => {
@@ -25,9 +27,9 @@ const MessageCard = ({ className, series }) => {
       <Body>
         <Metadata>
           <h6>{`${length} parts`}</h6>
-          <h6>{`${
+          <Date>{`${
             start === end ? `${start}` : `${start}, ${end}`
-          } ${year}`}</h6>
+          } ${year}`}</Date>
         </Metadata>
         <h3>{title}</h3>
         <div style={{ fontSize: '0.8rem', marginBottom: '0', opacity: '0.6' }}>

@@ -10,8 +10,10 @@ import MessageCard from '../components/MessageCard';
 import CardGridContainer from '../components/CardGridContainer';
 import Button from '../components/Button';
 import SEO from '../components/Seo';
+import Date from '../components/Metadata/Date';
+import Metadata from '../components/Metadata/Metadata';
 
-import { FaCalendar } from 'react-icons/fa';
+import ContentfulRichText from '../components/ContentfulRichText';
 
 const SeriesTemplate = props => {
   const { series } = props.data;
@@ -24,37 +26,6 @@ const SeriesTemplate = props => {
     messages,
   } = series;
 
-  console.log(series);
-  // parses the rich text description to keep formatting
-  const descriptionText = json.content // querying for json
-    .map((paragraph, index) => {
-      return (
-        <p key={index} style={{ fontWeight: '200' }}>
-          {paragraph.content.map((text, index) => {
-            // if there are no marks (see below) give me the text
-            // 'marks' is what gives styling from contentful
-            if (text.marks.length === 0) {
-              return text.value;
-            } else {
-              // create array of styles
-              const styles = text.marks.map(mark => mark.type);
-              return (
-                <span
-                  key={index}
-                  style={{
-                    fontWeight: styles.includes('bold') && 'bold',
-                    fontStyle: styles.includes('italic') && 'italic',
-                  }}
-                >
-                  {text.value}
-                </span>
-              );
-            }
-          })}
-        </p>
-      );
-    });
-
   return (
     <>
       <SEO title={title} />
@@ -63,13 +34,12 @@ const SeriesTemplate = props => {
         <Img fluid={image.fluid} />
         <Info>
           <Title>{title}</Title>
-          <h5>
-            {' '}
-            <FaCalendar style={{ display: 'inline-block' }} />
-            {start} - {end}
-          </h5>
-
-          {descriptionText.map(paragraph => paragraph)}
+          <Metadata>
+            <Date icon={true}>
+              {start} - {end}
+            </Date>
+          </Metadata>
+          <ContentfulRichText content={json} />
         </Info>
       </SeriesSection>
 
@@ -117,25 +87,15 @@ const Info = styled.div`
   margin: 0 auto;
   padding: 2rem;
   & > ${Title} {
-    margin-bottom: 2rem;
-  }
-  & > h5 {
-    color: lightgrey;
-    display: flex;
-    align-items: center;
-    opacity: 0.8;
-    margin: 0.5rem 0;
-    svg {
-      margin-right: 0.5rem;
-      opacity: 0.8;
-      position: relative;
-      top: -1px;
-    }
+    margin-bottom: 1.2rem;
   }
   & > p {
     font-size: 0.8rem;
     line-height: 1.5;
     margin-bottom: 0;
+    :first-of-type {
+      margin-top: 2rem;
+    }
   }
   @media (min-width: 576px) {
     padding: 3rem;

@@ -18,6 +18,9 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
           nodes {
             title: messageTitle
             id: contentful_id
+            series: messageSeries {
+              id: contentful_id
+            }
           }
         }
       }
@@ -53,6 +56,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
       component: messageTemplate,
       context: {
         id: message.id,
+        seriesId: message.series.id,
       },
     });
   });

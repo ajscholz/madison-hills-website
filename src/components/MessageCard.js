@@ -4,8 +4,9 @@ import { Link } from 'gatsby';
 import PropTypes from 'prop-types';
 import Img from 'gatsby-image';
 
-// import { FaRegPlayCircle } from 'react-icons/fa';
 import { FaAngleDoubleRight } from 'react-icons/fa';
+
+import Date from '../components/Metadata/Date';
 
 const MessageCard = ({ className, message }) => {
   const { title, communicator, date, image, series } = message;
@@ -35,7 +36,7 @@ const MessageCard = ({ className, message }) => {
       <Body>
         <Metadata>
           <h6>{communicator}</h6>
-          <h6>{date}</h6>
+          <Date>{date}</Date>
         </Metadata>
         <h3>{title}</h3>
 
@@ -127,6 +128,7 @@ const Body = styled.div`
 const Metadata = styled.div`
   display: flex;
   justify-content: space-between;
+
   h6 {
     margin: 0;
     text-transform: uppercase;
