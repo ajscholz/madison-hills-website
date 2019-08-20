@@ -12,13 +12,16 @@ import SEO from '../components/Seo';
 
 import Metadata from '../components/Metadata/Metadata';
 import Date from '../components/Metadata/Date';
-
 import MessageVideoPlayButton from '../components/MessageVideoPlayer/MessageVideoPlayButton';
+import SpinnerIcon from '../components/SpinnerIcon';
 
 const MessageTemplate = ({ data }) => {
   const [touched, setTouched] = useState(false);
+  const [ready, setReady] = useState(false);
   const { message, otherMessages } = data;
   const { title, communicator, date, video } = message;
+
+  console.log('in template');
 
   return (
     <>
@@ -32,8 +35,14 @@ const MessageTemplate = ({ data }) => {
             width="100%"
             height="100%"
             controls={touched}
+            onReady={() => setReady(true)}
           />
-          {!touched && (
+          {!ready && (
+            <Loading>
+              <StyledSpinnerIcon /> Loading Media
+            </Loading>
+          )}
+          {ready && !touched && (
             <MessageVideoPlayButton setTouched={setTouched} touched={touched} />
           )}
         </VideoWrapper>
@@ -97,6 +106,21 @@ const VideoWrapper = styled.div`
   @media (min-width: 1200px) {
     flex-shrink: 0;
   }
+`;
+
+const Loading = styled.div`
+  position: absolute;
+  display: flex;
+  align-items: center;
+  font-size: 2rem;
+  color: var(--primary);
+  font-weight: bold;
+`;
+
+const StyledSpinnerIcon = styled(SpinnerIcon)`
+  /* position: absolute; */
+  font-size: 1em;
+  margin-right: 0.5em;
 `;
 
 const Info = styled.div`
