@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { graphql } from 'gatsby';
-import Img from 'gatsby-image';
 import ReactPlayer from 'react-player';
 
 import Section from '../components/Section';
@@ -19,7 +18,7 @@ import MessageVideoPlayButton from '../components/MessageVideoPlayer/MessageVide
 const MessageTemplate = ({ data }) => {
   const [touched, setTouched] = useState(false);
   const { message, otherMessages } = data;
-  const { title, communicator, date, image, video } = message;
+  const { title, communicator, date, video } = message;
 
   return (
     <>

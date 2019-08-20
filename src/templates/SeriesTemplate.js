@@ -34,12 +34,12 @@ const SeriesTemplate = props => {
         <Img fluid={image.fluid} />
         <Info>
           <Title>{title}</Title>
+          <ContentfulRichText content={json} />
           <Metadata>
             <Date icon={true}>
               {start} - {end}
             </Date>
           </Metadata>
-          <ContentfulRichText content={json} />
         </Info>
       </SeriesSection>
 
@@ -93,8 +93,8 @@ const Info = styled.div`
     font-size: 0.8rem;
     line-height: 1.5;
     margin-bottom: 0;
-    :first-of-type {
-      margin-top: 2rem;
+    :last-of-type {
+      margin-bottom: 2rem;
     }
   }
   @media (min-width: 576px) {

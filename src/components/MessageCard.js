@@ -9,13 +9,13 @@ import { FaAngleDoubleRight } from 'react-icons/fa';
 import Date from '../components/Metadata/Date';
 
 const MessageCard = ({ className, message }) => {
-  const { title, communicator, date, image, series } = message;
-  const seriesSlug =
-    series &&
-    `/messages/series/${series.title
-      .replace(/ /g, '-')
-      .replace(/[?!,/^*%$@#()'"`|]/g, '')
-      .toLowerCase()}`;
+  const { title, communicator, date, image } = message;
+  // const seriesSlug =
+  //   series &&
+  //   `/messages/series/${series.title
+  //     .replace(/ /g, '-')
+  //     .replace(/[?!,/^*%$@#()'"`|]/g, '')
+  //     .toLowerCase()}`;
   const messageSlug = `/messages/${title
     .replace(/ /g, '-')
     .replace(/[?!,/^*%$@#()'"`|]/g, '')
