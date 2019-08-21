@@ -92,7 +92,7 @@ export default () => {
       <Title>Recent Messages</Title>
 
       <ButtonWrapper>
-        <FilterButton onClick={() => setFiltersOpen(state => !state)}>
+        <FilterButton onClick={() => setFiltersOpen(true)}>
           <FaFilter />
           Filter Messages
         </FilterButton>
@@ -103,26 +103,22 @@ export default () => {
       </ButtonWrapper>
 
       <CardsWrapper>
-        {filtersOpen && (
-          <Filters
-            open={filtersOpen}
-            click={setFiltersOpen}
-            reset={resetFilters}
-          >
-            <Chips
-              filterName="communicators"
-              items={communicators}
-              selected={contextCommunicators}
-              click={filterComm}
-            />
-            {/* <Chips
+        {/* {filtersOpen && ( */}
+        <Filters open={filtersOpen} click={setFiltersOpen} reset={resetFilters}>
+          <Chips
+            filterName="communicators"
+            items={communicators}
+            selected={contextCommunicators}
+            click={filterComm}
+          />
+          {/* <Chips
             filterName="topics"
             items={['marriage', 'bible', 'reaching people', 'church']}
             selected={[]}
             click={() => null}
           /> */}
-          </Filters>
-        )}
+        </Filters>
+        {/* )} */}
 
         <CardGridContainer
           style={width > 992 ? { width: 'calc(100% - 200px - 2rem)' } : null}

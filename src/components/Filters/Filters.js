@@ -9,8 +9,7 @@ export default props => {
   const { open, click, children, reset } = props;
 
   const toggle = useSpring({
-    transform: open ? 'translateY(0)' : 'translateY(-105%)',
-    config: { clamp: true, mass: 1, tension: 120, friction: 16 },
+    transform: open ? 'translateY(0)' : 'translateY(100%)',
   });
 
   return (
@@ -48,7 +47,7 @@ const Filters = styled(animated.div)`
   right: 0;
   top: 0;
   background: lightgray;
-  z-index: 2000;
+  z-index: 200;
   display: grid;
   align-items: start;
   align-content: start;
