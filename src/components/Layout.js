@@ -11,6 +11,7 @@ import { useStaticQuery, graphql } from 'gatsby';
 import styled from 'styled-components';
 import { useBrowserWidth } from '../context/BrowserWidthContext';
 import 'typeface-nunito-sans';
+import { MessageViewProvider } from '../context/MessageViewContext';
 
 import Header from './Header';
 import Footer from './Footer';
@@ -22,16 +23,7 @@ import links from '../utils/links';
 import PreFooter from './PreFooter';
 
 const Layout = ({ children }) => {
-  const data = useStaticQuery(graphql`
-    query SiteTitleQuery {
-      site {
-        siteMetadata {
-          title
-        }
-      }
-    }
-  `);
-
+  const data = useStaticQuery(query);
   const width = useBrowserWidth();
 
   const [sideDrawerOpen, drawerToggleHandler] = useState(false);
@@ -41,12 +33,12 @@ const Layout = ({ children }) => {
   }
 
   return (
-    <>
+    <MessageViewProvider>
       <GlobalStyles />
       <FlexContainer>
         <Header
           siteTitle={data.site.siteMetadata.title}
-          drawerClickHandler={() => drawerToggleHandler(!sideDrawerOpen)}
+          drawerClickHandler={() => drawerToggleHandler(() => !sideDrawerOpen)}
         />
         {width <= 662 ? (
           <SideDrawer
@@ -56,8 +48,9 @@ const Layout = ({ children }) => {
           />
         ) : null}
         {sideDrawerOpen ? (
-          <StyledBackdrop
-            onClick={() => drawerToggleHandler(!sideDrawerOpen)}
+          <Backdrop
+            onClick={() => drawerToggleHandler(() => !sideDrawerOpen)}
+            open={sideDrawerOpen}
           />
         ) : null}
 
@@ -66,7 +59,7 @@ const Layout = ({ children }) => {
         <PreFooter />
         <Footer title={data.site.siteMetadata.title} />
       </FlexContainer>
-    </>
+    </MessageViewProvider>
   );
 };
 
@@ -75,12 +68,6 @@ const FlexContainer = styled.div`
   flex-direction: column;
   align-items: stretch;
   min-height: 100%;
-`;
-
-const StyledBackdrop = styled(Backdrop)`
-  @media (min-width: 663px) {
-    display: none;
-  }
 `;
 
 const Main = styled.main`
@@ -93,3 +80,13 @@ Layout.propTypes = {
 };
 
 export default Layout;
+
+const query = graphql`
+  query SiteTitleQuery {
+    site {
+      siteMetadata {
+        title
+      }
+    }
+  }
+`;

@@ -1,39 +1,16 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import styled, { css } from 'styled-components';
 import { graphql, useStaticQuery } from 'gatsby';
+import { FaFilter, FaBan } from 'react-icons/fa';
 
 import MessageCard from '../MessageCard';
 import Title from '../Title';
-import Chip from '../Chip';
+import Chips from '../Filters/Chips';
 import CardGridContainer from '../CardGridContainer';
+import { useBrowserWidth } from '../../context/BrowserWidthContext';
 
-import { FaPlus } from 'react-icons/fa';
-
-const query = graphql`
-  {
-    messages: allContentfulMessage(sort: { fields: messageDate, order: DESC }) {
-      edges {
-        message: node {
-          id: contentful_id
-          title: messageTitle
-          date: messageDate(formatString: "MMM DD, YYYY")
-          communicator
-          image: messagePhoto {
-            fluid {
-              ...GatsbyContentfulFluid
-            }
-          }
-          series: messageSeries {
-            title: seriesTitle
-          }
-        }
-      }
-    }
-    communicators: allContentfulMessage {
-      communicators: distinct(field: communicator)
-    }
-  }
-`;
+import { MessageViewContext } from '../../context/MessageViewContext';
+import Filters from '../Filters/Filters';
 
 export default () => {
   const {
@@ -41,13 +18,26 @@ export default () => {
     communicators: { communicators },
   } = useStaticQuery(query);
 
-  const [commFilter, setCommFilter] = useState([]);
   const [page, setPage] = useState(1);
+  const [filtersOpen, setFiltersOpen] = useState(false);
+
+  const [views, setViews] = useContext(MessageViewContext);
+  const width = useBrowserWidth();
+
+  if (width >= 992 && filtersOpen === false) setFiltersOpen(true);
+  // if (width < 992 && filtersOpen === true) setFiltersOpen(false);
+
+  const {
+    filters: { communicators: contextCommunicators },
+  } = views;
 
   let filteredMessages = [];
 
   messages.edges.forEach(({ message }) => {
-    if (commFilter.length === 0 || commFilter.includes(message.communicator))
+    if (
+      contextCommunicators.length === 0 ||
+      contextCommunicators.includes(message.communicator)
+    )
       filteredMessages.push(message);
   });
 
@@ -58,46 +48,91 @@ export default () => {
 
   const paginatedMessages = filteredMessages.slice(startIndex, endIndex);
 
-  const filterComm = e => {
-    const name = e.currentTarget.textContent;
-    const pos = commFilter.indexOf(name);
+  const filterComm = name => {
+    const pos = contextCommunicators.indexOf(name);
 
     // if it's not found....
     if (pos === -1) {
-      setCommFilter([...commFilter, name]);
+      setViews({
+        ...views,
+        filters: {
+          ...views.filters,
+          communicators: [...contextCommunicators, name],
+        },
+      });
     } else {
       // create a new array to manipulate
-      const newFilter = [...commFilter];
+      const newFilter = [...contextCommunicators];
       // remove the clicked item
       newFilter.splice(pos, 1);
       // update state
-      setCommFilter([...newFilter]);
+      setViews({
+        ...views,
+        filters: {
+          ...views.filters,
+          communicators: [...newFilter],
+        },
+      });
     }
+  };
+
+  const resetFilters = () => {
+    setViews({
+      ...views,
+      filters: {
+        communicators: [],
+        topics: [],
+      },
+    });
+    setPage(1);
   };
 
   return (
     <MessageView>
       <Title>Recent Messages</Title>
-      <div>Filter Communicator</div>
-      <div
-        style={{ display: 'flex', alignItems: 'center', marginBottom: '2rem' }}
-      >
-        {communicators.map((communicator, index) => {
-          const selected = commFilter.includes(communicator);
 
-          return (
-            <Chip key={index} onClick={e => filterComm(e)} selected={selected}>
-              <CloseIcon as={FaPlus} />
-              {communicator}
-            </Chip>
-          );
-        })}
-      </div>
-      <CardGridContainer>
-        {paginatedMessages.map(message => {
-          return <MessageCard message={message} key={message.id} />;
-        })}
-      </CardGridContainer>
+      <ButtonWrapper>
+        <FilterButton onClick={() => setFiltersOpen(state => !state)}>
+          <FaFilter />
+          Filter Messages
+        </FilterButton>
+        <ClearButton onClick={() => resetFilters()}>
+          <FaBan />
+          Clear Filters
+        </ClearButton>
+      </ButtonWrapper>
+
+      <CardsWrapper>
+        {filtersOpen && (
+          <Filters
+            open={filtersOpen}
+            click={setFiltersOpen}
+            reset={resetFilters}
+          >
+            <Chips
+              filterName="communicators"
+              items={communicators}
+              selected={contextCommunicators}
+              click={filterComm}
+            />
+            {/* <Chips
+            filterName="topics"
+            items={['marriage', 'bible', 'reaching people', 'church']}
+            selected={[]}
+            click={() => null}
+          /> */}
+          </Filters>
+        )}
+
+        <CardGridContainer
+          style={width > 992 ? { width: 'calc(100% - 200px - 2rem)' } : null}
+        >
+          {paginatedMessages.map(message => {
+            return <MessageCard message={message} key={message.id} />;
+          })}
+        </CardGridContainer>
+      </CardsWrapper>
+
       <Pagination>
         {[...Array(pages)].map((item, index) => {
           const thisPage = index + 1;
@@ -123,16 +158,15 @@ const MessageView = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-`;
-
-const CloseIcon = styled.span`
-  display: inline-block;
-  margin-right: 5px;
+  position: relative;
 `;
 
 const Pagination = styled.div`
   display: flex;
   justify-content: center;
+  @media (min-width: 992px) {
+    margin-left: calc(2rem + 200px);
+  }
 `;
 
 const PaginationButton = styled.button`
@@ -167,4 +201,64 @@ const PaginationButton = styled.button`
         background: var(--primary);
       }
     `}
+`;
+
+const ButtonBase = styled.button`
+  outline: none;
+  border: none;
+  padding: 0;
+  background: transparent;
+  margin-bottom: 1rem;
+  font-size: 0.8rem;
+  display: flex;
+  align-items: center;
+  & > svg {
+    display: block;
+    margin-right: 0.25rem;
+  }
+`;
+
+const ButtonWrapper = styled.div`
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+`;
+
+const FilterButton = styled(ButtonBase)`
+  color: var(--primaryDark);
+`;
+
+const ClearButton = styled(ButtonBase)`
+  color: var(--danger);
+`;
+
+const CardsWrapper = styled.div`
+  display: flex;
+  width: 100%;
+`;
+
+const query = graphql`
+  {
+    messages: allContentfulMessage(sort: { fields: messageDate, order: DESC }) {
+      edges {
+        message: node {
+          id: contentful_id
+          title: messageTitle
+          date: messageDate(formatString: "MMM DD, YYYY")
+          communicator
+          image: messagePhoto {
+            fluid {
+              ...GatsbyContentfulFluid
+            }
+          }
+          series: messageSeries {
+            title: seriesTitle
+          }
+        }
+      }
+    }
+    communicators: allContentfulMessage {
+      communicators: distinct(field: communicator)
+    }
+  }
 `;
