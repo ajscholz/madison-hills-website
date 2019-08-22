@@ -7,10 +7,10 @@ const messagesState = {
   filters: { communicators: [], topics: [], year: [] },
 };
 
-const seriesState = {
-  type: 'series',
-  filters: { topics: [], year: [] },
-};
+// const seriesState = {
+//   type: 'series',
+//   filters: { topics: [], year: [] },
+// };
 
 const MessageViewContext = createContext([{}, () => {}]);
 

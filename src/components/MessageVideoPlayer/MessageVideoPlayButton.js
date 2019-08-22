@@ -2,16 +2,17 @@ import React from 'react';
 import styled from 'styled-components';
 import { FaVideo } from 'react-icons/fa';
 
-const MessageVideoPlayButton = props => {
-  return (
-    <PlayButton type="button" onClick={() => props.setTouched(state => !state)}>
-      Watch
-      <FaVideo />
-    </PlayButton>
-  );
-};
+export default ({ setTouched }) => (
+  <MessageVideoPlayButton
+    type="button"
+    onClick={() => setTouched(state => !state)}
+  >
+    Watch
+    <FaVideo />
+  </MessageVideoPlayButton>
+);
 
-export const PlayButton = styled.button`
+export const MessageVideoPlayButton = styled.button`
   font-size: 1rem;
   padding: 0.75rem 2.5rem;
   position: absolute;
@@ -26,11 +27,8 @@ export const PlayButton = styled.button`
   box-shadow: 0px 2px 5px 2px rgba(0, 0, 0, 0.5);
   & svg {
     font-size: 0.8rem;
-    /* display: inline-block; */
     margin-left: 0.5rem;
     position: relative;
-    bottom: 1px;
+    opacity: 0.9;
   }
 `;
-
-export default MessageVideoPlayButton;

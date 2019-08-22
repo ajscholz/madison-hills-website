@@ -27,27 +27,17 @@ export function useMeasure() {
 export default memo(({ isOpen, belief, click, index }) => {
   const previous = usePrevious(isOpen);
   const [bind, { height: viewHeight }] = useMeasure();
-  const turn = useSpring({
-    from: { transform: 'rotate(0deg)' },
-    to: { transform: isOpen ? 'rotate(90deg)' : 'rotate(0deg)' },
-  });
+  const rotate = useSpring({ transform: `rotate(${isOpen ? '90' : '0'}deg)` });
   const { height, opacity, transform } = useSpring({
-    from: {
-      height: 0,
-      opacity: 0,
-      transform: 'translate3d(20px,0,0)',
-    },
-    to: {
-      height: isOpen ? viewHeight : 0,
-      opacity: isOpen ? 1 : 0,
-      transform: `translate3d(${isOpen ? 0 : 20}px,0,0)`,
-    },
+    height: isOpen ? viewHeight : 0,
+    opacity: isOpen ? 1 : 0,
+    transform: `translate3d(${isOpen ? 0 : 20}px,0,0)`,
   });
 
   return (
     <Frame>
       <Head onClick={isOpen ? () => click(null) : () => click(index)}>
-        <Icon style={{ transform: turn.transform }}>
+        <Icon style={rotate}>
           <FaChevronRight></FaChevronRight>
         </Icon>
         <div>{belief.title}</div>
@@ -116,7 +106,9 @@ const Head = styled.button`
 const Icon = styled(a.span)`
   margin-right: 0.45rem;
   font-size: 0.9rem;
-  opacity: 0.9;
+  opacity: 0.8;
+  position: relative;
+  top: 2px;
 `;
 
 const Container = styled.div`

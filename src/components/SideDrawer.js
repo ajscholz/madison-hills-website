@@ -9,7 +9,7 @@ import { FaTimes } from 'react-icons/fa';
 const SideDrawer = ({ click, open }) => {
   const toggle = useSpring({
     transform: open ? 'translateX(0)' : 'translateX(105%)',
-    config: { clamp: true, mass: 1, tension: 120, friction: 16 },
+    // config: { clamp: true, mass: 1, tension: 120, friction: 16 },
   });
   return (
     <StyledSideDrawer style={toggle}>

@@ -19,13 +19,13 @@ const MessageTemplate = ({ data }) => {
   const [touched, setTouched] = useState(false);
   const [ready, setReady] = useState(false);
   const { message, otherMessages } = data;
-  const { title, communicator, date, video } = message;
+  const { title, communicator, date, video, series } = message;
 
   console.log('in template');
 
   return (
     <>
-      <SEO title={title} />
+      <SEO title={title} image={series.image.file.url} />
 
       <VideoSection>
         <VideoWrapper>
@@ -164,6 +164,13 @@ export const query = graphql`
       video: messageVideo {
         file {
           url
+        }
+      }
+      series: messageSeries {
+        image: seriesGraphic {
+          file {
+            url
+          }
         }
       }
     }
