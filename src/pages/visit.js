@@ -7,34 +7,21 @@ import Section from '../components/Section';
 import Title from '../components/Title';
 import ContactForm from '../components/ContactForm';
 
-export const data = graphql`
-  {
-    hero: contentfulPageBannerImages(page: { eq: "Visit" }) {
-      image: pageBannerImage {
-        file {
-          url
-          details {
-            image {
-              height
-              width
-            }
-          }
-        }
-        fluid {
-          ...GatsbyContentfulFluid
-          src
-        }
-      }
-    }
-  }
-`;
+const visit = ({
+  data: {
+    page: { image },
+  },
+}) => {
+  const img = {
+    src: image.file.url,
+    height: image.file.details.image.height,
+    width: image.file.details.image.width,
+  };
 
-const visit = ({ data }) => {
-  const image = {src: data.hero.image.file.url, height: data.hero.image.file.details.image.height, width: data.hero.image.file.details.image.width}
   return (
     <>
-      <Seo title="Visit" image={image} />
-      <HeroImage image={data.hero.image.fluid} backgroundPosition="51% 78%">
+      <Seo title="Visit" image={img} />
+      <HeroImage image={image.fluid} backgroundPosition="51% 78%">
         Visit
       </HeroImage>
       <Section>
@@ -54,3 +41,24 @@ const visit = ({ data }) => {
 };
 
 export default visit;
+
+export const data = graphql`
+  {
+    page: contentfulPages(title: { eq: "Visit" }) {
+      image: bannerImage {
+        fluid {
+          ...GatsbyContentfulFluid
+        }
+        file {
+          url
+          details {
+            image {
+              height
+              width
+            }
+          }
+        }
+      }
+    }
+  }
+`;

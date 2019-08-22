@@ -10,41 +10,23 @@ import SeriesView from '../components/views/SeriesView';
 
 import { MessageViewContext } from '../context/MessageViewContext';
 
-export const data = graphql`
-  {
-    hero: contentfulPageBannerImages(page: { eq: "Messages" }) {
-      image: pageBannerImage {
-        file {
-          url
-          details {
-            image {
-              height
-              width
-            }
-          }
-        }
-        fluid {
-          ...GatsbyContentfulFluid
-          src
-        }
-      }
-    }
-  }
-`;
-
-const watch = ({ data }) => {
+const messages = ({
+  data: {
+    page: { image },
+  },
+}) => {
   const [view, setView] = useContext(MessageViewContext);
 
-  const image = {
-    src: data.hero.image.file.url,
-    height: data.hero.image.file.details.image.height,
-    width: data.hero.image.file.details.image.width,
+  const img = {
+    src: image.file.url,
+    height: image.file.details.image.height,
+    width: image.file.details.image.width,
   };
 
   return (
     <>
-      <Seo title="Watch" image={image} />
-      <StyledHeroImage image={data.hero.image.fluid}>
+      <Seo title="Messages" image={img} />
+      <StyledHeroImage image={image.fluid}>
         Watch{' '}
         <div
           style={{
@@ -85,4 +67,25 @@ const watch = ({ data }) => {
   );
 };
 
-export default watch;
+export default messages;
+
+export const data = graphql`
+  {
+    page: contentfulPages(title: { eq: "Messages" }) {
+      image: bannerImage {
+        fluid {
+          ...GatsbyContentfulFluid
+        }
+        file {
+          url
+          details {
+            image {
+              height
+              width
+            }
+          }
+        }
+      }
+    }
+  }
+`;

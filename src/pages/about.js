@@ -11,16 +11,20 @@ import Accordion from '../components/Accordion';
 import ImageButton from '../components/ImageButton';
 
 const about = ({ data }) => {
-  const image = {
-    src: data.hero.image.file.url,
-    height: data.hero.image.file.details.image.height,
-    width: data.hero.image.file.details.image.width,
+  const {
+    page: { image },
+  } = data;
+  const img = {
+    src: image.file.url,
+    height: image.file.details.image.height,
+    width: image.file.details.image.width,
   };
 
   return (
     <>
-      <Seo title="About" image={image} />
-      <StyledHeroImage image={data.hero.image.fluid}>About</StyledHeroImage>
+      <Seo title="About" image={img} />
+
+      <StyledHeroImage image={image.fluid}>About</StyledHeroImage>
 
       <Section>
         <Title>Our Team</Title>
@@ -47,7 +51,7 @@ const about = ({ data }) => {
               aria-label={ministry.name}
               style={{ height: '100%', width: '100%' }}
             >
-              <ImageButton image={ministry.image.pageBannerImage}>
+              <ImageButton image={ministry.image.bannerImage}>
                 {ministry.name}
               </ImageButton>
             </Link>
@@ -88,8 +92,11 @@ export default about;
 
 export const data = graphql`
   {
-    hero: contentfulPageBannerImages(page: { eq: "About" }) {
-      image: pageBannerImage {
+    page: contentfulPages(title: { eq: "About" }) {
+      image: bannerImage {
+        fluid {
+          ...GatsbyContentfulFluid
+        }
         file {
           url
           details {
@@ -98,10 +105,6 @@ export const data = graphql`
               width
             }
           }
-        }
-        fluid {
-          ...GatsbyContentfulFluid
-          src
         }
       }
     }
@@ -142,7 +145,7 @@ export const data = graphql`
           name
           contentful_id
           image {
-            pageBannerImage {
+            bannerImage {
               fluid {
                 ...GatsbyContentfulFluid
               }

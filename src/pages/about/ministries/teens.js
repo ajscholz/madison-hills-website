@@ -12,79 +12,31 @@ import TextMessageButton from '../../../components/TextMessageButton';
 import SocialLinks from '../../../components/SocialLinks';
 import PlaylistPlayer from '../../../components/VideoPlayer/PlaylistPlayer';
 
-export const data = graphql`
-  {
-    hero: contentfulPageBannerImages(page: { eq: "Teens" }) {
-      image: pageBannerImage {
-        file {
-          url
-          details {
-            image {
-              height
-              width
-            }
-          }
-        }
-        fluid {
-          ...GatsbyContentfulFluid
-        }
-      }
-    }
-    programs: allContentfulPrograms(
-      filter: { ministryArea: { eq: "Teens" } }
-      sort: { fields: createdAt, order: ASC }
-    ) {
-      edges {
-        program: node {
-          id
-          title
-          dayOfWeek
-          startTime
-          endTime
-          location
-          ageRange
-          description {
-            description
-          }
-          image {
-            fluid {
-              ...GatsbyContentfulFluid
-            }
-          }
-        }
-      }
-    }
-    socialMedia: contentfulSocialMedia(ministryArea: { eq: "Teens" }) {
-      facebook
-      instagram
-      twitter
-    }
-    videos: contentfulVideoPlaylist(
-      title: { eq: "Niagra Falls Teen Mission Trip" }
-    ) {
-      playlist: videos {
-        title
-        contentful_id
-        link
-      }
-    }
-  }
-`;
-
 const Teens = ({ data }) => {
   const {
     videos: { playlist },
   } = data;
+  const {
+    page: { image },
+  } = data;
 
-  const image = {src: data.hero.image.file.url, height: data.hero.image.file.details.image.height, width: data.hero.image.file.details.image.width}
+  const img = {
+    src: image.file.url,
+    height: image.file.details.image.height,
+    width: image.file.details.image.width,
+  };
 
   return (
     <>
-      <Seo title="Teen Ministry" image={image} description={`The teen ministry of Madison Hills Christian Church.`} />
+      <Seo
+        title="Teen Ministry"
+        image={img}
+        description={`The teen ministry of Madison Hills Christian Church.`}
+      />
 
       {/* <PlaylistPlayer playlist={playlist} /> */}
 
-      <HeroImage image={data.hero.image.fluid} backgroundPosition="45% 27%">
+      <HeroImage image={image.fluid} backgroundPosition="45% 27%">
         Teen Ministry
       </HeroImage>
 
@@ -185,3 +137,62 @@ const MissionVerseReference = styled.div`
 //   background-color: #282f31;
 //   color: #fff;
 // `;
+
+export const data = graphql`
+  {
+    page: contentfulPages(title: { eq: "Teens" }) {
+      image: bannerImage {
+        fluid {
+          ...GatsbyContentfulFluid
+        }
+        file {
+          url
+          details {
+            image {
+              height
+              width
+            }
+          }
+        }
+      }
+    }
+    programs: allContentfulPrograms(
+      filter: { ministryArea: { eq: "Teens" } }
+      sort: { fields: createdAt, order: ASC }
+    ) {
+      edges {
+        program: node {
+          id
+          title
+          dayOfWeek
+          startTime
+          endTime
+          location
+          ageRange
+          description {
+            description
+          }
+          image {
+            fluid {
+              ...GatsbyContentfulFluid
+            }
+          }
+        }
+      }
+    }
+    socialMedia: contentfulSocialMedia(ministryArea: { eq: "Teens" }) {
+      facebook
+      instagram
+      twitter
+    }
+    videos: contentfulVideoPlaylist(
+      title: { eq: "Niagra Falls Teen Mission Trip" }
+    ) {
+      playlist: videos {
+        title
+        contentful_id
+        link
+      }
+    }
+  }
+`;

@@ -8,8 +8,8 @@ export default [
     path: '/jesus',
   },
   {
-    name: 'watch',
-    path: '/watch',
+    name: 'messages',
+    path: '/messages',
   },
   {
     name: 'visit',

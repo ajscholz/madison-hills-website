@@ -11,8 +11,11 @@ import Subtitle from '../../../components/Subtitle';
 
 export const data = graphql`
   {
-    hero: contentfulPageBannerImages(page: { eq: "Community" }) {
-      image: pageBannerImage {
+    page: contentfulPages(title: { eq: "Community" }) {
+      image: bannerImage {
+        fluid {
+          ...GatsbyContentfulFluid
+        }
         file {
           url
           details {
@@ -21,9 +24,6 @@ export const data = graphql`
               width
             }
           }
-        }
-        fluid {
-          ...GatsbyContentfulFluid
         }
       }
     }
@@ -47,12 +47,18 @@ export const data = graphql`
   }
 `;
 
-const teens = ({ data }) => {
-  const image = {src: data.hero.image.file.url, height: data.hero.image.file.details.image.height, width: data.hero.image.file.details.image.width}
+const community = ({ data }) => {
+  const { image } = data.page;
+  const img = {
+    src: image.file.url,
+    height: image.file.details.image.height,
+    width: image.file.details.image.width,
+  };
+
   return (
     <>
-      <Seo title="Community Ministries" image={image} />
-      <HeroImage image={data.hero.image.fluid}>Community Ministries</HeroImage>
+      <Seo title="Community Ministries" image={img} />
+      <HeroImage image={image.fluid}>Community Ministries</HeroImage>
       <Section>
         <Title>For Richmond</Title>
         <Subtitle>{`We aren't interested in building our own kingdom. We're interested in building God's Kingdom. Here are some of our partners in Richmond that are making a huge difference.`}</Subtitle>
@@ -72,4 +78,4 @@ const teens = ({ data }) => {
   );
 };
 
-export default teens;
+export default community;

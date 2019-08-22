@@ -9,34 +9,17 @@ import Title from '../components/Title';
 import Button from '../components/Button';
 import { Link } from 'gatsby';
 
-export const data = graphql`
-  {
-    hero: contentfulPageBannerImages(page: { eq: "Jesus" }) {
-      image: pageBannerImage {
-        file {
-          url
-          details {
-            image {
-              height
-              width
-            }
-          }
-        }
-        fluid {
-          ...GatsbyContentfulFluid
-          src
-        }
-      }
-    }
-  }
-`;
-
 export default ({ data }) => {
-  const image = {src: data.hero.image.file.url, height: data.hero.image.file.details.image.height, width: data.hero.image.file.details.image.width}
+  const { image } = data.page;
+  const img = {
+    src: image.file.url,
+    height: image.file.details.image.height,
+    width: image.file.details.image.width,
+  };
   return (
     <>
-      <Seo title="Jesus" image={image}/>
-      <HeroImage image={data.hero.image.fluid} backgroundPosition="51% 78%">
+      <Seo title="Jesus" image={img} />
+      <HeroImage image={image.fluid} backgroundPosition="51% 78%">
         Jesus
       </HeroImage>
       <Section>
@@ -117,8 +100,29 @@ const VerseLarge = styled.div`
   text-align: center;
   @media (min-width: 576px) {
     font-size: 1.75rem;
-    @media (min-width: 776px) {
-      font-size: 2rem;
+  }
+  @media (min-width: 776px) {
+    font-size: 2rem;
+  }
+`;
+
+export const data = graphql`
+  {
+    page: contentfulPages(title: { eq: "Jesus" }) {
+      image: bannerImage {
+        fluid {
+          ...GatsbyContentfulFluid
+        }
+        file {
+          url
+          details {
+            image {
+              height
+              width
+            }
+          }
+        }
+      }
     }
   }
 `;

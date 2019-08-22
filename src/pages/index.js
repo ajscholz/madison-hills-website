@@ -12,62 +12,21 @@ import FlipCard from '../components/FlipCard';
 
 import { FaClock, FaMapMarkerAlt } from 'react-icons/fa';
 
-export const data = graphql`
-  query MyQuery {
-    hero: contentfulPageBannerImages(page: { eq: "Home" }) {
-      image: pageBannerImage {
-        file {
-          url
-          details {
-            image {
-              height
-              width
-            }
-          }
-        }
-        fluid {
-          ...GatsbyContentfulFluid
-        }
-      }
-    }
-    site {
-      siteMetadata {
-        address
-        city
-        state
-      }
-    }
-    kickball: file(name: { eq: "kickball" }) {
-      childImageSharp {
-        fluid {
-          ...GatsbyImageSharpFluid
-        }
-      }
-    }
-    larosas: file(name: { eq: "larosas" }) {
-      childImageSharp {
-        fluid {
-          ...GatsbyImageSharpFluid
-        }
-      }
-    }
-    theOffice: file(name: { eq: "the-office" }) {
-      childImageSharp {
-        fluid {
-          ...GatsbyImageSharpFluid
-        }
-      }
-    }
-  }
-`;
-
-const IndexPage = ({ data, className }) => {
-  const image = {src: data.hero.image.file.url, height: data.hero.image.file.details.image.height, width: data.hero.image.file.details.image.width}
+const IndexPage = ({ data }) => {
+  const {
+    page: { image },
+    className,
+  } = data;
+  const img = {
+    src: image.file.url,
+    height: image.file.details.image.height,
+    width: image.file.details.image.width,
+  };
 
   return (
     <>
-      <SEO title="Home" image={image} />
-      <HeroImage image={data.hero.image.fluid} full>
+      <SEO title="Home" image={img} />
+      <HeroImage image={image.fluid} full>
         For Richmond
         <br />
         For You
@@ -173,6 +132,55 @@ const EventsContainer = styled.div`
   align-items: center;
   @media (min-width: 920px) {
     max-width: 860px;
+  }
+`;
+
+export const data = graphql`
+  {
+    page: contentfulPages(title: { eq: "Home" }) {
+      image: bannerImage {
+        fluid {
+          ...GatsbyContentfulFluid
+        }
+        file {
+          url
+          details {
+            image {
+              height
+              width
+            }
+          }
+        }
+      }
+    }
+    site {
+      siteMetadata {
+        address
+        city
+        state
+      }
+    }
+    kickball: file(name: { eq: "kickball" }) {
+      childImageSharp {
+        fluid {
+          ...GatsbyImageSharpFluid
+        }
+      }
+    }
+    larosas: file(name: { eq: "larosas" }) {
+      childImageSharp {
+        fluid {
+          ...GatsbyImageSharpFluid
+        }
+      }
+    }
+    theOffice: file(name: { eq: "the-office" }) {
+      childImageSharp {
+        fluid {
+          ...GatsbyImageSharpFluid
+        }
+      }
+    }
   }
 `;
 
