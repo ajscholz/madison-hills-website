@@ -11,8 +11,11 @@ export default styled.button`
     props.circle ? '50%' : props.square ? '0' : '8px'};
   transition: var(--mainTransition);
   border: none;
+  box-shadow: var(--shadow2);
+  outline: none;
   :hover {
     transform: scale(1.05);
+    box-shadow: var(--shadow3);
   }
 `;
 
@@ -28,6 +31,8 @@ export const ToggleButton = styled.button`
   border-radius: 8px;
   transition: var(--mainTransition);
   outline: none;
+  box-shadow: var(--shadow2);
+
   &:hover {
   }
   @media (min-width: 576px) {
@@ -39,5 +44,6 @@ export const ToggleButton = styled.button`
     cursor: default;
     background: var(--primary);
     color: var(--white);
+    box-shadow: none;
   }
 `;

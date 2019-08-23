@@ -11,9 +11,7 @@ import Accordion from '../components/Accordion';
 import ImageButton from '../components/ImageButton';
 
 const about = ({ data }) => {
-  const {
-    page: { image },
-  } = data;
+  const { image } = data.page;
   const img = {
     src: image.file.url,
     height: image.file.details.image.height,

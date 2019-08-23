@@ -1,11 +1,12 @@
-// parses the rich text description to keep formatting
+// parses contentful rich text data to keep formatting
 
 import React from 'react';
 
-const ContentfulRichText = ({ content }) => {
-  const paragraphArray = content.content.map((paragraph, index) => {
+// ------- HELPER FUNCTION TO GET AN ARRAY OF <p>'S ------- //
+export const contentfulRichTextIsolator = (content, className) =>
+  content.content.map((paragraph, index) => {
     return (
-      <p key={index} style={{ fontWeight: '200' }}>
+      <p key={index} className={className && className}>
         {paragraph.content.map((text, index) => {
           // if there are no marks (see below) give me the text
           // 'marks' is what gives styling from contentful
@@ -31,7 +32,11 @@ const ContentfulRichText = ({ content }) => {
     );
   });
 
-  return <>{paragraphArray.map(paragraph => paragraph)}</>;
-};
+// ------- COMPONENT USING HELPER FUNCTION TO RETURN <p>S AS JSX ------- //
+const ContentfulRichText = ({ content, className }) => (
+  <>
+    {contentfulRichTextIsolator(content, className).map(paragraph => paragraph)}
+  </>
+);
 
 export default ContentfulRichText;

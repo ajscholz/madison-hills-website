@@ -8,101 +8,173 @@ import Section from '../components/Section';
 import Title from '../components/Title';
 import Button from '../components/Button';
 import { Link } from 'gatsby';
+import Img from 'gatsby-image';
+import ContentfulRichText from '../components/ContentfulRichText';
 
-export default ({ data }) => {
-  const { image } = data.page;
+const JesusPage = ({ data }) => {
+  const { image, sections } = data.page;
+
+  const s1 = sections[0];
+  const s2 = sections[1];
+  const verse = { content: [s2.content.json.content[0]] };
+  const reference = { content: [s2.content.json.content[1]] };
+  const s3 = sections[2];
+
   const img = {
     src: image.file.url,
     height: image.file.details.image.height,
     width: image.file.details.image.width,
   };
+
   return (
     <>
       <Seo title="Jesus" image={img} />
+
       <HeroImage image={image.fluid} backgroundPosition="51% 78%">
         Jesus
       </HeroImage>
-      <Section>
-        <Title>Who is Jesus?</Title>
-        <p>
-          The questions we like to ask about God are endless: “Is God real?” “Is
-          what we know about Him really true?” and “what does He have to do with
-          my life?” just to list a few.
-        </p>
-        <p>
-          The Bible may not answer every question about God and will often lead
-          us to ask more, but one of the areas in which the Bible is quite
-          definite, is the answer to the question: who is Jesus? C.S Lewis, a
-          well-known Christian author wrote of Jesus, “Either this man was, and
-          is, the Son of God, or else a madman or something worse. You can shut
-          him up for a fool, you can spit at him and kill him as a demon or you
-          can fall at his feet and call him Lord and God, but let us not come
-          with any patronizing nonsense about his being a great human teacher.
-          He has not left that open to us. He did not intend to.”
-        </p>
-        <p>
-          Jesus commends the Apostle Peter’s confession of Him as “the Messiah,
-          the Son of the Living God” (Matthew 16:16), because Jesus knew that
-          who He is – and could be to us – has the power to change our lives.
-          Jesus is so unique because two worlds collide in him: Heaven and
-          Earth, the Divine and the human.
-        </p>
-        <p>
-          Yes, His Name is the name above all names, and his star-breathing,
-          storm-calming, miracle-working power is second to none. Yet, He is
-          also the human Jesus, the personal friend who knows what we are going
-          through and cares about us. That’s why the Bible also calls Him
-          “Immanuel”, God with us.
-        </p>
-      </Section>
-      <StyledSection dark>
-        <Reference>John 3:16 MSG</Reference>
-        <VerseLarge>
-          This is how much God loved the world: He gave his Son so that no one
-          need be destroyed; by believing in Him, anyone can have a whole and
-          lasting life.
-        </VerseLarge>
-      </StyledSection>
-      <Section>
-        <Title>Be Part of the Family</Title>
-        <p>
-          One of the best ways to find connection to help you with your faith is
-          being part of a local church.
-        </p>
-        <p>
-          We're a little biased, but we think Madison Hills might just be the
-          right church family for you.
-        </p>
-        <p>
-          So no matter where you've been or what your life looks like you're
-          welcome here.
-        </p>
-        <Button
-          as={Link}
-          to="/visit"
-          style={{ marginTop: '2rem', outline: 'none' }}
-        >
-          Plan A Visit
+
+      <SectionOne>
+        <Title>{s1.title}</Title>
+        <ContentfulRichText content={s1.content.json} />
+      </SectionOne>
+
+      <SectionTwo>
+        <ContentfulRichText content={verse} className="verse" />
+        <ContentfulRichText content={reference} className="reference" />
+      </SectionTwo>
+
+      <SectionThree>
+        <Title>{s3.title}</Title>
+        <div className="text-content">
+          <ContentfulRichText content={s3.content.json} />
+        </div>
+        <Img fluid={s3.image.fluid} />
+        <Button>
+          <Link to="/visit">Plan A Visit</Link>
         </Button>
-      </Section>
+      </SectionThree>
     </>
   );
 };
 
-const StyledSection = styled(Section)`
-  flex-direction: column-reverse;
+const SectionOne = styled(Section)`
+  text-align: center;
+  max-width: 900px;
+  margin: 0 auto;
+  & > p {
+    margin-top: 0;
+  }
 `;
 
-const Reference = styled.h3``;
-
-const VerseLarge = styled.div`
+const SectionTwo = styled(Section)`
   font-size: 1.5rem;
   text-align: center;
-  @media (min-width: 576px) {
-    font-size: 1.75rem;
+
+  & .verse {
+    margin: 0;
+    @media (min-width: 576px) {
+      font-size: 1.2em;
+    }
+    @media (min-width: 776px) {
+      font-size: 1.5em;
+    }
   }
-  @media (min-width: 776px) {
-    font-size: 2rem;
+
+  & .reference {
+    margin-bottom: 0;
+    color: var(--primary);
+    font-size: 0.7em;
+    @media (min-width: 576px) {
+      font-size: 0.85em;
+    }
+    @media (min-width: 776px) {
+      font-size: 1em;
+    }
+  }
+`;
+
+const SectionThree = styled(Section)`
+  display: grid;
+  position: relative;
+  text-align: center;
+  max-width: 900px;
+  margin: 0 auto;
+  grid-template-columns: 100%;
+  grid-template-rows: auto;
+  grid-template-areas:
+    'title'
+    'text'
+    'button';
+
+  & ${Title} {
+    grid-area: title;
+    margin: 0 auto 2.5rem;
+    z-index: 1;
+  }
+
+  & .text-content {
+    grid-area: text;
+    z-index: 1;
+    & p {
+      margin-top: 0;
+    }
+  }
+
+  & button {
+    grid-area: button;
+    margin: 1rem auto 0;
+    z-index: 1;
+  }
+
+  & .gatsby-image-wrapper {
+    width: 100%;
+    height: 100%;
+    position: absolute !important;
+    top: 0;
+    left: 0;
+    background: var(--white);
+    & img {
+      opacity: 0.3 !important;
+      object-position: 58% 40% !important;
+    }
+  }
+
+  @media (min-width: 662px) {
+    grid-template-areas:
+      'title title'
+      'image text'
+      'image button';
+    grid-template-columns: 40% 1fr;
+    grid-template-rows: repeat(3, auto);
+    grid-gap: 2rem;
+
+    & ${Title} {
+      margin: 0 auto 1rem;
+    }
+
+    & .text-content {
+      text-align: left;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: flex-start;
+      & p:last-of-type {
+        margin-bottom: 0;
+      }
+    }
+
+    & button {
+      margin: -0.5rem auto 0 0;
+    }
+
+    & .gatsby-image-wrapper {
+      position: static;
+      grid-area: image;
+      & img {
+        opacity: 1 !important;
+      }
+    }
   }
 `;
 
@@ -123,6 +195,19 @@ export const data = graphql`
           }
         }
       }
+      sections: section {
+        title
+        content {
+          json
+        }
+        image {
+          fluid {
+            ...GatsbyContentfulFluid
+          }
+        }
+      }
     }
   }
 `;
+
+export default JesusPage;
