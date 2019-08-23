@@ -1,11 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
 import { useSpring, animated } from 'react-spring';
-import { FaTimes, FaCheck, FaUndo } from 'react-icons/fa';
+import { FaTimes, FaCheck, FaBan } from 'react-icons/fa';
 
 // import Backdrop from '../Backdrop';
 
-export default props => {
+const Filters = props => {
   const { open, click, children, reset } = props;
 
   const toggle = useSpring({
@@ -13,34 +13,44 @@ export default props => {
   });
 
   return (
-    <Filters style={toggle}>
-      <Close onClick={() => click(false)}>
-        <FaTimes />
-      </Close>
-      {/* <Backdrop open={open}></Backdrop> */}
-      <h3>Filters</h3>
-      {Array.isArray(children) ? (
-        children.map((child, index) => (
-          <FilterBox key={index}>{child}</FilterBox>
-        ))
-      ) : (
-        <FilterBox>{children}</FilterBox>
-      )}
-      <ButtonWrapper>
-        <ApplyButton onClick={() => click(false)}>
-          <FaCheck />
-          Apply Filters
-        </ApplyButton>
-        <ResetButton onClick={() => reset()}>
-          <FaUndo />
-          Reset Filters
-        </ResetButton>
-      </ButtonWrapper>
-    </Filters>
+    <>
+      <Wrapper className={props.className} style={toggle}>
+        <Close onClick={() => click(false)}>
+          <FaTimes />
+        </Close>
+        {/* <Backdrop open={open}></Backdrop> */}
+        <h3>Filter</h3>
+        {Array.isArray(children) ? (
+          children.map((child, index) => (
+            <FilterBox key={index}>{child}</FilterBox>
+          ))
+        ) : (
+          <FilterBox>{children}</FilterBox>
+        )}
+        <ButtonWrapper>
+          <ApplyButton onClick={() => click(false)}>
+            <FaCheck />
+            Apply Filters
+          </ApplyButton>
+          <ResetButton onClick={() => reset()}>
+            <FaBan />
+            Clear Filters
+          </ResetButton>
+          <ClearButton onClick={() => reset()}>
+            <FaBan />
+            Clear
+          </ClearButton>
+        </ButtonWrapper>
+      </Wrapper>
+    </>
   );
 };
 
-const Filters = styled(animated.div)`
+export default styled(Filters)`
+  height: 100%;
+`;
+
+const Wrapper = styled(animated.div)`
   position: fixed;
   bottom: 0;
   left: 0;
@@ -55,25 +65,29 @@ const Filters = styled(animated.div)`
   grid-template-rows: min-content min-content;
   grid-row-gap: 1rem;
   grid-column-gap: 0.5rem;
-  padding: 1rem;
+  padding: 5rem 1rem 1rem;
   & > h3 {
     margin: 0;
     text-align: center;
     grid-column: 1 / -1;
-    font-weight: bold;
-    text-decoration: underline;
+    /* font-weight: bold; */
+    /* text-decoration: underline; */
   }
   @media (min-width: 992px) {
+    height: 100%;
+    background: red;
     position: static;
     max-width: 200px;
     min-width: 200px;
-    background: transparent;
-    border: 2px solid var(--black);
-    border-radius: 5px;
+    padding: 0 2rem 0 0;
+    background: none;
+    /* border-right: 2px solid var(--secondary); */
     margin-right: 2rem;
-    height: 500px;
     display: flex;
     flex-direction: column;
+    & h3 {
+      margin-bottom: 1.5rem;
+    }
   }
 `;
 
@@ -101,6 +115,7 @@ const FilterBox = styled.div`
   flex-direction: column;
   /* flex-wrap: wrap; */
   width: min-content;
+  margin-bottom: 1.5rem;
 `;
 
 const ButtonWrapper = styled.div`
@@ -109,8 +124,11 @@ const ButtonWrapper = styled.div`
   bottom: 1rem;
   left: 5%;
   @media (min-width: 992px) {
-    position: static;
-    width: 100%;
+    width: auto;
+    bottom: unset;
+    left: unset;
+    right: 0;
+    top: 6px;
   }
 `;
 
@@ -130,6 +148,12 @@ const ButtonBase = styled.button`
     display: block;
     margin-right: 0.35rem;
   }
+  @media (min-width: 992px) {
+    padding: 0;
+    background: transparent;
+    margin-bottom: 1rem;
+    font-size: 0.8rem;
+  }
 `;
 
 const ApplyButton = styled(ButtonBase)`
@@ -142,4 +166,15 @@ const ApplyButton = styled(ButtonBase)`
 
 const ResetButton = styled(ButtonBase)`
   background: var(--danger);
+  @media (min-width: 992px) {
+    display: none;
+  }
+`;
+
+const ClearButton = styled(ButtonBase)`
+  display: none;
+  color: var(--danger);
+  @media (min-width: 992px) {
+    display: flex;
+  }
 `;

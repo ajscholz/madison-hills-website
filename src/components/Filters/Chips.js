@@ -8,7 +8,7 @@ const ChipCreator = props => {
 
   return (
     <>
-      <Header>{filterName}</Header>
+      <Header>{`> ${filterName.substring(0, filterName.length - 1)}`}</Header>
       <List>
         {items.map((item, index) => {
           return (
@@ -30,8 +30,9 @@ const ChipCreator = props => {
 const Header = styled.h4`
   font-size: 0.8rem;
   margin-top: 0;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.25rem;
   text-transform: capitalize;
+  color: var(--secondary);
 `;
 
 const CloseIcon = styled.span`
@@ -58,6 +59,7 @@ const Chip = styled.button`
   flex-wrap: nowrap;
   white-space: nowrap;
   position: relative;
+  margin-left: 1.5rem;
   svg {
     transition: var(--mainTransition);
     font-size: 1em;

@@ -111,12 +111,12 @@ export default () => {
             selected={contextCommunicators}
             click={filterComm}
           />
-          {/* <Chips
+          <Chips
             filterName="topics"
             items={['marriage', 'bible', 'reaching people', 'church']}
             selected={[]}
             click={() => null}
-          /> */}
+          />
         </Filters>
         {/* )} */}
 
@@ -218,6 +218,9 @@ const ButtonWrapper = styled.div`
   display: flex;
   width: 100%;
   justify-content: space-between;
+  @media (min-width: 992px) {
+    display: none;
+  }
 `;
 
 const FilterButton = styled(ButtonBase)`
