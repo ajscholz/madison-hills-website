@@ -30,9 +30,11 @@ const JesusPage = ({ data }) => {
     <>
       <Seo title="Jesus" image={img} />
 
-      <HeroImage image={image.fluid} backgroundPosition="51% 78%">
-        Jesus
-      </HeroImage>
+      <HeroImage
+        image={image.fluid}
+        backgroundPosition="51% 78%"
+        title="Jesus"
+      />
 
       <SectionOne>
         <Title>{s1.title}</Title>

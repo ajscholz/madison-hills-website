@@ -23,7 +23,7 @@ const HeroImage = ({ className, image, children, full, title }) => {
       className={className}
       fluid={backgroundFluidImageStack}
     >
-      <Banner>{title ? title : children}</Banner>
+      <Banner>{title}</Banner>
       {children}
     </StyledBackgroundImage>
   );

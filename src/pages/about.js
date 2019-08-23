@@ -22,7 +22,7 @@ const about = ({ data }) => {
     <>
       <Seo title="About" image={img} />
 
-      <StyledHeroImage image={image.fluid}>About</StyledHeroImage>
+      <StyledHeroImage image={image.fluid} title="About" />
 
       <Section>
         <Title>Our Team</Title>

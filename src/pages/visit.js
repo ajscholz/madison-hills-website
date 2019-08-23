@@ -21,13 +21,15 @@ const visit = ({
   return (
     <>
       <Seo title="Visit" image={img} />
-      <HeroImage image={image.fluid} backgroundPosition="51% 78%">
-        Visit
-      </HeroImage>
+      <HeroImage
+        image={image.fluid}
+        backgroundPosition="51% 78%"
+        title="Visit"
+      />
       <Section>
         <Title>What To Expect</Title>
       </Section>
-      <Section dark>
+      <Section>
         <Title>Not Sure?</Title>
         {/* <Subtitle>{`Here's one of our best messages to help you decide.`}</Subtitle> */}
       </Section>

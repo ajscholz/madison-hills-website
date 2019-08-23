@@ -26,13 +26,14 @@ const messages = ({
   return (
     <>
       <Seo title="Messages" image={img} />
-      <StyledHeroImage image={image.fluid}>
-        Watch{' '}
+
+      <StyledHeroImage image={image.fluid} title="Messages">
         <div
           style={{
             flexDirection: 'row',
             justifyContent: 'center',
-            padding: '.5rem 1rem 0 1rem',
+            position: 'relative',
+            top: '20px',
           }}
         >
           <ToggleButton

@@ -6,17 +6,15 @@ import HeroImage from '../components/HeroImage';
 import SEO from '../components/Seo';
 import Title from '../components/Title';
 import Section from '../components/Section';
-import Icon from '../components/Icon';
 import ContactForm from '../components/ContactForm';
 import FlipCard from '../components/FlipCard';
 
-import { FaMapMarkedAlt, FaClock, FaExternalLinkAlt } from 'react-icons/fa';
+import { FaMapMarkedAlt, FaClock } from 'react-icons/fa';
 import IconInfo from '../components/IconInfo';
 
 const IndexPage = ({ data }) => {
   const {
     page: { image },
-    className,
   } = data;
   const img = {
     src: image.file.url,
@@ -37,13 +35,11 @@ const IndexPage = ({ data }) => {
       <Section>
         <Title>{`When & Where`}</Title>
         <InfoWrapper>
-          <IconInfo icon={<FaClock />} alt="time">
+          <IconInfo icon={<FaClock alt="time" />}>
             Every Sunday{'9:30 & 10:45'}
           </IconInfo>
-          <div className="divider" />
           <IconInfo
-            icon={<FaMapMarkedAlt />}
-            alt="location"
+            icon={<FaMapMarkedAlt alt="location" />}
             link="https://www.google.com/maps/place/Madison+Hills+Christian+Church/@37.763511,-84.2878922,15z/data=!4m5!3m4!1s0x0:0xc78644b99e70ae4f!8m2!3d37.763511!4d-84.2878922"
           >
             {data.site.siteMetadata.address}

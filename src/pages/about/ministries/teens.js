@@ -36,9 +36,11 @@ const Teens = ({ data }) => {
 
       {/* <PlaylistPlayer playlist={playlist} /> */}
 
-      <HeroImage image={image.fluid} backgroundPosition="45% 27%">
-        Teen Ministry
-      </HeroImage>
+      <HeroImage
+        image={image.fluid}
+        backgroundPosition="45% 27%"
+        title="Teen Ministry"
+      />
 
       <Section style={{ paddingTop: '6rem' }}>
         <Title as="div" style={{ textTransform: 'none' }}>
