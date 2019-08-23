@@ -10,7 +10,8 @@ import Icon from '../components/Icon';
 import ContactForm from '../components/ContactForm';
 import FlipCard from '../components/FlipCard';
 
-import { FaClock, FaMapMarkerAlt } from 'react-icons/fa';
+import { FaMapMarkedAlt, FaClock, FaExternalLinkAlt } from 'react-icons/fa';
+import IconInfo from '../components/IconInfo';
 
 const IndexPage = ({ data }) => {
   const {
@@ -26,33 +27,32 @@ const IndexPage = ({ data }) => {
   return (
     <>
       <SEO title="Home" image={img} />
-      <HeroImage image={image.fluid} full>
-        For Richmond
-        <br />
-        For You
-      </HeroImage>
-      <Section large>
-        <Title>Helping people find and follow Jesus</Title>
+
+      <HeroImage
+        image={image.fluid}
+        title="Helping&nbsp;people find&nbsp;and&nbsp;follow Jesus"
+        full
+      />
+
+      <Section>
+        <Title>{`When & Where`}</Title>
         <InfoWrapper>
-          <InfoContainer>
-            <StyledIcon icon={FaClock} className={className} />
-            <InfoText>
-              {`Sundays`}
-              <br />
-              {`9:30 & 10:45a`}
-            </InfoText>
-          </InfoContainer>
-          <InfoContainer>
-            <StyledIcon icon={FaMapMarkerAlt} className={className} />
-            <InfoText>
-              {data.site.siteMetadata.address}
-              <br />
-              {data.site.siteMetadata.city}, {data.site.siteMetadata.state}
-            </InfoText>
-          </InfoContainer>
+          <IconInfo icon={<FaClock />} alt="time">
+            Every Sunday{'9:30 & 10:45'}
+          </IconInfo>
+          <div className="divider" />
+          <IconInfo
+            icon={<FaMapMarkedAlt />}
+            alt="location"
+            link="https://www.google.com/maps/place/Madison+Hills+Christian+Church/@37.763511,-84.2878922,15z/data=!4m5!3m4!1s0x0:0xc78644b99e70ae4f!8m2!3d37.763511!4d-84.2878922"
+          >
+            {data.site.siteMetadata.address}
+            {`${data.site.siteMetadata.city}, ${data.site.siteMetadata.state}`}
+          </IconInfo>
         </InfoWrapper>
       </Section>
-      <Section dark padSide="5vw">
+
+      <Section dark>
         <Title>Upcoming Events</Title>
         <EventsContainer>
           <FlipCard
@@ -69,6 +69,7 @@ const IndexPage = ({ data }) => {
           />
         </EventsContainer>
       </Section>
+
       <Section>
         <Title>Contact Us</Title>
         <ContactForm />
@@ -78,49 +79,46 @@ const IndexPage = ({ data }) => {
 };
 
 const InfoWrapper = styled.div`
-  width: 100%;
-  max-width: 650px;
-  margin: 0 auto;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  justify-content: center;
-  @media (min-width: 768px) {
-    flex-direction: row;
-  }
-`;
+  width: 225px;
 
-const InfoContainer = styled.div`
-  width: 100%;
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-wrap: wrap;
-  margin-top: 1.5rem;
-  :first-of-type {
-    padding-bottom: 2rem;
-    margin-bottom: 1rem;
+  .divider {
+    display: none;
+    height: auto;
+    width: 1px;
+    background: var(--tertiary);
+    opacity: 0.6;
+  }
+
+  & > div:not(:last-child) {
+    margin-bottom: 1.5rem;
   }
   @media (min-width: 768px) {
-    :first-of-type {
-      padding-bottom: 0;
+    width: 500px;
+    display: flex;
+    justify-content: space-between;
+
+    & > div:not(:last-child) {
       margin-bottom: 0;
     }
+
+    & > * {
+      width: 200px;
+      flex-direction: column;
+      text-align: center;
+      svg {
+        margin: 1rem 0 0.4em;
+        font-size: 1.5em;
+      }
+    }
+
+    .divider {
+      display: none;
+    }
   }
-`;
 
-const StyledIcon = styled(Icon)`
-  font-size: 1.5rem;
-  color: var(--primary);
-  width: 100%;
-  margin-bottom: 1rem;
-`;
-
-const InfoText = styled.h3`
-  font-size: 1rem;
-  margin: 0;
-  text-align: center;
+  @media (min-width: 992px) {
+    width: 600px;
+  }
 `;
 
 const EventsContainer = styled.div`

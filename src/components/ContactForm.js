@@ -5,6 +5,7 @@ import { useStaticQuery, graphql } from 'gatsby';
 import SpinnerIcon from './SpinnerIcon';
 
 import { FaRegCheckCircle, FaRegTimesCircle } from 'react-icons/fa';
+import Button from './Button';
 
 const emailData = graphql`
   {
@@ -159,28 +160,16 @@ const StyledErrorMessage = styled(ErrorMessage)`
   top: 0;
   right: 0;
   font-size: 0.8rem;
-  background: var(--danger);
   padding: 0.4rem 0.8rem;
   border-radius: 5px;
-  color: var(--white);
+  color: var(--danger);
 `;
 
-const StyledButton = styled.button`
-  background: var(--primary);
-  color: var(--white);
+const StyledButton = styled(Button)`
   width: 100%;
-  padding: 1rem 2rem;
-  font-size: 1rem;
-  border: none;
-  border-radius: 5px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: var(--mainTransition);
-  cursor: pointer;
-  &:not(:disabled):hover {
+  /* &:not(:disabled):hover {
     background: var(--primaryDark);
-  }
+  } */
   &:disabled {
     opacity: 0.9;
     cursor: default;

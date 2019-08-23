@@ -4,7 +4,7 @@ import BackgroundImage from 'gatsby-background-image';
 
 import Banner from './Banner';
 
-const HeroImage = ({ className, image, children, full }) => {
+const HeroImage = ({ className, image, children, full, title }) => {
   // adds overlay
   const backgroundFluidImageStack = full
     ? [
@@ -23,7 +23,8 @@ const HeroImage = ({ className, image, children, full }) => {
       className={className}
       fluid={backgroundFluidImageStack}
     >
-      <Banner>{children}</Banner>
+      <Banner>{title ? title : children}</Banner>
+      {children}
     </StyledBackgroundImage>
   );
 };
