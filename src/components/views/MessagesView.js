@@ -13,20 +13,18 @@ import { MessageViewContext } from '../../context/MessageViewContext';
 import Filters from '../Filters/Filters';
 
 export default () => {
-  const { messages, tags } = useStaticQuery(query);
-
   const [page, setPage] = useState(1);
   const [filtersOpen, setFiltersOpen] = useState(false);
 
-  const [views, setViews] = useContext(MessageViewContext);
   const width = useBrowserWidth();
-
   if (width >= 992 && filtersOpen === false) setFiltersOpen(true);
-  // if (width < 992 && filtersOpen === true) setFiltersOpen(false);
 
+  const [views, setViews] = useContext(MessageViewContext);
   const {
     filters: { communicators: contextCommunicators },
   } = views;
+
+  const { messages, tags } = useStaticQuery(query);
 
   let filteredMessages = [];
 
@@ -99,70 +97,91 @@ export default () => {
         </ClearButton>
       </ButtonWrapper>
 
+      {/* {filtersOpen && ( */}
+      <Filters open={filtersOpen} click={setFiltersOpen} reset={resetFilters}>
+        <Chips
+          filterName="communicators"
+          items={[
+            ...tags.communicators,
+            'This is a long name that i am putting here for a test',
+          ]}
+          selected={contextCommunicators}
+          click={filterComm}
+        />
+        <Chips
+          filterName="topics"
+          items={[...tags.topics, 'another', 'anotehr 2']}
+          selected={[]}
+          click={() => null}
+        />
+      </Filters>
+      {/* )} */}
       <CardsWrapper>
-        {/* {filtersOpen && ( */}
-        <Filters open={filtersOpen} click={setFiltersOpen} reset={resetFilters}>
-          <Chips
-            filterName="communicators"
-            items={[
-              ...tags.communicators,
-              'This is a long name that i am putting here for a test',
-            ]}
-            selected={contextCommunicators}
-            click={filterComm}
-          />
-          <Chips
-            filterName="topics"
-            items={[...tags.topics, 'another', 'anotehr 2']}
-            selected={[]}
-            click={() => null}
-          />
-        </Filters>
-        {/* )} */}
-
-        <CardGridContainer
-          style={width > 992 ? { width: 'calc(100% - 200px - 2rem)' } : null}
-        >
+        {filteredMessages.length === 0 && (
+          <p
+            style={{
+              margin: '0 3rem',
+              fontSize: '1rem',
+              color: 'var(--black)',
+            }}
+          >
+            No messages available with the selected filters.
+          </p>
+        )}
+        <CardGridContainer>
           {paginatedMessages.map(message => {
             return <MessageCard message={message} key={message.id} />;
           })}
         </CardGridContainer>
-      </CardsWrapper>
 
-      <Pagination>
-        {[...Array(pages)].map((item, index) => {
-          const thisPage = index + 1;
-          return (
-            <PaginationButton
-              onClick={() => setPage(thisPage)}
-              selected={page === thisPage}
-              disabled={page === thisPage}
-              key={index}
-            >
-              {thisPage}
-            </PaginationButton>
-          );
-        })}
-      </Pagination>
+        <Pagination>
+          {[...Array(pages)].map((item, index) => {
+            const thisPage = index + 1;
+            return (
+              <PaginationButton
+                onClick={() => setPage(thisPage)}
+                selected={page === thisPage}
+                disabled={page === thisPage}
+                key={index}
+              >
+                {thisPage}
+              </PaginationButton>
+            );
+          })}
+        </Pagination>
+      </CardsWrapper>
     </MessageView>
   );
 };
 
 const MessageView = styled.div`
   width: 100%;
-  min-height: 750px;
+  max-width: 1170px;
   display: flex;
   flex-direction: column;
   align-items: center;
   position: relative;
+  @media (min-width: 992px) {
+    min-height: 600px;
+    display: grid;
+    grid-template:
+      'title title' auto
+      'filters cards' minmax(200px, 1fr)
+      / 200px 1fr;
+
+    & ${Title} {
+      grid-area: title;
+      margin-left: auto;
+      margin-right: auto;
+      width: auto;
+      margin-bottom: 3rem;
+    }
+  }
 `;
 
 const Pagination = styled.div`
   display: flex;
   justify-content: center;
-  @media (min-width: 992px) {
-    margin-left: calc(2rem + 200px);
-  }
 `;
 
 const PaginationButton = styled.button`
@@ -234,6 +253,15 @@ const ClearButton = styled(ButtonBase)`
 const CardsWrapper = styled.div`
   display: flex;
   width: 100%;
+  flex-direction: column;
+  @media (min-width: 992px) {
+    grid-area: cards;
+    align-self: start;
+    min-height: 400px;
+    & > ${CardGridContainer} {
+      max-width: unset;
+    }
+  }
 `;
 
 const query = graphql`

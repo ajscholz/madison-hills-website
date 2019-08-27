@@ -50,11 +50,10 @@ const Filters = props => {
   );
 };
 
-export default styled(Filters)`
-  height: 100%;
-`;
+export default Filters;
 
 const Wrapper = styled(animated.div)`
+  color: var(--black);
   position: fixed;
   left: 0;
   top: 0;
@@ -68,20 +67,16 @@ const Wrapper = styled(animated.div)`
   flex-wrap: nowrap;
   align-items: center;
   @media (min-width: 992px) {
-    height: 100%;
-    background: red;
     position: static;
-    max-width: 200px;
-    min-width: 200px;
-    padding: 0 2rem 0 0;
+    height: 100%;
+    align-self: start;
+    width: calc(100% - 2rem);
+    padding: 0;
     background: none;
-    /* border-right: 2px solid var(--secondary); */
     margin-right: 2rem;
-    display: flex;
-    flex-direction: column;
-    & h3 {
-      margin-bottom: 1.5rem;
-    }
+    grid-area: filters;
+    overflow-y: scroll;
+    /* overflow-x: visible; */
   }
 `;
 
@@ -98,8 +93,12 @@ const Header = styled.div`
     margin: 0;
     text-align: center;
     grid-column: 1 / -1;
-    /* font-weight: bold; */
-    /* text-decoration: underline; */
+  }
+  @media (min-width: 992px) {
+    height: auto;
+    padding: 0;
+    justify-content: flex-start;
+    margin-bottom: 1.5rem;
   }
 `;
 
@@ -115,7 +114,13 @@ const Body = styled.div`
   grid-column-gap: 0.5rem;
   padding: 0 2.5vw;
   flex-shrink: 1;
-  /* overflow: hidden; */
+  @media (min-width: 992px) {
+    height: 100%;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
+    grid-gap: 0;
+    padding: 0;
+  }
 `;
 
 const Close = styled.button`
@@ -154,6 +159,9 @@ const FilterBox = styled.div`
     height: 25px;
     background: linear-gradient(rgba(242, 238, 238, 0), rgba(242, 238, 238, 1));
   }
+  @media (min-width: 992px) {
+    height: unset;
+  }
 `;
 
 const Footer = styled.div`
@@ -163,6 +171,9 @@ const Footer = styled.div`
   box-shadow: var(--shadow1);
   flex-shrink: 0;
   @media (min-width: 992px) {
+    position: absolute;
+    padding: 0;
+    box-shadow: none;
     width: auto;
     bottom: unset;
     left: unset;
@@ -190,8 +201,7 @@ const ButtonBase = styled.button`
   @media (min-width: 992px) {
     padding: 0;
     background: transparent;
-    margin-bottom: 1rem;
-    font-size: 0.8rem;
+    font-size: 0.7rem;
   }
 `;
 

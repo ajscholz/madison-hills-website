@@ -10,7 +10,12 @@ const Chips = props => {
     <div className={className}>
       <Header>
         <FaChevronRight
-          style={{ position: 'relative', bottom: '1px', marginRight: '.2rem' }}
+          style={{
+            position: 'relative',
+            bottom: '1px',
+            marginRight: '.2rem',
+            opacity: '.8',
+          }}
         />
         {`${filterName.substring(0, filterName.length - 1)}`}
       </Header>
@@ -36,6 +41,9 @@ export default styled(Chips)`
   width: 100%;
   height: 100%;
   overflow: scroll;
+  @media (min-width: 992px) {
+    height: unset;
+  }
 `;
 
 const Header = styled.h4`
@@ -43,7 +51,7 @@ const Header = styled.h4`
   top: 0;
   font-size: 0.8rem;
   margin-top: 0;
-  margin-bottom: 0.2rem;
+  margin-bottom: 0.5rem;
   text-transform: capitalize;
   color: var(--secondary);
   display: flex;
@@ -64,9 +72,9 @@ const Chip = styled.button`
   border: 1px solid var(--primary);
   color: var(--primary);
   font-size: 0.5rem;
-  margin: 0.25rem;
+  margin: 0.4rem;
   font-weight: 400;
-  padding: 0.25rem 0.5rem;
+  padding: 0.2rem 0.8rem;
   text-transform: capitalize;
   letter-spacing: 0.1em;
   border-radius: 12.5px;
