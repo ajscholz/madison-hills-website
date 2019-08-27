@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { useSpring, animated } from 'react-spring';
-import { FaTimes, FaCheck, FaBan } from 'react-icons/fa';
+import { FaTimes, FaCheck, FaBan, FaChevronRight } from 'react-icons/fa';
 
 // import Backdrop from '../Backdrop';
 
@@ -15,19 +15,23 @@ const Filters = props => {
   return (
     <>
       <Wrapper className={props.className} style={toggle}>
-        <Close onClick={() => click(false)}>
-          <FaTimes />
-        </Close>
-        {/* <Backdrop open={open}></Backdrop> */}
-        <h3>Filter</h3>
-        {Array.isArray(children) ? (
-          children.map((child, index) => (
-            <FilterBox key={index}>{child}</FilterBox>
-          ))
-        ) : (
-          <FilterBox>{children}</FilterBox>
-        )}
-        <ButtonWrapper>
+        <Header>
+          <Close onClick={() => click(false)}>
+            <FaTimes />
+          </Close>
+          {/* <Backdrop open={open}></Backdrop> */}
+          <h3>Filter</h3>
+        </Header>
+        <Body>
+          {Array.isArray(children) ? (
+            children.map((child, index) => (
+              <FilterBox key={index}>{child}</FilterBox>
+            ))
+          ) : (
+            <FilterBox>{children}</FilterBox>
+          )}
+        </Body>
+        <Footer>
           <ApplyButton onClick={() => click(false)}>
             <FaCheck />
             Apply Filters
@@ -40,7 +44,7 @@ const Filters = props => {
             <FaBan />
             Clear
           </ClearButton>
-        </ButtonWrapper>
+        </Footer>
       </Wrapper>
     </>
   );
@@ -52,27 +56,17 @@ export default styled(Filters)`
 
 const Wrapper = styled(animated.div)`
   position: fixed;
-  bottom: 0;
   left: 0;
-  right: 0;
   top: 0;
-  background: lightgray;
+  height: 100%;
+  max-height: 100%;
+  width: 100%;
+  background: var(--white);
   z-index: 200;
-  display: grid;
-  align-items: start;
-  align-content: start;
-  grid-template-columns: repeat(auto-fit, minmax(125px, 1fr));
-  grid-template-rows: min-content min-content;
-  grid-row-gap: 1rem;
-  grid-column-gap: 0.5rem;
-  padding: 5rem 1rem 1rem;
-  & > h3 {
-    margin: 0;
-    text-align: center;
-    grid-column: 1 / -1;
-    /* font-weight: bold; */
-    /* text-decoration: underline; */
-  }
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  align-items: center;
   @media (min-width: 992px) {
     height: 100%;
     background: red;
@@ -89,6 +83,39 @@ const Wrapper = styled(animated.div)`
       margin-bottom: 1.5rem;
     }
   }
+`;
+
+const Header = styled.div`
+  width: 100%;
+  height: 6rem;
+  padding: 1rem;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  position: relative;
+  flex-shrink: 0;
+  & > h3 {
+    margin: 0;
+    text-align: center;
+    grid-column: 1 / -1;
+    /* font-weight: bold; */
+    /* text-decoration: underline; */
+  }
+`;
+
+const Body = styled.div`
+  width: 100%;
+  height: 100%;
+  display: grid;
+  align-items: start;
+  align-content: start;
+  grid-template-columns: repeat(auto-fit, minmax(45%, 1fr));
+  grid-template-rows: 1fr;
+  grid-row-gap: 1rem;
+  grid-column-gap: 0.5rem;
+  padding: 0 2.5vw;
+  flex-shrink: 1;
+  /* overflow: hidden; */
 `;
 
 const Close = styled.button`
@@ -110,19 +137,31 @@ const Close = styled.button`
 `;
 
 const FilterBox = styled.div`
-  overflow: hidden;
+  /* overflow: hidden; */
+  position: relative;
+  height: 100%;
   display: flex;
   flex-direction: column;
   /* flex-wrap: wrap; */
-  width: min-content;
-  margin-bottom: 1.5rem;
+  width: 100%;
+  overflow: hidden;
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 25px;
+    background: linear-gradient(rgba(242, 238, 238, 0), rgba(242, 238, 238, 1));
+  }
 `;
 
-const ButtonWrapper = styled.div`
-  width: 90%;
-  position: absolute;
-  bottom: 1rem;
-  left: 5%;
+const Footer = styled.div`
+  width: 100%;
+  margin-top: auto;
+  padding: 1rem 5% 1rem 5%;
+  box-shadow: var(--shadow1);
+  flex-shrink: 0;
   @media (min-width: 992px) {
     width: auto;
     bottom: unset;

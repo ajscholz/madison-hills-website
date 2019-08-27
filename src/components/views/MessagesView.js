@@ -13,10 +13,7 @@ import { MessageViewContext } from '../../context/MessageViewContext';
 import Filters from '../Filters/Filters';
 
 export default () => {
-  const {
-    messages,
-    communicators: { communicators },
-  } = useStaticQuery(query);
+  const { messages, tags } = useStaticQuery(query);
 
   const [page, setPage] = useState(1);
   const [filtersOpen, setFiltersOpen] = useState(false);
@@ -107,13 +104,16 @@ export default () => {
         <Filters open={filtersOpen} click={setFiltersOpen} reset={resetFilters}>
           <Chips
             filterName="communicators"
-            items={communicators}
+            items={[
+              ...tags.communicators,
+              'This is a long name that i am putting here for a test',
+            ]}
             selected={contextCommunicators}
             click={filterComm}
           />
           <Chips
             filterName="topics"
-            items={['marriage', 'bible', 'reaching people', 'church']}
+            items={[...tags.topics, 'another', 'anotehr 2']}
             selected={[]}
             click={() => null}
           />
@@ -256,7 +256,8 @@ const query = graphql`
         }
       }
     }
-    communicators: allContentfulMessage {
+    tags: allContentfulMessage {
+      topics: distinct(field: tags)
       communicators: distinct(field: communicator)
     }
   }
