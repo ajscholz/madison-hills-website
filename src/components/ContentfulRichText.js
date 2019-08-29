@@ -6,7 +6,11 @@ import React from 'react';
 export const contentfulRichTextIsolator = (content, className, style) =>
   content.content.map((paragraph, index) => {
     return (
-      <p key={index} className={className && className} style={style}>
+      <p
+        key={index}
+        className={className && className}
+        style={{ textAlign: 'center', ...style }}
+      >
         {paragraph.content.map((text, index) => {
           // if there are no marks (see below) give me the text
           // 'marks' is what gives styling from contentful

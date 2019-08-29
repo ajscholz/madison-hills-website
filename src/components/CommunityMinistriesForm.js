@@ -29,12 +29,8 @@ export default ({ light }) => {
   return (
     <Formik
       initialValues={{
-        // name: 'andrew',
-        // email: 'andrew@citynorth.chuerch',
-        // message: `let's get this going`,
         name: '',
         email: '',
-        message: ``,
       }}
       validate={values => {
         let errors = {};
@@ -48,23 +44,23 @@ export default ({ light }) => {
         ) {
           errors.email = 'Invalid email address';
         }
-        if (!values.message) {
-          errors.message = 'Required';
-        }
         return errors;
       }}
       onSubmit={async (values, { setSubmitting, resetForm }) => {
         try {
-          const response = await fetch('/.netlify/functions/contact', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-              ...values,
-              siteEmail: siteEmail,
-            }),
-          });
+          const response = await fetch(
+            '/.netlify/functions/community-ministries',
+            {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+              },
+              body: JSON.stringify({
+                ...values,
+                siteEmail: siteEmail,
+              }),
+            }
+          );
           const data = await response.json();
           if (response.ok) {
             setAccepted(true);
@@ -104,16 +100,6 @@ export default ({ light }) => {
               light={light}
             />
             <StyledErrorMessage name="email" component="div" />
-          </FieldContainer>
-          <FieldContainer>
-            <StyledField
-              name="message"
-              component="textarea"
-              placeholder="Message..."
-              rows="5"
-              light={light}
-            />
-            <StyledErrorMessage name="message" component="div" />
           </FieldContainer>
           <StyledButton type="submit" disabled={isSubmitting}>
             {isSubmitting && <SpinnerIcon margin="0 1rem 0 0" top="2px" />}
@@ -221,6 +207,6 @@ const SubmitMessage = styled.div`
 
 const Icon = styled.svg`
   display: block;
-  font-size: 10rem;
+  font-size: 6rem;
   color: ${props => (props.accepted ? 'var(--primary)' : 'tomato')};
 `;

@@ -2,6 +2,8 @@ import React from 'react';
 import styled from 'styled-components';
 import Img from 'gatsby-image';
 
+import { FaExternalLinkAlt } from 'react-icons/fa';
+
 export default props => {
   return (
     <MinistryCard>
@@ -14,6 +16,14 @@ export default props => {
       {props.link && (
         <Link href={props.link} rel="noopener noreferrer" target="_blank">
           Learn More
+          <FaExternalLinkAlt
+            style={{
+              display: 'inline-block',
+              fontSize: '.6rem',
+              opacity: '.8',
+              marginLeft: '.3rem',
+            }}
+          />
         </Link>
       )}
     </MinistryCard>
@@ -21,7 +31,7 @@ export default props => {
 };
 
 const MinistryCard = styled.div`
-  border-radius: 5px;
+  /* border-radius: 5px; */
   overflow: hidden;
   width: 100%;
   max-width: 350px;
@@ -29,7 +39,7 @@ const MinistryCard = styled.div`
   max-height: max-content;
   background: white;
   padding: 2rem;
-  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+  box-shadow: var(--shadow2);
   margin: 1rem 0;
   display: flex;
   flex-direction: column;

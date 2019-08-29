@@ -7,7 +7,10 @@ import Seo from '../../../components/Seo';
 import Title from '../../../components/Title';
 import MinistryCard from '../../../components/MinistryCard';
 import FlexContainer from '../../../components/FlexContainer';
-import Subtitle from '../../../components/Subtitle';
+import ContentfulRichText from '../../../components/ContentfulRichText';
+import CommunityMinistriesForm from '../../../components/CommunityMinistriesForm';
+
+import { sectionHelper } from '../../../utils/helpers';
 
 const community = ({ data }) => {
   const { image } = data.page;
@@ -17,25 +20,57 @@ const community = ({ data }) => {
     width: image.file.details.image.width,
   };
 
+  let sections = sectionHelper(
+    ['7nIXrgqsVg3xBt3oPaz5gf', '3udEQr4gNnB6xbmAZeD4HO'],
+    data.page.sections
+  );
+
+  sections[0].content = (
+    <>
+      <ContentfulRichText
+        content={sections[0].textContent.json}
+        style={{ marginTop: '0' }}
+      />
+      <FlexContainer style={{ marginTop: '1rem' }}>
+        {sections[0].contentReferences.map(ministry => (
+          <MinistryCard
+            key={ministry.contentful_id}
+            title={ministry.name}
+            description={ministry.description.description}
+            image={ministry.image.fixed}
+            link={ministry.link}
+          />
+        ))}
+      </FlexContainer>
+    </>
+  );
+
+  sections[1].content = (
+    <>
+      <ContentfulRichText
+        content={sections[1].textContent.json}
+        style={{ marginBottom: '3rem' }}
+      />
+      <CommunityMinistriesForm message={false} light />
+    </>
+  );
+
+  console.log(sections);
+
   return (
     <>
       <Seo title="Community Ministries" image={img} />
+
       <HeroImage image={image.fluid} title="Community Ministries" />
-      <Section>
-        <Title>For Richmond</Title>
-        <Subtitle>{`We aren't interested in building our own kingdom. We're interested in building God's Kingdom. Here are some of our partners in Richmond that are making a huge difference.`}</Subtitle>
-        <FlexContainer>
-          {data.ministries.edges.map(({ ministry }) => (
-            <MinistryCard
-              key={ministry.contentful_id}
-              title={ministry.name}
-              description={ministry.description.description}
-              image={ministry.image.fixed}
-              link={ministry.link}
-            ></MinistryCard>
-          ))}
-        </FlexContainer>
-      </Section>
+
+      {sections.map(section => {
+        return (
+          <Section key={section.id}>
+            <Title>{section.title}</Title>
+            {section.content}
+          </Section>
+        );
+      })}
     </>
   );
 };
@@ -59,19 +94,24 @@ export const data = graphql`
           }
         }
       }
-    }
-    ministries: allContentfulCommunityMinistries {
-      edges {
-        ministry: node {
-          contentful_id
-          name
-          link
-          description {
-            description
-          }
-          image {
-            fixed(height: 100) {
-              ...GatsbyContentfulFixed
+      sections: section {
+        id: contentful_id
+        title
+        textContent {
+          json
+        }
+        contentReferences {
+          ... on ContentfulCommunityMinistries {
+            contentful_id
+            name
+            link
+            description {
+              description
+            }
+            image {
+              fixed(height: 100) {
+                ...GatsbyContentfulFixed
+              }
             }
           }
         }
