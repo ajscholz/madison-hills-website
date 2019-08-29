@@ -11,7 +11,7 @@ import TextMessageButton from '../../../components/TextMessageButton';
 
 import { sectionHelper } from '../../../utils/helpers';
 
-export default ({ data }) => {
+const Kids = ({ data }) => {
   const { image } = data.page;
   const img = {
     src: image.file.url,
@@ -33,10 +33,13 @@ export default ({ data }) => {
       <Seo title="Madison Hills Kids Ministry" image={img} />
       <HeroImage image={image.fluid} title="Kids Ministry" />
 
-      {sections.map(section => (
+      {sections.map((section, i) => (
         <Section key={section.id}>
           <Title>{section.title}</Title>
-          <MinistrySection ministry={section.programs[0]} />
+          <MinistrySection
+            ministry={section.programs[0]}
+            reverse={i % 2 === 1}
+          />
         </Section>
       ))}
 
@@ -58,6 +61,8 @@ export default ({ data }) => {
     </>
   );
 };
+
+export default Kids;
 
 export const data = graphql`
   {
