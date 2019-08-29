@@ -7,24 +7,74 @@ import Section from '../../../components/Section';
 import Title from '../../../components/Title';
 import Seo from '../../../components/Seo';
 import Button from '../../../components/Button';
-import MinistryList from '../../../components/MinistryList';
+import MinistrySection from '../../../components/MinistrySection';
 import TextMessageButton from '../../../components/TextMessageButton';
 import SocialLinks from '../../../components/SocialLinks';
 import PlaylistPlayer from '../../../components/VideoPlayer/PlaylistPlayer';
+import VerseSection from '../../../components/VerseSection';
 
-const Teens = ({ data }) => {
-  const {
-    videos: { playlist },
-  } = data;
-  const {
-    page: { image },
-  } = data;
+import { sectionHelper } from '../../../utils/helpers';
+import ContentfulRichText from '../../../components/ContentfulRichText';
+
+const Teens = ({ data, className }) => {
+  const { image } = data.page;
 
   const img = {
     src: image.file.url,
     height: image.file.details.image.height,
     width: image.file.details.image.width,
   };
+
+  let sections = sectionHelper(
+    [
+      '16KoZzuX0fDHTMUj8lSUHl',
+      '5WVKjWGFWHyxVswQcwfxyE',
+      '3uWg6JqAbiHtpASleuvMhB',
+      'mfF9pfoDXbn49oWIuwFPi',
+      'ezwExY6ZhCUuSoNeaqXCG',
+    ],
+    data.page.sections
+  );
+
+  sections[0].content = (
+    <StyledContentfulRichText
+      className={className}
+      content={sections[0].textContent.json}
+    />
+  );
+  sections[0].styles = { paddingTop: '6rem', paddingBottom: '6rem' };
+
+  let content = sections[1].contentReferences[0];
+  sections[1].content = (
+    <VerseSection text={content.text.text} reference={content.reference} />
+  );
+
+  sections[2].content = (
+    <MinistrySection ministry={sections[2].contentReferences[0]} />
+  );
+
+  sections[3].content = (
+    <MinistrySection
+      ministry={sections[3].contentReferences[0]}
+      reverse={true}
+    />
+  );
+
+  content = sections[4].contentReferences[0];
+  sections[4].content = (
+    <>
+      <div
+        style={{
+          textAlign: 'center',
+          maxWidth: '800px',
+          marginBottom: '2rem',
+        }}
+      >
+        <ContentfulRichText content={sections[4].textContent.json} />
+      </div>
+      <PlaylistPlayer playlist={content.playlist} />
+    </>
+  );
 
   return (
     <>
@@ -34,27 +84,20 @@ const Teens = ({ data }) => {
         description={`The teen ministry of Madison Hills Christian Church.`}
       />
 
-      {/* <PlaylistPlayer playlist={playlist} /> */}
-
       <HeroImage
         image={image.fluid}
         backgroundPosition="45% 27%"
         title="Teen Ministry"
       />
 
-      <Section style={{ paddingTop: '6rem' }}>
-        <Title as="div" style={{ textTransform: 'none' }}>
-          {`We lead teens to a closer relationship with Jesus Christ`}
-        </Title>
-
-        <MissionVerse>
-          <Scripture>
-            {`
-Don’t let anyone look down on you because you are young, but set an example for the believers in speech, in conduct, in love, in faith and in purity. Until I come, devote yourself to the public reading of Scripture, to preaching and to teaching.`}
-          </Scripture>
-          <MissionVerseReference>I Timothy 4:12-13</MissionVerseReference>
-        </MissionVerse>
-      </Section>
+      {sections.map((section, i) => {
+        return (
+          <Section key={section.id} style={{ ...section.styles }}>
+            {i > 1 && <Title>{section.title}</Title>}
+            {section.content}
+          </Section>
+        );
+      })}
 
       <Section>
         <Title>Stay In the Loop</Title>
@@ -67,78 +110,31 @@ Don’t let anyone look down on you because you are young, but set an example fo
         </TextMessageButton>
       </Section>
 
-      <MinistryList programs={data.programs.edges} />
-
-      <Section className="video">
-        <Title>Making A Difference</Title>
-        <div
-          style={{
-            textAlign: 'center',
-            maxWidth: '800px',
-            marginBottom: '2rem',
-          }}
-        >
-          {`Every Summer we go to a wonderful city and do amazing projects, meet new people and serve those that need served!  These trips are 5-6 days, having amazing experiences, bonding with our group and making memories that will last a lifetime! This Summer, we took  27 Teens and 6 Adults to Niagara Falls…and had an amazing week!`}
-        </div>
-        <PlaylistPlayer playlist={playlist} />
-      </Section>
       <Section>
         <Title>What About My Children?</Title>
         <Button as={Link} to="/about/ministries/kids">
           Kids Page
         </Button>
       </Section>
+
       <SocialLinks accounts={data.socialMedia} />
     </>
   );
 };
 
-export default styled(Teens)`
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-`;
+export default Teens;
 
-// const Mission = styled.div`
-//   font-size: 1.5rem;
-//   margin-bottom: 1.5rem;
-//   text-align: center;
-// `;
-
-const MissionVerse = styled.div`
-  max-width: 600px;
-`;
-
-const Scripture = styled.div`
-  margin-bottom: 0;
+const StyledContentfulRichText = styled(ContentfulRichText)`
+  margin: 0;
+  font-size: 1.7rem;
   text-align: center;
+  @media (min-width: 576px) {
+    font-size: 1.85rem;
+  }
+  @media (min-width: 776px) {
+    font-size: 2rem;
+  }
 `;
-
-const MissionVerseReference = styled.div`
-  width: 100%;
-  text-transform: uppercase;
-  font-size: 0.8rem;
-  color: rgb(150, 150, 150);
-  display: flex;
-  font-weight: bold;
-  justify-content: flex-end;
-  margin-top: 1rem;
-`;
-
-// const MediaPlayer = styled.div`
-//   width: 100%;
-//   max-width: 640px;
-//   position: relative;
-// `;
-
-// const MediaControls = styled.div`
-//   display: flex;
-//   align-items: center;
-//   padding: 12px;
-//   background-color: #282f31;
-//   color: #fff;
-// `;
 
 export const data = graphql`
   {
@@ -157,26 +153,42 @@ export const data = graphql`
           }
         }
       }
-    }
-    programs: allContentfulPrograms(
-      filter: { ministryArea: { eq: "Teens" } }
-      sort: { fields: createdAt, order: ASC }
-    ) {
-      edges {
-        program: node {
-          id
-          title
-          dayOfWeek
-          startTime
-          endTime
-          location
-          ageRange
-          description {
-            description
+      sections: section {
+        title
+        id: contentful_id
+        textContent {
+          json
+        }
+        contentReferences {
+          ... on ContentfulVerse {
+            reference
+            text {
+              text
+            }
           }
-          image {
-            fluid {
-              ...GatsbyContentfulFluid
+          ... on ContentfulPrograms {
+            title
+            id: contentful_id
+            dayOfWeek
+            startTime
+            endTime
+            location
+            ageRange
+            description {
+              description
+            }
+            image {
+              fluid {
+                ...GatsbyContentfulFluid
+              }
+            }
+          }
+          ... on ContentfulVideoPlaylist {
+            title
+            playlist: videos {
+              title
+              contentful_id
+              link
             }
           }
         }
@@ -186,15 +198,6 @@ export const data = graphql`
       facebook
       instagram
       twitter
-    }
-    videos: contentfulVideoPlaylist(
-      title: { eq: "Niagra Falls Teen Mission Trip" }
-    ) {
-      playlist: videos {
-        title
-        contentful_id
-        link
-      }
     }
   }
 `;

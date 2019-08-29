@@ -3,10 +3,10 @@
 import React from 'react';
 
 // ------- HELPER FUNCTION TO GET AN ARRAY OF <p>'S ------- //
-export const contentfulRichTextIsolator = (content, className) =>
+export const contentfulRichTextIsolator = (content, className, style) =>
   content.content.map((paragraph, index) => {
     return (
-      <p key={index} className={className && className}>
+      <p key={index} className={className && className} style={style}>
         {paragraph.content.map((text, index) => {
           // if there are no marks (see below) give me the text
           // 'marks' is what gives styling from contentful
@@ -33,9 +33,11 @@ export const contentfulRichTextIsolator = (content, className) =>
   });
 
 // ------- COMPONENT USING HELPER FUNCTION TO RETURN <p>S AS JSX ------- //
-const ContentfulRichText = ({ content, className }) => (
+const ContentfulRichText = ({ content, className, style }) => (
   <>
-    {contentfulRichTextIsolator(content, className).map(paragraph => paragraph)}
+    {contentfulRichTextIsolator(content, className, style).map(
+      paragraph => paragraph
+    )}
   </>
 );
 

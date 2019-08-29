@@ -1,26 +1,24 @@
 import React from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import Img from 'gatsby-image';
 
-import Section from './Section';
-
-export default ({ ministry }) => (
-  <MinistrySection key={ministry.id}>
-    <GridContainer>
-      <Image fluid={ministry.image.fluid} imgStyle={{ objectFit: 'contain' }} />
-      <MinistryInfo>
-        <div style={{ fontWeight: 'bold' }}>
-          {ministry.dayOfWeek} {ministry.startTime}-{ministry.endTime}
-        </div>
-        <div style={{ fontWeight: 'bold' }}>Location: {ministry.location}</div>
-        <div style={{ fontWeight: 'bold' }}>Ages: {ministry.ageRange}</div>
-      </MinistryInfo>
-      <MinistryDescription>
-        {ministry.description.description}
-      </MinistryDescription>
-    </GridContainer>
-  </MinistrySection>
+const MinistrySection = ({ ministry, reverse }) => (
+  <GridContainer reverse={reverse}>
+    <Image fluid={ministry.image.fluid} imgStyle={{ objectFit: 'contain' }} />
+    <MinistryInfo>
+      <h4>
+        {ministry.dayOfWeek} {ministry.startTime}-{ministry.endTime}
+      </h4>
+      <h4>Location: {ministry.location}</h4>
+      <h4>Ages: {ministry.ageRange}</h4>
+    </MinistryInfo>
+    <MinistryDescription>
+      {ministry.description.description}
+    </MinistryDescription>
+  </GridContainer>
 );
+
+export default MinistrySection;
 
 const GridContainer = styled.div`
   display: grid;
@@ -37,25 +35,23 @@ const GridContainer = styled.div`
   @media (min-width: 660px) {
     max-height: 250px;
     grid-template-columns: 40% 1fr;
-    grid-column-gap: 2rem;
     grid-template-rows: auto 1fr;
     grid-template-areas:
       'picture info'
       'picture description';
+    grid-column-gap: 2rem;
     justify-items: start;
     text-align: left;
-  }
-`;
 
-const MinistrySection = styled(Section)`
-  &:nth-of-type(even) > ${GridContainer} {
-    @media (min-width: 660px) {
-      grid-template-columns: 1fr 40%;
-      grid-template-areas:
-        'info picture'
-        'description picture';
-      text-align: right;
-    }
+    ${props =>
+      props.reverse &&
+      css`
+        grid-template-columns: 1fr 40%;
+        grid-template-areas:
+          'info picture'
+          'description picture';
+        text-align: right;
+      `}
   }
 `;
 
@@ -73,9 +69,14 @@ const MinistryInfo = styled.div`
   color: var(--primaryDark);
   font-size: 0.9rem;
   grid-area: info;
+  & > h4 {
+    margin: 0;
+    font-weight: bold;
+  }
 `;
 
-const MinistryDescription = styled.div`
+const MinistryDescription = styled.p`
   font-size: 0.9rem;
   grid-area: description;
+  margin: 0;
 `;
