@@ -10,31 +10,28 @@ import TeamCard from '../components/TeamCard';
 import Accordion from '../components/Accordion';
 import ImageButton from '../components/ImageButton';
 
+import { sectionHelper } from '../utils/helpers';
+
 const about = ({ data }) => {
-  const { image, sections } = data.page;
+  const { image } = data.page;
   const img = {
     src: image.file.url,
     height: image.file.details.image.height,
     width: image.file.details.image.width,
   };
 
-  let team = {};
-  let ministries = {};
-  let beliefs = {};
+  const sections = sectionHelper(
+    [
+      '3KsEOEGsu7w6IDlkYavQM4',
+      '2y51JvuZ4XxM1wiTC9kqRy',
+      'iQqn9gttmnCEbrHeoC4gr',
+    ],
+    data.page.sections
+  );
 
-  for (let i in sections) {
-    if (sections[i].id === '3KsEOEGsu7w6IDlkYavQM4') {
-      team = { ...sections[i], styles: {} };
-    } else if (sections[i].id === '2y51JvuZ4XxM1wiTC9kqRy') {
-      ministries = { ...sections[i], styles: { padding: '4rem 0 0' } };
-    } else if (sections[i].id === 'iQqn9gttmnCEbrHeoC4gr') {
-      beliefs = { ...sections[i], styles: {} };
-    }
-  }
-
-  team.content = (
+  sections[0].content = (
     <FlexContainer>
-      {team.contentReferences.map(person => (
+      {sections[0].contentReferences.map(person => (
         <TeamCard
           key={person.id}
           name={person.name}
@@ -46,9 +43,9 @@ const about = ({ data }) => {
     </FlexContainer>
   );
 
-  ministries.content = (
+  sections[1].content = (
     <GridContainer>
-      {ministries.contentReferences.map(ministry => (
+      {sections[1].contentReferences.map(ministry => (
         <Link
           to={`/about/ministries/${ministry.name.toLowerCase()}`}
           key={ministry.contentful_id}
@@ -63,18 +60,16 @@ const about = ({ data }) => {
     </GridContainer>
   );
 
-  console.log(beliefs.contentReferences);
+  sections[1].styles = { padding: '4rem 0 0' };
 
-  beliefs.content = <Accordion items={beliefs.contentReferences} />;
-
-  const pageSections = [team, ministries, beliefs];
+  sections[2].content = <Accordion items={sections[2].contentReferences} />;
 
   return (
     <>
       <Seo title="About" image={img} />
       <StyledHeroImage image={image.fluid} title="About" />
 
-      {pageSections.map((section, i) => {
+      {sections.map(section => {
         return (
           <Section key={section.id} style={section.styles}>
             <Title>{section.title}</Title>

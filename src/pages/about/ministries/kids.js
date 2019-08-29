@@ -6,8 +6,10 @@ import Section from '../../../components/Section';
 import Seo from '../../../components/Seo';
 import Title from '../../../components/Title';
 import Button from '../../../components/Button';
-import MinistryList from '../../../components/MinistryList';
+import MinistrySection from '../../../components/MinistrySection';
 import TextMessageButton from '../../../components/TextMessageButton';
+
+import { sectionHelper } from '../../../utils/helpers';
 
 export default ({ data }) => {
   const { image } = data.page;
@@ -17,22 +19,34 @@ export default ({ data }) => {
     width: image.file.details.image.width,
   };
 
+  const sections = sectionHelper(
+    [
+      '4rEW2suQGMc8uVcf8LYxVw',
+      'DM68VRmYgzJ7HyueEc8Nt',
+      '3D5SMShE2HXTDAlYoM7zbX',
+    ],
+    data.page.sections
+  );
+
   return (
     <>
       <Seo title="Madison Hills Kids Ministry" image={img} />
       <HeroImage image={image.fluid} title="Kids Ministry" />
 
-      <MinistryList programs={data.programs.edges} />
+      {sections.map(section => (
+        <Section key={section.id}>
+          <Title>{section.title}</Title>
+          <MinistrySection ministry={section.programs[0]} />
+        </Section>
+      ))}
 
-      <Section dark>
+      <Section>
         <Title>Stay In the Loop</Title>
-        <div>
+        <p style={{ textAlign: 'center' }}>
           Text "@mhcckidn" to 81010 or click the button below to join our text
           list.
-        </div>
-        <TextMessageButton link="sms://81010?body=%40mhcckidn">
-          Text Us Now
-        </TextMessageButton>
+        </p>
+        <TextMessageButton link="sms://81010?body=%40mhcckidn" />
       </Section>
 
       <Section>
@@ -62,26 +76,23 @@ export const data = graphql`
           }
         }
       }
-    }
-    programs: allContentfulPrograms(
-      filter: { ministryArea: { eq: "Kids" } }
-      sort: { fields: createdAt, order: ASC }
-    ) {
-      edges {
-        program: node {
-          id
-          title
-          dayOfWeek
-          startTime
-          endTime
-          location
-          ageRange
-          description {
-            description
-          }
-          image {
-            fluid {
-              ...GatsbyContentfulFluid
+      sections: section {
+        id: contentful_id
+        title
+        programs: contentReferences {
+          ... on ContentfulPrograms {
+            dayOfWeek
+            startTime
+            endTime
+            location
+            ageRange
+            description {
+              description
+            }
+            image {
+              fluid {
+                ...GatsbyContentfulFluid
+              }
             }
           }
         }

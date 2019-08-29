@@ -2,38 +2,25 @@ import React from 'react';
 import styled from 'styled-components';
 import Img from 'gatsby-image';
 
-import Title from './Title';
 import Section from './Section';
 
-export default props => {
-  return (
-    <>
-      {props.programs.map(({ program }, index) => (
-        <MinistrySection key={program.id}>
-          <Title>{program.title}</Title>
-          <GridContainer>
-            <Image
-              fluid={program.image.fluid}
-              imgStyle={{ objectFit: 'contain' }}
-            />
-            <MinistryInfo>
-              <div style={{ fontWeight: 'bold' }}>
-                {program.dayOfWeek} {program.startTime}-{program.endTime}
-              </div>
-              <div style={{ fontWeight: 'bold' }}>
-                Location: {program.location}
-              </div>
-              <div style={{ fontWeight: 'bold' }}>Ages: {program.ageRange}</div>
-            </MinistryInfo>
-            <MinistryDescription>
-              {program.description.description}
-            </MinistryDescription>
-          </GridContainer>
-        </MinistrySection>
-      ))}
-    </>
-  );
-};
+export default ({ ministry }) => (
+  <MinistrySection key={ministry.id}>
+    <GridContainer>
+      <Image fluid={ministry.image.fluid} imgStyle={{ objectFit: 'contain' }} />
+      <MinistryInfo>
+        <div style={{ fontWeight: 'bold' }}>
+          {ministry.dayOfWeek} {ministry.startTime}-{ministry.endTime}
+        </div>
+        <div style={{ fontWeight: 'bold' }}>Location: {ministry.location}</div>
+        <div style={{ fontWeight: 'bold' }}>Ages: {ministry.ageRange}</div>
+      </MinistryInfo>
+      <MinistryDescription>
+        {ministry.description.description}
+      </MinistryDescription>
+    </GridContainer>
+  </MinistrySection>
+);
 
 const GridContainer = styled.div`
   display: grid;
