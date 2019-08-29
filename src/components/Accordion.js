@@ -6,11 +6,11 @@ export default props => {
   const [openItem, setOpenItem] = React.useState(null);
   return (
     <Accordion>
-      {props.beliefs.map(({ belief }, index) => {
+      {props.items.map((item, index) => {
         return (
           <AccordionItem
-            belief={belief}
-            key={belief.contentful_id}
+            belief={item}
+            key={item.contentful_id}
             isOpen={openItem === index ? true : false}
             click={setOpenItem}
             index={index}

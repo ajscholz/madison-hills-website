@@ -16,8 +16,8 @@ const JesusPage = ({ data }) => {
 
   const s1 = sections[0];
   const s2 = sections[1];
-  const verse = { content: [s2.content.json.content[0]] };
-  const reference = { content: [s2.content.json.content[1]] };
+  const verse = { content: [s2.content.json.textContent[0]] };
+  const reference = { content: [s2.content.json.textContent[1]] };
   const s3 = sections[2];
 
   const img = {
@@ -199,7 +199,7 @@ export const data = graphql`
       }
       sections: section {
         title
-        content {
+        textContent {
           json
         }
         image {
