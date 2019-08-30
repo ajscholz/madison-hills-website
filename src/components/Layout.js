@@ -47,12 +47,7 @@ const Layout = ({ children }) => {
             click={drawerToggleHandler}
           />
         ) : null}
-        {sideDrawerOpen ? (
-          <Backdrop
-            onClick={() => drawerToggleHandler(() => !sideDrawerOpen)}
-            open={sideDrawerOpen}
-          />
-        ) : null}
+        {sideDrawerOpen ? <Backdrop click={drawerToggleHandler} /> : null}
 
         <Main>{children}</Main>
 

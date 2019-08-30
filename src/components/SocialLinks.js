@@ -13,7 +13,11 @@ export default props => {
   const accounts = Object.entries(props.accounts);
 
   return (
-    <SocialLinks size={accounts.length} normal={props.normal}>
+    <SocialLinks
+      size={accounts.length}
+      normal={props.normal}
+      className={props.className}
+    >
       {accounts.map(account => {
         if (account[1] === null) return null;
         return (
