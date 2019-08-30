@@ -55,7 +55,7 @@ exports.handler = async event => {
     to: `andrew@citynorth.church`,
     subject: 'Community Ministries - Get Involved Form Submission',
     generateTextFromHTML: true,
-    html: `<h1>You've recieved a new form submission!</h1><hr><p><b>Name: </b>${data.name}</p><p><b>Email: </b>${data.email}</p><p><b>Message: </b>${data.message}</p><hr><h4>To reply to your message simply reply to this email directly!</h4>`,
+    html: `<h1>You've recieved a new form submission!</h1><hr><p><b>Name: </b>${data.name}</p><p><b>Email: </b>${data.email}</p><hr><h4>To reply to your message simply reply to this email directly!</h4>`,
   };
 
   try {
