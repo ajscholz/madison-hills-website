@@ -2,20 +2,10 @@
 
 import React, { createContext, useState } from 'react';
 
-const messagesState = {
-  type: 'messages',
-  filters: { communicators: [], topics: [], year: [] },
-};
-
-// const seriesState = {
-//   type: 'series',
-//   filters: { topics: [], year: [] },
-// };
-
 const MessageViewContext = createContext([{}, () => {}]);
 
 const MessageViewProvider = props => {
-  const [view, setView] = useState({ ...messagesState });
+  const [view, setView] = useState();
 
   return (
     <MessageViewContext.Provider value={[view, setView]}>
