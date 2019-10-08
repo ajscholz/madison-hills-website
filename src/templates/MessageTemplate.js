@@ -21,8 +21,6 @@ const MessageTemplate = ({ data }) => {
   const { message, otherMessages } = data;
   const { title, communicator, date, video, series } = message;
 
-  console.log('in template');
-
   return (
     <>
       <SEO title={title} image={series.image.file.url} />
@@ -159,11 +157,6 @@ export const query = graphql`
       image: messagePhoto {
         fluid {
           ...GatsbyContentfulFluid
-        }
-      }
-      video: messageVideo {
-        file {
-          url
         }
       }
       series: messageSeries {

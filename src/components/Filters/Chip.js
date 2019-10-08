@@ -1,5 +1,5 @@
 import React from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { FiX, FiCheck } from 'react-icons/fi';
 
 const Chip = props => {
@@ -10,34 +10,51 @@ const Chip = props => {
       className={className}
       onClick={() => handleClick(text, filter, func)}
     >
-      <ChipContentWrapper>
+      <div className="chip-content-wrapper">
         {active ? <FiX /> : <FiCheck />}
         {text}
-      </ChipContentWrapper>
+      </div>
     </button>
   );
 };
 
 export default styled(Chip)`
-  padding: 0.5em 3em;
-  background: ${props => (props.active ? 'darkslategray' : 'transparent')};
-  border: 1px solid darkslategray;
-  border-radius: 20px;
-  display: block;
-  color: ${props => (props.active ? 'white' : 'darkslategray')};
+  background-color: transparent;
+  height: max-content;
+  max-width: calc(100% - 1rem);
+  border: 1px solid var(--primary);
+  color: var(--primary);
+  font-size: 0.5rem;
+  margin: 0.4rem;
+  font-weight: 400;
+  padding: 0.2rem 0.8rem;
+  text-transform: capitalize;
+  letter-spacing: 0.1em;
+  border-radius: 12.5px;
+  transition: var(--mainTransition);
   outline: none;
-  cursor: pointer;
-  margin-bottom: 0.75em;
-  width: max-content;
-`;
-
-const ChipContentWrapper = styled.div`
   display: flex;
   align-items: center;
-  justify-content: flex-start;
-
-  & > svg {
-    display: inline-block;
-    margin-right: 0.5em;
+  position: relative;
+  margin-left: 1rem;
+  p {
+    white-space: nowrap;
+    margin: 0;
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
+  svg {
+    transition: var(--mainTransition);
+    font-size: 1em;
+  }
+  ${props =>
+    props.selected &&
+    css`
+      background: var(--primary);
+      color: var(--white);
+      svg {
+        transform: rotate(45deg);
+      }
+    `}
 `;

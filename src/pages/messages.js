@@ -15,7 +15,7 @@ import MessageCard from '../components/MessageCard';
 
 import { MessageViewContext } from '../context/MessageViewContext';
 
-const messages = props => {
+const MessagesPage = props => {
   const { page, allContentfulMessage, messageTags } = props.data;
   let { messages } = allContentfulMessage;
   const { communicators, topics } = messageTags;
@@ -126,7 +126,7 @@ const messages = props => {
   );
 };
 
-export default messages;
+export default MessagesPage;
 
 export const data = graphql`
   {
