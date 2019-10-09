@@ -49,29 +49,29 @@ export default styled(Chips)`
   }
 `;
 
-const Header = styled.h4`
-  position: sticky;
-  top: 0;
-  font-size: 0.8rem;
-  margin-top: 0;
-  margin-bottom: 0.5rem;
-  text-transform: capitalize;
-  color: var(--secondary);
-  display: flex;
-  align-items: center;
-  background: var(--white);
-  z-index: 250;
-`;
+// const Header = styled.h4`
+//   position: sticky;
+//   top: 0;
+//   font-size: 0.8rem;
+//   margin-top: 0;
+//   margin-bottom: 0.5rem;
+//   text-transform: capitalize;
+//   color: var(--secondary);
+//   display: flex;
+//   align-items: center;
+//   background: var(--white);
+//   z-index: 250;
+// `;
 
-const CloseIcon = styled.span`
-  margin-right: 5px;
-  flex-shrink: 0;
-`;
+// const CloseIcon = styled.span`
+//   margin-right: 5px;
+//   flex-shrink: 0;
+// `;
 
-const List = styled.div`
-  width: 100%;
-  margin-bottom: 25px;
-`;
+// const List = styled.div`
+//   width: 100%;
+//   margin-bottom: 25px;
+// `;
 
 Chips.propTypes = {
   items: PropTypes.array.isRequired,

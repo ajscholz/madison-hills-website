@@ -1,20 +1,42 @@
 import React from 'react';
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 import { FiX, FiCheck } from 'react-icons/fi';
+import { a, useSpring, useTransition } from 'react-spring';
 
 const Chip = props => {
   const { text, handleClick, active, filter, func, className } = props;
 
+  const chipStyles = useSpring({
+    background: active ? 'var(--primary)' : 'var(--white)',
+    color: active ? 'var(--white)' : 'var(--primary)',
+  });
+
+  const transitions = useTransition(active, null, {
+    from: { position: 'absolute', opacity: 0 },
+    enter: { opacity: 1 },
+    leave: { opacity: 0 },
+    // unique: true,
+  });
+
   return (
-    <button
+    <a.button
       className={className}
       onClick={() => handleClick(text, filter, func)}
+      style={chipStyles}
     >
-      <div className="chip-content-wrapper">
-        {active ? <FiX /> : <FiCheck />}
-        {text}
-      </div>
-    </button>
+      {transitions.map(({ item, key, props }) =>
+        item ? (
+          <a.div style={props}>
+            <FiCheck />
+          </a.div>
+        ) : (
+          <a.div style={props}>
+            <FiX />
+          </a.div>
+        )
+      )}
+      <p>{text}</p>
+    </a.button>
   );
 };
 
@@ -37,9 +59,12 @@ export default styled(Chip)`
   align-items: center;
   position: relative;
   margin-left: 1rem;
+  & div {
+    display: flex;
+  }
   p {
     white-space: nowrap;
-    margin: 0;
+    margin: 0 0 0 1rem;
     max-width: 100%;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -48,13 +73,4 @@ export default styled(Chip)`
     transition: var(--mainTransition);
     font-size: 1em;
   }
-  ${props =>
-    props.selected &&
-    css`
-      background: var(--primary);
-      color: var(--white);
-      svg {
-        transform: rotate(45deg);
-      }
-    `}
 `;

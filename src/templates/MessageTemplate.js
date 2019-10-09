@@ -159,6 +159,11 @@ export const query = graphql`
           ...GatsbyContentfulFluid
         }
       }
+      video: messageVideo {
+        file {
+          url
+        }
+      }
       series: messageSeries {
         image: seriesGraphic {
           file {

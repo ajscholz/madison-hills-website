@@ -24,7 +24,7 @@ const emailData = graphql`
 
 export default ({ light }) => {
   const [submitted, setSubmitted] = useState(false);
-  const [accepted, setAccepted] = useState(false);
+  const [accepted] = useState(false);
 
   const {
     site: {
