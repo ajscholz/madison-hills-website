@@ -63,3 +63,13 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
 };
 
 // slug: `${message.title.toLowerCase().replace(/ /g, '-')}`,
+
+// CREATES PAGE CONTEXT FOR MULTIPLE LAYOUTS
+exports.onCreatePage = ({ page, actions }) => {
+  const { createPage } = actions;
+
+  if (page.path.match(/party-people/)) {
+    page.context.landing = true;
+    createPage(page);
+  }
+};

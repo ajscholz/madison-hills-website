@@ -21,8 +21,11 @@ import GlobalStyles from './GlobalStyles';
 
 import links from '../utils/links';
 import PreFooter from './PreFooter';
+import Popup from './Popup/Popup';
+import ModalController from './ModalComponents/ModalController';
 
-const Layout = ({ children }) => {
+const Layout = props => {
+  const { children, pageContext } = props;
   const data = useStaticQuery(query);
   const width = useBrowserWidth();
 
@@ -32,30 +35,48 @@ const Layout = ({ children }) => {
     drawerToggleHandler(false);
   }
 
-  return (
-    <MessageViewProvider>
-      <GlobalStyles />
-      <FlexContainer>
-        <Header
-          siteTitle={data.site.siteMetadata.title}
-          drawerClickHandler={() => drawerToggleHandler(() => !sideDrawerOpen)}
-        />
-        {width <= 662 ? (
-          <SideDrawer
-            links={links}
-            open={sideDrawerOpen}
-            click={drawerToggleHandler}
-          />
-        ) : null}
-        {sideDrawerOpen ? <Backdrop click={drawerToggleHandler} /> : null}
+  const infoBoxActive = true;
 
+  if (pageContext.landing) {
+    return (
+      <>
+        <GlobalStyles />
         <Main>{children}</Main>
+      </>
+    );
+  } else {
+    return (
+      <MessageViewProvider>
+        <GlobalStyles />
+        <FlexContainer>
+          <Header
+            siteTitle={data.site.siteMetadata.title}
+            drawerClickHandler={() =>
+              drawerToggleHandler(() => !sideDrawerOpen)
+            }
+          />
+          {width <= 662 ? (
+            <SideDrawer
+              links={links}
+              open={sideDrawerOpen}
+              click={drawerToggleHandler}
+            />
+          ) : null}
+          {sideDrawerOpen ? <Backdrop click={drawerToggleHandler} /> : null}
 
-        <PreFooter />
-        <Footer title={data.site.siteMetadata.title} />
-      </FlexContainer>
-    </MessageViewProvider>
-  );
+          <Main>{children}</Main>
+
+          <PreFooter />
+          <Footer title={data.site.siteMetadata.title} />
+        </FlexContainer>
+        {infoBoxActive && (
+          <ModalController buttonStyle="none">
+            <Popup />
+          </ModalController>
+        )}
+      </MessageViewProvider>
+    );
+  }
 };
 
 const FlexContainer = styled.div`
@@ -66,6 +87,7 @@ const FlexContainer = styled.div`
 `;
 
 const Main = styled.main`
+  min-height: 100%;
   flex-grow: 1;
   background: var(--white);
 `;
@@ -77,7 +99,7 @@ Layout.propTypes = {
 export default Layout;
 
 const query = graphql`
-  query SiteTitleQuery {
+  {
     site {
       siteMetadata {
         title

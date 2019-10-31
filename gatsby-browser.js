@@ -9,7 +9,10 @@
 import React from 'react';
 
 import BrowserWidthProvider from './src/context/BrowserWidthContext';
+import { ModalContextProvider } from './src/context/ModalContext';
 
 export const wrapRootElement = ({ element }) => (
-  <BrowserWidthProvider>{element}</BrowserWidthProvider>
+  <ModalContextProvider>
+    <BrowserWidthProvider>{element}</BrowserWidthProvider>
+  </ModalContextProvider>
 );

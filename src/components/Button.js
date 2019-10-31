@@ -1,6 +1,9 @@
+import React from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import { Link } from 'gatsby';
 
-export default styled.button`
+const Button = styled.button`
   font-size: 0.9rem;
   padding: 1em 2em;
   background-color: var(--primary);
@@ -21,6 +24,8 @@ export default styled.button`
     box-shadow: var(--shadow3);
   }
 `;
+
+export default Button;
 
 export const ToggleButton = styled.button`
   background-color: transparent;
@@ -50,3 +55,17 @@ export const ToggleButton = styled.button`
     box-shadow: none;
   }
 `;
+
+export const LinkButton = props => {
+  const { to, children, style } = props;
+
+  return (
+    <Button as={Link} to={to} style={style}>
+      {children}
+    </Button>
+  );
+};
+
+LinkButton.propTypes = {
+  to: PropTypes.string.isRequired,
+};

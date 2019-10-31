@@ -25,16 +25,19 @@ const Chips = props => {
     <>
       <h2>{title}</h2>
       <div className={className}>
-        {items.map((item, index) => (
-          <Chip
-            active={state.includes(item)}
-            filter={state}
-            func={setState}
-            key={index}
-            text={item}
-            handleClick={handleClick}
-          />
-        ))}
+        {items.map((item, index) => {
+          const active = state.includes(item);
+          return (
+            <Chip
+              active={active}
+              filter={state}
+              func={setState}
+              key={index}
+              text={item}
+              handleClick={handleClick}
+            />
+          );
+        })}
       </div>
     </>
   );

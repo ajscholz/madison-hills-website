@@ -10,23 +10,25 @@ const { CurrentTime, Progress, SeekBar, Duration, Volume } = controls;
 export default ({ src }) => {
   return (
     <Media>
-      {({ isFullscreen, playPause }) => (
-        <MediaPlayer tabIndex="0">
-          <Player src={src} onClick={() => playPause()} />
-          <MediaControls fullscreen={isFullscreen}>
-            <MediaControl as={PlayPause} />
-            <MediaControl as={CurrentTime} />
-            <Seek>
-              <ProgressBar as={Progress} />
-              <StyledSeekBar />
-            </Seek>
-            <MediaControl as={Duration} />
-            <MediaControl as={MuteUnmute} />
-            <VolumeControl as={Volume} />
-            <MediaControl as={Fullscreen} />
-          </MediaControls>
-        </MediaPlayer>
-      )}
+      {({ isFullscreen, playPause }) => {
+        return (
+          <MediaPlayer tabIndex="0">
+            <Player src={src} onClick={() => playPause()} />
+            <MediaControls fullscreen={isFullscreen}>
+              <MediaControl as={PlayPause} />
+              <MediaControl as={CurrentTime} />
+              <Seek>
+                <ProgressBar as={Progress} />
+                <StyledSeekBar />
+              </Seek>
+              <MediaControl as={Duration} />
+              <MediaControl as={MuteUnmute} />
+              <VolumeControl as={Volume} />
+              <MediaControl as={Fullscreen} />
+            </MediaControls>
+          </MediaPlayer>
+        );
+      }}
     </Media>
   );
 };
@@ -68,8 +70,8 @@ const MediaControls = styled.div`
     props.fullscreen &&
     css`
       width: 100%;
-      position: absolute;
-      bottom: 0;
+      position: fixed;
+      top: 0;
       left: 0;
 
       /* push controls above fullscreen video */
