@@ -7,6 +7,7 @@ import SEO from '../components/Seo';
 // import Section from '../components/Section';
 import MediaPlayer from '../components/VideoPlayer/MediaPlayer';
 import { LinkButton } from '../components/Button';
+import HeroImage from '../components/HeroImage';
 
 const PartyPeoplePage = props => {
   const { data, className } = props;
@@ -25,38 +26,41 @@ const PartyPeoplePage = props => {
 
   return (
     <div className={className}>
-      <SEO
-        title="Home"
-        // image={img}
-      />
-      <div className="container">
-        <h1>Party People Church?</h1>
-        <p>
-          Yeah, we're the party people church. Maybe that sounds weird to you.
-          Take{' '}
-          <span style={{ fontWeight: '700', color: 'var(--primaryDark)' }}>
-            <em>two minutes</em>
-          </span>{' '}
-          to watch this video and discover the difference here.
-        </p>
-        <div className="player-container">
-          <MediaPlayer src={videoLink}></MediaPlayer>
-        </div>
+      <HeroImage image={data.image.fluid} huge>
+        <SEO
+          title="Home"
+          // image={img}
+        />
+        <div className="container">
+          <h1>Party People Church?</h1>
+          <p>
+            Yeah, we're the party people church. Maybe that sounds weird to you.
+            Take{' '}
+            <span style={{ fontWeight: '700', color: 'var(--primaryDark)' }}>
+              <em>two minutes</em>
+            </span>{' '}
+            to watch this video and discover the difference here.
+          </p>
+          <div className="player-container">
+            <MediaPlayer src={videoLink}></MediaPlayer>
+          </div>
 
-        <LinkButton to="/" style={{ marginTop: '2rem' }}>
-          Find out more
-        </LinkButton>
-      </div>
+          <LinkButton to="/" style={{ marginTop: '2rem' }}>
+            Find out more
+          </LinkButton>
+        </div>
+      </HeroImage>
     </div>
   );
 };
 
 export default styled(PartyPeoplePage)`
-  padding: 5%;
+  /* padding: 5%; */
   height: 100vh;
   text-align: center;
 
   & .container {
+    padding: 5%;
     height: 100%;
     max-width: 768px;
     margin: 0 auto;
@@ -83,6 +87,11 @@ export const data = graphql`
   {
     video: contentfulYouTubeVideo(title: { eq: "Why Party People?" }) {
       link
+    }
+    image: contentfulAsset(contentful_id: { eq: "MC5dWFao0NSvZst2Pw3vl" }) {
+      fluid(resizingBehavior: FILL) {
+        ...GatsbyContentfulFluid
+      }
     }
   }
 `;

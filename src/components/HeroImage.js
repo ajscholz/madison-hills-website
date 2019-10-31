@@ -4,13 +4,18 @@ import BackgroundImage from 'gatsby-background-image';
 
 import Banner from './Banner';
 
-const HeroImage = ({ className, image, children, full, title }) => {
+const HeroImage = ({ className, image, children, full, title, huge }) => {
   // adds overlay
   const backgroundFluidImageStack = full
     ? [
         image,
         `linear-gradient(to bottom, rgba(0, 130, 29, .3), rgba(0, 130, 29, .3))`,
         `linear-gradient(rgba(0,0,0,.6), rgba(0,0,0,.6))`,
+      ].reverse()
+    : huge
+    ? [
+        image,
+        `linear-gradient(to bottom, rgba(242, 238, 238, 0.7), rgba(242, 238, 238, 0.7))`,
       ].reverse()
     : [
         image,
@@ -33,7 +38,7 @@ const StyledHeroImage = styled(HeroImage)`
   height: ${props => (props.full ? '70vh' : '40vh')};
   background-position: ${props => props.backgroundPosition};
   @media (min-width: 577px) {
-    height: ${props => (props.full ? '70vh' : '40vh')};
+    height: ${props => (props.full ? '70vh' : props.huge ? '100vh' : '40vh')};
   }
 `;
 
