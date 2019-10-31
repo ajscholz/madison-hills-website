@@ -35,7 +35,7 @@ const HeroImage = ({ className, image, children, full, title, huge }) => {
 };
 
 const StyledHeroImage = styled(HeroImage)`
-  height: ${props => (props.full ? '70vh' : '40vh')};
+  height: ${props => (props.full ? '70vh' : props.huge ? '100vh' : '40vh')};
   background-position: ${props => props.backgroundPosition};
   @media (min-width: 577px) {
     height: ${props => (props.full ? '70vh' : props.huge ? '100vh' : '40vh')};
