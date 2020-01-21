@@ -15,11 +15,13 @@ import Date from '../components/Metadata/Date';
 import MessageVideoPlayButton from '../components/MessageVideoPlayer/MessageVideoPlayButton';
 import SpinnerIcon from '../components/SpinnerIcon';
 
+import { MDXRenderer } from 'gatsby-plugin-mdx';
+
 const MessageTemplate = ({ data }) => {
   const [touched, setTouched] = useState(false);
   const [ready, setReady] = useState(false);
   const { message, otherMessages } = data;
-  const { title, communicator, date, video, series } = message;
+  const { title, communicator, date, video, series, description } = message;
 
   return (
     <>
@@ -28,7 +30,7 @@ const MessageTemplate = ({ data }) => {
       <VideoSection>
         <VideoWrapper>
           <ReactPlayer
-            url={video.file.url}
+            url={video}
             playing={touched}
             width="100%"
             height="100%"
@@ -48,17 +50,7 @@ const MessageTemplate = ({ data }) => {
         {/* <Img fluid={image.fluid} style={{ minWidth: '100%', height: '100%' }} /> */}
         <Info>
           <Title style={{ marginBottom: '1.5rem' }}>{title}</Title>
-          <p>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dicta
-            aliquid voluptatibus sed ipsam eius nihil quia eum maiores totam ea,
-            nisi fugit consequuntur nostrum ipsa, cupiditate autem atque harum
-            dolores?
-          </p>
-          <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Sed, quidem
-            hic? Incidunt repudiandae quo, laudantium repellat dicta accusamus
-            autem quisquam.
-          </p>
+          <MDXRenderer>{description.childMdx.body}</MDXRenderer>
           <Metadata>
             <Date icon={true}>{date}</Date>
             <h6>{communicator}</h6>
@@ -153,17 +145,18 @@ export const query = graphql`
     message: contentfulMessage(contentful_id: { eq: $id }) {
       title: messageTitle
       communicator
+      description: messageDescription {
+        childMdx {
+          body
+        }
+      }
       date: messageDate(formatString: "M/D/YYYY")
       image: messagePhoto {
         fluid {
           ...GatsbyContentfulFluid
         }
       }
-      video: messageVideo {
-        file {
-          url
-        }
-      }
+      video: messageVideo
       series: messageSeries {
         image: seriesGraphic {
           file {

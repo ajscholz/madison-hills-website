@@ -36,6 +36,7 @@ module.exports = {
     );
   },
   plugins: [
+    `gatsby-plugin-mdx`,
     {
       resolve: `gatsby-plugin-layout`,
       options: {

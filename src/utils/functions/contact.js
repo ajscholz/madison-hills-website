@@ -50,12 +50,39 @@ exports.handler = async event => {
       name: 'AJSolutions',
       address: 'andrew@citynorth.church',
     },
-    replyTo: data.email,
-    // to: data.siteEmail,
-    to: `andrew@citynorth.church`,
+    replyTo: `${data.name} <${data.email}>`,
+    to: `Madison Hills Christian Church <ben@madisonhills.org>`,
+    bcc: `Andrew Scholz <andrew@citynorth.church>`,
     subject: 'Website Form Submission',
     generateTextFromHTML: true,
-    html: `<h1>You've recieved a new form submission!</h1><hr><p><b>Name: </b>${data.name}</p><p><b>Email: </b>${data.email}</p><p><b>Message: </b>${data.message}</p><hr><h4>To reply to your message simply reply to this email directly!</h4>`,
+    html: `
+    <html>
+      <style>
+        span {
+          font-weight: 700;
+        }
+      </style>
+      <h1>
+        You've received a new form submission.
+      </h1>
+      <hr>
+      <p>
+        <span>Name: </span>
+        ${data.name}
+      </p>
+      <p>
+        <span>Email: </span>
+        <a href="mailto: ${data.email}">${data.email}</a>
+      </p>
+      <p>
+        ${data.message.replace(/\n/g, '</p><p>')} 
+      </p>
+      <br>
+      <hr>
+      <h4>
+        To reply to your message simply reply to this email directly.
+      </h4>
+    </html>`,
   };
 
   try {
