@@ -29,6 +29,8 @@ const about = ({ data }) => {
     data.page.sections
   );
 
+  console.log(sections);
+
   sections[0].content = (
     <FlexContainer>
       {sections[0].contentReferences.map(person => (
