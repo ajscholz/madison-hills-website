@@ -29,19 +29,37 @@ const Filter = ({ data, filterType, update, className }) => {
 
   return (
     <div className={className}>
-      <h3>{filterType}</h3>
-
-      <FilterClearButton
-        disabled={noFilters}
-        click={() =>
-          update(filterType, {
-            selected: [],
-            unselected: data.unselected.concat(data.selected).sort(),
-          })
-        }
+      <div
+        style={{
+          display: 'flex',
+          justifyContent: 'space-between',
+          alignItems: 'flex-end',
+        }}
       >
-        <GrClear />
-      </FilterClearButton>
+        <h3>{filterType}</h3>
+        <div
+          style={{
+            display: 'flex',
+            marginBottom: '3.75px',
+            alignItems: 'baseline',
+          }}
+        >
+          <span
+            style={{ fontSize: '.8em', marginRight: '.5em' }}
+          >{`${data.selected.length} selected`}</span>
+          <FilterClearButton
+            disabled={noFilters}
+            click={() =>
+              update(filterType, {
+                selected: [],
+                unselected: data.unselected.concat(data.selected).sort(),
+              })
+            }
+          >
+            <GrClear />
+          </FilterClearButton>
+        </div>
+      </div>
 
       <ChipContainer>
         {dataArr.map(item => {
@@ -78,12 +96,21 @@ export default styled(Filter)`
     text-transform: capitalize;
     margin-bottom: 0.2em;
   }
-  & > button {
-    position: absolute;
+  & ${FilterClearButton} {
+    /* position: absolute; */
     border: none;
     top: 2px;
     right: 0;
     background: tomato;
+    border: 0;
+    display: flex;
+    align-items: center;
+    padding: 0.35em;
+    border-radius: 50px;
+    &:disabled {
+      background: #ffb9ac;
+      cursor: default;
+    }
   }
 `;
 

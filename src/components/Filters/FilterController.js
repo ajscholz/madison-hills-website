@@ -3,28 +3,30 @@ import Filter from './Filter';
 import List from './List';
 import styled from 'styled-components';
 import Backdrop from '../Backdrop';
+import fromEntries from 'object.fromentries';
 
 // import FilterClearButton from './FilterClearButton';
 
 const FilterController = ({ state, filterData, listData }) => {
   // create an array of key/value pairs to transform back into a useable object
-  const initialState = Object.fromEntries(
-    Object.keys(filterData).map(key => {
-      return [
-        key,
-        {
-          selected: [],
-          unselected: filterData[key],
-        },
-      ];
-    })
+  const initialState = useMemo(() =>
+    fromEntries(
+      Object.keys(filterData).map(key => {
+        return [
+          key,
+          {
+            selected: [],
+            unselected: filterData[key],
+          },
+        ];
+      })
+    )
   );
   const [filter, setFilter] = useState(initialState);
   const [showFilters, setShowFilters] = state;
   const filterRef = useRef();
   useEffect(() => {
     filterRef.current = filter;
-    console.log(filterRef.current);
   }, [showFilters]);
 
   const clearFilters = () => setFilter(initialState);
