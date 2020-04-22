@@ -10,7 +10,13 @@ const Backdrop = ({ className, click }) => {
     };
   });
 
-  return <div className={className} onClick={() => click(false)}></div>;
+  return (
+    <button
+      className={className}
+      onKeyDown={() => {}}
+      onClick={() => click(false)}
+    />
+  );
 };
 
 export default styled(Backdrop)`
@@ -19,8 +25,14 @@ export default styled(Backdrop)`
   left: 0;
   right: 0;
   bottom: 0;
+  width: 100%;
+  height: 100%;
+  outline: none;
+  cursor: default;
+  border: none;
+  background: transparent;
   z-index: 100;
-  @media (min-width: 663px) {
+  @media (min-width: 576px) {
     background: rgba(0, 0, 0, 0.3);
   }
 `;

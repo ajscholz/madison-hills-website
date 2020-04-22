@@ -1,5 +1,22 @@
 const path = require('path');
 
+exports.createSchemaCustomization = ({ actions, schema }) => {
+  const { createTypes } = actions;
+  const typeDefs = [
+    schema.buildObjectType({
+      name: 'ContentfulMessage',
+      fields: {
+        year: {
+          type: 'String',
+          resolve: source => new Date(source.messageDate).getFullYear(),
+        },
+      },
+      interfaces: ['Node'],
+    }),
+  ];
+  createTypes(typeDefs);
+};
+
 exports.createPages = async ({ graphql, actions, reporter }) => {
   const { createPage } = actions;
   const seriesTemplate = path.resolve(`src/templates/SeriesTemplate.js`);

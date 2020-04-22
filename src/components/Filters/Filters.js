@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { useSpring, animated } from 'react-spring';
-import { FaTimes, FaCheck, FaBan, FaChevronRight } from 'react-icons/fa';
+import { FaTimes, FaCheck, FaBan } from 'react-icons/fa';
 
 // import Backdrop from '../Backdrop';
 

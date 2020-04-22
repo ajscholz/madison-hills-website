@@ -21,8 +21,8 @@ import GlobalStyles from './GlobalStyles';
 
 import links from '../utils/links';
 import PreFooter from './PreFooter';
-import Popup from './Popup/Popup';
-import ModalController from './ModalComponents/ModalController';
+// import Popup from './Popup/Popup';
+// import ModalController from './ModalComponents/ModalController';
 
 const Layout = props => {
   const { children, pageContext } = props;
@@ -35,7 +35,7 @@ const Layout = props => {
     drawerToggleHandler(false);
   }
 
-  const infoBoxActive = true;
+  // const infoBoxActive = true;
 
   if (pageContext.landing) {
     return (
@@ -69,11 +69,11 @@ const Layout = props => {
           <PreFooter />
           <Footer title={data.site.siteMetadata.title} />
         </FlexContainer>
-        {infoBoxActive && (
+        {/* {infoBoxActive && (
           <ModalController buttonStyle="none">
             <Popup />
           </ModalController>
-        )}
+        )} */}
       </MessageViewProvider>
     );
   }

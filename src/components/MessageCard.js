@@ -75,7 +75,10 @@ const PlayIcon = styled.div`
 `;
 
 export default styled(MessageCard)`
-  height: 275.84px;
+  height: auto;
+  width: 100%;
+  max-width: 300px;
+  margin: 1.25em;
   display: grid;
   grid-template-columns: 100%;
   grid-template-rows: auto auto;
@@ -84,6 +87,8 @@ export default styled(MessageCard)`
   cursor: pointer;
   &:hover ${PlayIcon} {
     opacity: 1;
+  }
+  @media (min-width: 576px) {
   }
 `;
 
@@ -108,7 +113,7 @@ const Header = styled.div`
 
 const Body = styled.div`
   width: 100%;
-  padding: 1rem;
+  padding: 1.25rem;
   background: var(--white);
   color: var(--black);
   overflow: hidden;

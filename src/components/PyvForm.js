@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
-import { useStaticQuery, graphql } from 'gatsby';
+// import { useStaticQuery, graphql } from 'gatsby';
 import SpinnerIcon from './SpinnerIcon';
 import DatePicker from 'react-datepicker';
 import getDay from 'date-fns/getDay';
@@ -12,25 +12,25 @@ import 'react-datepicker/dist/react-datepicker.css';
 import { FaRegCheckCircle, FaRegTimesCircle, FaCalendar } from 'react-icons/fa';
 import Button from './Button';
 
-const emailData = graphql`
-  {
-    site {
-      siteMetadata {
-        siteEmail: email
-      }
-    }
-  }
-`;
+// const emailData = graphql`
+//   {
+//     site {
+//       siteMetadata {
+//         siteEmail: email
+//       }
+//     }
+//   }
+// `;
 
 export default ({ light }) => {
   const [submitted, setSubmitted] = useState(false);
   const [accepted] = useState(false);
 
-  const {
-    site: {
-      siteMetadata: { siteEmail },
-    },
-  } = useStaticQuery(emailData);
+  // const {
+  //   site: {
+  //     siteMetadata: { siteEmail },
+  //   },
+  // } = useStaticQuery(emailData);
 
   const isSunday = date => {
     const day = getDay(date);
