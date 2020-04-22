@@ -8,20 +8,16 @@ import Backdrop from '../Backdrop';
 
 const FilterController = ({ state, filterData, listData }) => {
   // create an array of key/value pairs to transform back into a useable object
-  const initialState = useMemo(
-    () =>
-      Object.fromEntries(
-        Object.keys(filterData).map(key => {
-          return [
-            key,
-            {
-              selected: [],
-              unselected: filterData[key],
-            },
-          ];
-        })
-      ),
-    [filterData]
+  const initialState = Object.fromEntries(
+    Object.keys(filterData).map(key => {
+      return [
+        key,
+        {
+          selected: [],
+          unselected: filterData[key],
+        },
+      ];
+    })
   );
   const [filter, setFilter] = useState(initialState);
   const [showFilters, setShowFilters] = state;
