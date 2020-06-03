@@ -86,6 +86,9 @@ exports.handler = async event => {
   };
 
   try {
+    // if this is a bot throw an error immediately
+    if (data.real === false) throw 'bot';
+
     const response = await transporter.sendMail(message);
     if (response.accepted.length === 0) {
       console.log('Form submission failed');

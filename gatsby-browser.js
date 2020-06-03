@@ -6,13 +6,21 @@
 
 // You can delete this file if you're not using it
 
-import React from 'react';
+const React = require('react');
 
-import BrowserWidthProvider from './src/context/BrowserWidthContext';
-import { ModalContextProvider } from './src/context/ModalContext';
+const BrowserWidthProvider = require('./src/context/BrowserWidthContext');
+const { ModalContextProvider } = require('./src/context/ModalContext');
 
-export const wrapRootElement = ({ element }) => (
+exports.wrapRootElement = ({ element }) => (
   <ModalContextProvider>
-    <BrowserWidthProvider>{element}</BrowserWidthProvider>
+    <BrowserWidthProvider.default>{element}</BrowserWidthProvider.default>
   </ModalContextProvider>
 );
+
+// used to verify this was actually someone from a browser, not a bot filling out forms
+exports.onInitialClientRender = () => {
+  if (typeof window !== 'undefined') {
+    const myStore = window.localStorage;
+    myStore.setItem('real', true);
+  }
+};

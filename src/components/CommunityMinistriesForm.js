@@ -58,6 +58,13 @@ export default ({ light }) => {
               body: JSON.stringify({
                 ...values,
                 siteEmail: siteEmail,
+                // determine from local storage is this was just a bot reading txt files
+                real:
+                  typeof window === 'undefined'
+                    ? false
+                    : window.localStorage.real === true
+                    ? true
+                    : false,
               }),
             }
           );

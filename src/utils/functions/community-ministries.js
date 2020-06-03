@@ -38,8 +38,6 @@ exports.handler = async event => {
   //   host: 'smtp.mailtrap.io',
   //   port: 2525,
   //   auth: {
-  // user: process.env.MAILTRAP_USERNAME,
-  // pass: process.env.MAILTRAP_PASSWORD,
   //     user: 'a949c930869b32',
   //     pass: '00f4db531864a8',
   //   },
@@ -59,6 +57,9 @@ exports.handler = async event => {
   };
 
   try {
+    // if this is a bot throw an error immediately
+    if (data.real === false) throw 'bot';
+
     const response = await transporter.sendMail(message);
     if (response.accepted.length === 0) {
       console.log('Form submission failed');

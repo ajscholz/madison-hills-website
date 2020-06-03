@@ -63,6 +63,12 @@ export default ({ light }) => {
             body: JSON.stringify({
               ...values,
               siteEmail: siteEmail,
+              real:
+                typeof window === 'undefined'
+                  ? false
+                  : window.localStorage.real === true
+                  ? true
+                  : false,
             }),
           });
           const data = await response.json();
