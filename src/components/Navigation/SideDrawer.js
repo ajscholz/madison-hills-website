@@ -39,7 +39,7 @@ const StyledSideDrawer = styled(animated.div)`
   top: 0;
   right: 0;
   width: 80%;
-  z-index: 200;
+  z-index: 2000;
   padding: 2rem;
   display: flex;
   flex-direction: column;
