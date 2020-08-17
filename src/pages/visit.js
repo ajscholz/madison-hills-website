@@ -50,6 +50,8 @@ const visit = ({ data }) => {
     </>
   );
 
+  const newSections = [sections[0], sections[2], sections[3]];
+
   return (
     <>
       <Seo title="Visit" image={img} />
@@ -60,17 +62,16 @@ const visit = ({ data }) => {
         title="Visit"
       />
 
-      <Section>
-        <Title>Let us know</Title>
-        <PyvForm />
-      </Section>
-
-      {sections.map(section => (
+      {newSections.map(section => (
         <Section key={section.id}>
           <Title>{section.title}</Title>
           {section.content}
         </Section>
       ))}
+      {/* <Section>
+        <Title>Let us know</Title>
+        <PyvForm />
+      </Section> */}
     </>
   );
 };

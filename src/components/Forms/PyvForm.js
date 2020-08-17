@@ -53,8 +53,8 @@ export default ({ light }) => {
   return (
     <Formik
       initialValues={{
-        name: 'andrew',
-        email: 'andrew@citynorth.chuerch',
+        name: '',
+        email: '',
         date: new Date(),
         kids: false,
         contact: false,
