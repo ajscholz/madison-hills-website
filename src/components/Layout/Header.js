@@ -38,7 +38,7 @@ const Header = ({ siteTitle, drawerClickHandler }) => {
 
 const StyledHeader = styled.header`
   margin: 0;
-  position: fixed;
+  position: absolute;
   z-index: 1000;
   width: 100%;
   background: var(--white);
