@@ -9,8 +9,8 @@ const HeroImage = ({ className, image, children, full, title, huge }) => {
   const backgroundFluidImageStack = full
     ? [
         image,
-        `linear-gradient(to bottom, rgba(0, 130, 29, .3), rgba(0, 130, 29, .3))`,
-        `linear-gradient(rgba(0,0,0,.6), rgba(0,0,0,.6))`,
+        `linear-gradient(to bottom, rgba(0, 130, 29, .2), rgba(0, 130, 29, .1))`,
+        `linear-gradient(rgba(0,0,0,.3), rgba(0,0,0,.4))`,
       ].reverse()
     : huge
     ? [
@@ -19,7 +19,7 @@ const HeroImage = ({ className, image, children, full, title, huge }) => {
       ].reverse()
     : [
         image,
-        `linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6))`,
+        `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5))`,
       ].reverse();
 
   return (
@@ -35,10 +35,11 @@ const HeroImage = ({ className, image, children, full, title, huge }) => {
 };
 
 const StyledHeroImage = styled(HeroImage)`
-  height: ${props => (props.full ? '70vh' : props.huge ? '100vh' : '40vh')};
+  padding-top: 121.14px;
+  height: ${props => (props.full ? '85vh' : props.huge ? '100vh' : '65vh')};
   background-position: ${props => props.backgroundPosition};
   @media (min-width: 577px) {
-    height: ${props => (props.full ? '70vh' : props.huge ? '100vh' : '40vh')};
+    height: ${props => (props.full ? '85vh' : props.huge ? '100vh' : '66vh')};
   }
 `;
 

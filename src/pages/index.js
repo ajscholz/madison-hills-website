@@ -8,6 +8,7 @@ import Title from '../components/Title';
 import Section from '../components/Sections/Section';
 import ContactForm from '../components/Forms/ContactForm';
 import FlipCard from '../components/Cards/FlipCard';
+import MessageCard from '../components/Cards/MessageCard';
 
 import { FaMapMarkedAlt, FaClock } from 'react-icons/fa';
 import IconInfo from '../components/IconInfo';
@@ -15,12 +16,15 @@ import IconInfo from '../components/IconInfo';
 const IndexPage = ({ data }) => {
   const {
     page: { image },
+    message,
   } = data;
   const img = {
     src: image.file.url,
     height: image.file.details.image.height,
     width: image.file.details.image.width,
   };
+
+  console.log(message);
 
   return (
     <>
@@ -49,6 +53,11 @@ const IndexPage = ({ data }) => {
       </Section>
 
       <Section dark>
+        <Title>Listen to A Recent Message</Title>
+        <MessageCard message={message} />
+      </Section>
+
+      {/* <Section dark>
         <Title>Upcoming Events</Title>
         <EventsContainer>
           <FlipCard
@@ -64,7 +73,7 @@ const IndexPage = ({ data }) => {
             image={data.larosas.childImageSharp.fluid}
           />
         </EventsContainer>
-      </Section>
+      </Section> */}
 
       <Section>
         <Title>Contact Us</Title>
@@ -133,7 +142,7 @@ export const data = graphql`
   {
     page: contentfulPages(title: { eq: "Home" }) {
       image: bannerImage {
-        fluid {
+        fluid(quality: 90) {
           ...GatsbyContentfulFluid
         }
         file {
@@ -154,26 +163,8 @@ export const data = graphql`
         state
       }
     }
-    kickball: file(name: { eq: "kickball" }) {
-      childImageSharp {
-        fluid {
-          ...GatsbyImageSharpFluid
-        }
-      }
-    }
-    larosas: file(name: { eq: "larosas" }) {
-      childImageSharp {
-        fluid {
-          ...GatsbyImageSharpFluid
-        }
-      }
-    }
-    theOffice: file(name: { eq: "the-office" }) {
-      childImageSharp {
-        fluid {
-          ...GatsbyImageSharpFluid
-        }
-      }
+    message: contentfulMessage {
+      ...MessageCardFragment
     }
   }
 `;

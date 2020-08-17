@@ -151,7 +151,7 @@ export const data = graphql`
   {
     page: contentfulPages(title: { eq: "Messages" }) {
       image: bannerImage {
-        fluid {
+        fluid(quality: 90) {
           ...GatsbyContentfulFluid
         }
         file {
@@ -167,20 +167,7 @@ export const data = graphql`
     }
     allContentfulMessage(sort: { fields: messageDate, order: DESC }) {
       messages: nodes {
-        id: contentful_id
-        title: messageTitle
-        date: messageDate(formatString: "MMM DD, YYYY")
-        year: year
-        communicator
-        topics: tags
-        image: messagePhoto {
-          fluid {
-            ...GatsbyContentfulFluid
-          }
-        }
-        series: messageSeries {
-          title: seriesTitle
-        }
+        ...MessageCardFragment
       }
     }
     messageTags: allContentfulMessage {

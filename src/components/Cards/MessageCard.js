@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { Link } from 'gatsby';
 import PropTypes from 'prop-types';
 import Img from 'gatsby-image';
+import { graphql } from 'gatsby';
 
 import { FaAngleDoubleRight } from 'react-icons/fa';
 
@@ -159,3 +160,22 @@ MessageCard.propTypes = {
     date: PropTypes.string.isRequired,
   }).isRequired,
 };
+
+export const query = graphql`
+  fragment MessageCardFragment on ContentfulMessage {
+    id: contentful_id
+    title: messageTitle
+    date: messageDate(formatString: "MMM DD, YYYY")
+    year: year
+    communicator
+    topics: tags
+    image: messagePhoto {
+      fluid {
+        ...GatsbyContentfulFluid
+      }
+    }
+    series: messageSeries {
+      title: seriesTitle
+    }
+  }
+`;

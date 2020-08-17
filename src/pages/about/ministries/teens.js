@@ -140,7 +140,7 @@ export const data = graphql`
   {
     page: contentfulPages(title: { eq: "Teens" }) {
       image: bannerImage {
-        fluid {
+        fluid(quality: 90) {
           ...GatsbyContentfulFluid
         }
         file {
