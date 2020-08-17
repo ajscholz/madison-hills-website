@@ -1,5 +1,5 @@
 import React from 'react';
-import MessageCard from '../MessageCard';
+import MessageCard from '../Cards/MessageCard';
 import styled from 'styled-components';
 
 const List = ({ filters, data }) => {

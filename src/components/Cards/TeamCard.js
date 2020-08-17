@@ -1,9 +1,9 @@
-import React from "react"
-import styled from "styled-components"
-import Img from "gatsby-image"
+import React from 'react';
+import styled from 'styled-components';
+import Img from 'gatsby-image';
 // import PropTypes from 'prop-types'
 
-import Avatar from "./Avatar"
+import Avatar from '../Avatar';
 
 export default ({ image, name, jobTitle }) => {
   return (
@@ -14,8 +14,8 @@ export default ({ image, name, jobTitle }) => {
         <JobTitle>{jobTitle}</JobTitle>
       </Info>
     </TeamCard>
-  )
-}
+  );
+};
 
 const TeamCard = styled.div`
   margin: 1.5rem;
@@ -34,23 +34,23 @@ const TeamCard = styled.div`
     width: 225px;
     flex-grow: unset;
   }
-`
+`;
 
 const Info = styled.div`
   text-align: center;
   text-transform: capitalize;
-`
+`;
 
 const Name = styled.h3`
   color: var(--primary);
   margin-bottom: 0;
   font-size: 1.5rem;
   text-transform: uppercase;
-`
+`;
 
 const JobTitle = styled.h4`
   margin: 0;
-`
+`;
 
 // const Avatar = styled(Img)`
 //   height: 200px;

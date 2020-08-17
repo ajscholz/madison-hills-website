@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { Link } from 'gatsby';
 
-import links from '../utils/links';
+import links from '../../utils/links';
 
 const Navigation = ({ click, sideDrawer }) => {
   return (

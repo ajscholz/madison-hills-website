@@ -3,14 +3,14 @@ import { graphql } from 'gatsby';
 import styled from 'styled-components';
 
 import Seo from '../components/Seo';
-import HeroImage from '../components/HeroImage';
-import Section from '../components/Section';
+import HeroImage from '../components/Layout/HeroImage';
+import Section from '../components/Sections/Section';
 import Title from '../components/Title';
-import Button from '../components/Button';
+import Button from '../components/Buttons/Button';
 import { Link } from 'gatsby';
 import Img from 'gatsby-image';
 import ContentfulRichText from '../components/ContentfulRichText';
-import VerseSection from '../components/VerseSection';
+import VerseSection from '../components/Sections/VerseSection';
 
 import { sectionHelper } from '../utils/helpers';
 

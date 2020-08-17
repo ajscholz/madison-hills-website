@@ -1,13 +1,13 @@
 import React from 'react';
 import { graphql, Link } from 'gatsby';
 
-import HeroImage from '../../../components/HeroImage';
-import Section from '../../../components/Section';
+import HeroImage from '../../../components/Layout/HeroImage';
+import Section from '../../../components/Sections/Section';
 import Seo from '../../../components/Seo';
 import Title from '../../../components/Title';
-import Button from '../../../components/Button';
-import MinistrySection from '../../../components/MinistrySection';
-import TextMessageButton from '../../../components/TextMessageButton';
+import Button from '../../../components/Buttons/Button';
+import MinistrySection from '../../../components/Sections/MinistrySection';
+import TextMessageButton from '../../../components/Buttons/TextMessageButton';
 
 import { sectionHelper } from '../../../utils/helpers';
 

@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { useSpring, animated } from 'react-spring';
 import { graphql, useStaticQuery } from 'gatsby';
 
-import Navigation from './Navigation';
+import Navigation from '.';
 import SocialLinks from './SocialLinks';
 
 import { FaTimes } from 'react-icons/fa';

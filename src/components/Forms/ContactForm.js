@@ -1,68 +1,40 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
-// import { useStaticQuery, graphql } from 'gatsby';
-import SpinnerIcon from './SpinnerIcon';
-import DatePicker from 'react-datepicker';
-import getDay from 'date-fns/getDay';
-import subDays from 'date-fns/subDays';
+import { useStaticQuery, graphql } from 'gatsby';
+import SpinnerIcon from '../SpinnerIcon';
 
-import 'react-datepicker/dist/react-datepicker.css';
+import { FaRegCheckCircle, FaRegTimesCircle } from 'react-icons/fa';
+import Button from '../Buttons/Button';
 
-import { FaRegCheckCircle, FaRegTimesCircle, FaCalendar } from 'react-icons/fa';
-import Button from './Button';
-
-// const emailData = graphql`
-//   {
-//     site {
-//       siteMetadata {
-//         siteEmail: email
-//       }
-//     }
-//   }
-// `;
+const emailData = graphql`
+  {
+    site {
+      siteMetadata {
+        siteEmail: email
+      }
+    }
+  }
+`;
 
 export default ({ light }) => {
   const [submitted, setSubmitted] = useState(false);
-  const [accepted] = useState(false);
+  const [accepted, setAccepted] = useState(false);
 
-  // const {
-  //   site: {
-  //     siteMetadata: { siteEmail },
-  //   },
-  // } = useStaticQuery(emailData);
-
-  const isSunday = date => {
-    const day = getDay(date);
-    return day === 0;
-  };
-
-  const CustomDatePicker = ({ value, onChange }) => {
-    return (
-      <DatePicker
-        selected={value}
-        onChange={date => onChange('date', date)}
-        filterDate={isSunday}
-        minDate={subDays(new Date(), 0)}
-        placeholderText="Select a Sunday"
-        style={{ marginTop: '21.28px' }}
-      />
-    );
-  };
-
+  const {
+    site: {
+      siteMetadata: { siteEmail },
+    },
+  } = useStaticQuery(emailData);
   return (
     <Formik
       initialValues={{
-        name: 'andrew',
-        email: 'andrew@citynorth.chuerch',
-        date: new Date(),
-        kids: false,
-        contact: false,
-        // name: null,
-        // email: null,
-        // date: null,
-        // kids: null,
-        // contact: null,
+        // name: 'andrew',
+        // email: 'andrew@citynorth.chuerch',
+        // message: `let's get this going`,
+        name: '',
+        email: '',
+        message: ``,
       }}
       validate={values => {
         let errors = {};
@@ -83,38 +55,43 @@ export default ({ light }) => {
       }}
       onSubmit={async (values, { setSubmitting, resetForm }) => {
         try {
-          alert(values);
-          // const response = await fetch('/.netlify/functions/contact', {
-          //   method: 'POST',
-          //   headers: {
-          //     'Content-Type': 'application/json',
-          //   },
-          //   body: JSON.stringify({
-          //     ...values,
-          //     siteEmail: siteEmail,
-          //   }),
-          // });
-          // const data = await response.json();
-          // if (response.ok) {
-          //   setAccepted(true);
-          // } else {
-          //   setAccepted(false);
-          //   throw data.msg;
-          // }
+          const response = await fetch('/.netlify/functions/contact', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+              ...values,
+              siteEmail: siteEmail,
+              real:
+                typeof window === 'undefined'
+                  ? false
+                  : window.localStorage.real === true
+                  ? true
+                  : false,
+            }),
+          });
+          const data = await response.json();
+          if (response.ok) {
+            setAccepted(true);
+          } else {
+            setAccepted(false);
+            throw data.msg;
+          }
         } catch (err) {
           console.log(err);
         }
         setSubmitted(true);
-        // setTimeout(() => {
-        //   if (accepted) resetForm();
-        //   setSubmitting(false);
-        // }, 2000);
-        // setTimeout(() => {
-        //   setSubmitted(false);
-        // }, 5000);
+        setTimeout(() => {
+          if (accepted) resetForm();
+          setSubmitting(false);
+        }, 2000);
+        setTimeout(() => {
+          setSubmitted(false);
+        }, 5000);
       }}
     >
-      {({ isSubmitting, setFieldValue, values }) => (
+      {({ isSubmitting }) => (
         <StyledForm>
           <FieldContainer>
             <StyledField
@@ -134,33 +111,14 @@ export default ({ light }) => {
             />
             <StyledErrorMessage name="email" component="div" />
           </FieldContainer>
-          <FieldContainer style={{ display: 'flex' }}>
-            <h4>What date would you like to visit?</h4>
-            <Field
-              name="date"
-              component={CustomDatePicker}
-              onChange={setFieldValue}
-              value={values.date}
-            />{' '}
-            <FaCalendar />
-          </FieldContainer>
           <FieldContainer>
-            <h4>
-              Tell us a bit about your family... Do you have children in 5th
-              grade or younger?
-            </h4>
-            <Radio type="radio" name="kids" value={true} />
-            Yes
-            <Radio type="radio" name="kids" value={false} />
-            No
-            <StyledErrorMessage name="message" component="div" />
-          </FieldContainer>
-          <FieldContainer>
-            <h4>Would you like a pastor to reach out to you personally?</h4>
-            <Radio type="radio" name="contact" value={true} />
-            Yes
-            <Radio type="radio" name="contact" value={false} />
-            No
+            <StyledField
+              name="message"
+              component="textarea"
+              placeholder="Message..."
+              rows="5"
+              light={light}
+            />
             <StyledErrorMessage name="message" component="div" />
           </FieldContainer>
           <StyledButton type="submit" disabled={isSubmitting}>
@@ -195,21 +153,6 @@ const StyledForm = styled(Form)`
 const FieldContainer = styled.div`
   position: relative;
   width: 100%;
-  & > h4 {
-    margin-bottom: 0.5rem;
-  }
-  & .react-datepicker-wrapper {
-    margin-top: 21px;
-  }
-  & .react-datepicker__day--selected {
-    background-color: var(--primaryDark);
-  }
-  & .react-datepicker {
-    box-shadow: var(--shadow3);
-    .react-datepicker__header {
-      border-bottom: 1px solid var(--primary);
-    }
-  }
 `;
 
 const StyledField = styled(Field)`
@@ -230,13 +173,6 @@ const StyledField = styled(Field)`
   }
 `;
 
-const Radio = styled(Field)`
-  margin-right: 0.5rem;
-  &:not(:first-of-type) {
-    margin-left: 2rem;
-  }
-`;
-
 const StyledErrorMessage = styled(ErrorMessage)`
   position: absolute;
   top: 0;
@@ -249,7 +185,6 @@ const StyledErrorMessage = styled(ErrorMessage)`
 
 const StyledButton = styled(Button)`
   width: 100%;
-  margin-top: 2rem;
   /* &:not(:disabled):hover {
     background: var(--primaryDark);
   } */

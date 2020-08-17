@@ -3,11 +3,11 @@ import styled from 'styled-components';
 import { graphql } from 'gatsby';
 import ReactPlayer from 'react-player';
 
-import Section from '../components/Section';
+import Section from '../components/Sections/Section';
 import Title from '../components/Title';
-import MessageCard from '../components/MessageCard';
-import CardGridContainer from '../components/CardGridContainer';
-import Button from '../components/Button';
+import MessageCard from '../components/Cards/MessageCard';
+import CardGridContainer from '../components/Layout/CardGridContainer';
+import Button from '../components/Buttons/Button';
 import SEO from '../components/Seo';
 
 import Metadata from '../components/Metadata/Metadata';

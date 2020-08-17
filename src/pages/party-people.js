@@ -6,8 +6,8 @@ import SEO from '../components/Seo';
 // import Title from '../components/Title';
 // import Section from '../components/Section';
 import MediaPlayer from '../components/VideoPlayer/MediaPlayer';
-import { LinkButton } from '../components/Button';
-import HeroImage from '../components/HeroImage';
+import { LinkButton } from '../components/Buttons/Button';
+import HeroImage from '../components/Layout/HeroImage';
 
 const PartyPeoplePage = props => {
   const { data, className } = props;

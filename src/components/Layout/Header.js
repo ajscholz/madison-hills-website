@@ -4,9 +4,9 @@ import Img from 'gatsby-image';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 
-import DrawerToggleButton from './DrawerToggleButton';
-import Navigation from './Navigation';
-import { useBrowserWidth } from '../context/BrowserWidthContext';
+import DrawerToggleButton from '../Buttons/DrawerToggleButton';
+import Navigation from '../Navigation';
+import { useBrowserWidth } from '../../context/BrowserWidthContext';
 
 const data = graphql`
   {

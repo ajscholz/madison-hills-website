@@ -2,11 +2,11 @@ import React from 'react';
 import { graphql } from 'gatsby';
 
 import Seo from '../components/Seo';
-import HeroImage from '../components/HeroImage';
-import Section from '../components/Section';
+import HeroImage from '../components/Layout/HeroImage';
+import Section from '../components/Sections/Section';
 import Title from '../components/Title';
 import ContentfulRichText from '../components/ContentfulRichText';
-import PyvForm from '../components/PyvForm';
+import PyvForm from '../components/Forms/PyvForm';
 
 import { sectionHelper } from '../utils/helpers';
 

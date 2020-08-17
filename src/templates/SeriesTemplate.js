@@ -4,11 +4,11 @@ import { graphql } from 'gatsby';
 import Img from 'gatsby-image';
 
 // import StyledHeroImage from '../components/HeroImage';
-import Section from '../components/Section';
+import Section from '../components/Sections/Section';
 import Title from '../components/Title';
-import MessageCard from '../components/MessageCard';
-import CardGridContainer from '../components/CardGridContainer';
-import Button from '../components/Button';
+import MessageCard from '../components/Cards/MessageCard';
+import CardGridContainer from '../components/Layout/CardGridContainer';
+import Button from '../components/Buttons/Button';
 import SEO from '../components/Seo';
 import Date from '../components/Metadata/Date';
 import Metadata from '../components/Metadata/Metadata';

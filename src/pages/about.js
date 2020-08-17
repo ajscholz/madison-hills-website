@@ -3,12 +3,12 @@ import { graphql, Link } from 'gatsby';
 import styled from 'styled-components';
 
 import Seo from '../components/Seo';
-import StyledHeroImage from '../components/HeroImage';
-import Section from '../components/Section';
+import StyledHeroImage from '../components/Layout/HeroImage';
+import Section from '../components/Sections/Section';
 import Title from '../components/Title';
-import TeamCard from '../components/TeamCard';
+import TeamCard from '../components/Cards/TeamCard';
 import Accordion from '../components/Accordion';
-import ImageButton from '../components/ImageButton';
+import ImageButton from '../components/Buttons/ImageButton';
 
 import { sectionHelper } from '../utils/helpers';
 

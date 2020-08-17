@@ -2,7 +2,7 @@ import React from 'react';
 import { withMediaProps } from 'react-media-player';
 
 import { FaPlay, FaPause } from 'react-icons/fa';
-import IconButton from '../IconButton';
+import IconButton from '../Buttons/IconButton';
 
 const PlayPause = props => {
   const handlePlayPause = () => {
@@ -17,10 +17,7 @@ const PlayPause = props => {
   return (
     <IconButton>
       {isPlaying ? (
-        <FaPause
-          className={className}
-          onClick={() => handlePlayPause()}
-        />
+        <FaPause className={className} onClick={() => handlePlayPause()} />
       ) : (
         <FaPlay className={className} onClick={() => handlePlayPause()} />
       )}

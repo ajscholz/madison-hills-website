@@ -1,39 +1,47 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Link } from 'gatsby';
+import PropTypes from 'prop-types';
 import Img from 'gatsby-image';
-
-import Date from './Metadata/Date';
 
 import { FaAngleDoubleRight } from 'react-icons/fa';
 
-const MessageCard = ({ className, series }) => {
-  const { title, start, end, year, image, length } = series;
-  const seriesSlug = `/messages/series/${title
+import Date from '../../components/Metadata/Date';
+
+const MessageCard = ({ className, message }) => {
+  const { title, communicator, date, image } = message;
+  // const seriesSlug =
+  //   series &&
+  //   `/messages/series/${series.title
+  //     .replace(/ /g, '-')
+  //     .replace(/[?!,/^*%$@#()'"`|]/g, '')
+  //     .toLowerCase()}`;
+  const messageSlug = `/messages/${title
     .replace(/ /g, '-')
     .replace(/[?!,/^*%$@#()'"`|]/g, '')
     .toLowerCase()}`;
 
   return (
-    <Link className={className} to={`${seriesSlug}`}>
+    <Link className={className} to={messageSlug}>
       <Header>
         <Img
           fluid={image.fluid}
-          alt={`${title} series graphic`}
+          alt="preaching photo"
           style={{ width: '100%' }}
         />
-        {/* <PlayIcon>View Series</PlayIcon> */}
+        {/* <PlayIcon>
+          <FaRegPlayCircle />
+        </PlayIcon> */}
       </Header>
       <Body>
         <Metadata>
-          <h6>{`${length} parts`}</h6>
-          <Date>{`${
-            start === end ? `${start}` : `${start}, ${end}`
-          } ${year}`}</Date>
+          <h6>{communicator}</h6>
+          <Date>{date}</Date>
         </Metadata>
         <h3>{title}</h3>
-        <div style={{ fontSize: '0.8rem', marginBottom: '0', opacity: '0.6' }}>
-          View series{' '}
+
+        <div className="footer">
+          View message{' '}
           <FaAngleDoubleRight
             style={{
               display: 'inline-block',
@@ -58,7 +66,7 @@ const PlayIcon = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.25rem;
+  font-size: 3rem;
   color: var(--white);
   transition: var(--mainTransition);
   @media (min-width: 768px) {
@@ -67,7 +75,10 @@ const PlayIcon = styled.div`
 `;
 
 export default styled(MessageCard)`
-  height: 275.84px;
+  height: auto;
+  width: 100%;
+  max-width: 300px;
+  margin: 1.25em;
   display: grid;
   grid-template-columns: 100%;
   grid-template-rows: auto auto;
@@ -76,6 +87,8 @@ export default styled(MessageCard)`
   cursor: pointer;
   &:hover ${PlayIcon} {
     opacity: 1;
+  }
+  @media (min-width: 576px) {
   }
 `;
 
@@ -89,16 +102,18 @@ const Header = styled.div`
   align-items: center;
   justify-content: center;
   overflow: hidden;
+  /* transition: var(--mainTransition); */
   img {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    /* transition: var(--mainTransition); */
   }
 `;
 
 const Body = styled.div`
   width: 100%;
-  padding: 1rem;
+  padding: 1.25rem;
   background: var(--white);
   color: var(--black);
   overflow: hidden;
@@ -108,11 +123,17 @@ const Body = styled.div`
     text-overflow: ellipsis;
     overflow: hidden;
   }
+  .footer {
+    font-size: 0.8rem;
+    margin-bottom: 0;
+    opacity: 0.6;
+  }
 `;
 
 const Metadata = styled.div`
   display: flex;
   justify-content: space-between;
+
   h6 {
     margin: 0;
     text-transform: uppercase;
@@ -127,3 +148,14 @@ const Metadata = styled.div`
     }
   }
 `;
+
+MessageCard.propTypes = {
+  message: PropTypes.shape({
+    title: PropTypes.string.isRequired,
+    image: PropTypes.shape({
+      fluid: PropTypes.object.isRequired,
+    }).isRequired,
+    communicator: PropTypes.string.isRequired,
+    date: PropTypes.string.isRequired,
+  }).isRequired,
+};

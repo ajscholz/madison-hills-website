@@ -1,14 +1,14 @@
 import React from 'react';
 import { graphql } from 'gatsby';
 
-import HeroImage from '../../../components/HeroImage';
-import Section from '../../../components/Section';
+import HeroImage from '../../../components/Layout/HeroImage';
+import Section from '../../../components/Sections/Section';
 import Seo from '../../../components/Seo';
 import Title from '../../../components/Title';
-import MinistryCard from '../../../components/MinistryCard';
-import FlexContainer from '../../../components/FlexContainer';
+import MinistryCard from '../../../components/Cards/MinistryCard';
+import FlexContainer from '../../../components/Layout/FlexContainer';
 import ContentfulRichText from '../../../components/ContentfulRichText';
-import CommunityMinistriesForm from '../../../components/CommunityMinistriesForm';
+import CommunityMinistriesForm from '../../../components/Forms/CommunityMinistriesForm';
 
 import { sectionHelper } from '../../../utils/helpers';
 

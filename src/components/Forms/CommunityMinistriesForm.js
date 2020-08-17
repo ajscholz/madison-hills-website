@@ -2,10 +2,10 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import { useStaticQuery, graphql } from 'gatsby';
-import SpinnerIcon from './SpinnerIcon';
+import SpinnerIcon from '../SpinnerIcon';
 
 import { FaRegCheckCircle, FaRegTimesCircle } from 'react-icons/fa';
-import Button from './Button';
+import Button from '../Buttons/Button';
 
 const emailData = graphql`
   {

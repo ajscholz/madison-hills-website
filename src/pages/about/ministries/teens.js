@@ -2,16 +2,16 @@ import React from 'react';
 import { graphql, Link } from 'gatsby';
 import styled from 'styled-components';
 
-import HeroImage from '../../../components/HeroImage';
-import Section from '../../../components/Section';
+import HeroImage from '../../../components/Layout/HeroImage';
+import Section from '../../../components/Sections/Section';
 import Title from '../../../components/Title';
 import Seo from '../../../components/Seo';
-import Button from '../../../components/Button';
-import MinistrySection from '../../../components/MinistrySection';
-import TextMessageButton from '../../../components/TextMessageButton';
-import SocialLinks from '../../../components/SocialLinks';
+import Button from '../../../components/Buttons/Button';
+import MinistrySection from '../../../components/Sections/MinistrySection';
+import TextMessageButton from '../../../components/Buttons/TextMessageButton';
+import SocialLinks from '../../../components/Navigation/SocialLinks';
 import PlaylistPlayer from '../../../components/VideoPlayer/PlaylistPlayer';
-import VerseSection from '../../../components/VerseSection';
+import VerseSection from '../../../components/Sections/VerseSection';
 
 import { sectionHelper } from '../../../utils/helpers';
 import ContentfulRichText from '../../../components/ContentfulRichText';

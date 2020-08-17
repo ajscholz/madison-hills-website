@@ -3,8 +3,8 @@ import { graphql } from 'gatsby';
 import styled from 'styled-components';
 
 import Seo from '../components/Seo';
-import StyledHeroImage from '../components/HeroImage';
-import Section from '../components/Section';
+import StyledHeroImage from '../components/Layout/HeroImage';
+import Section from '../components/Sections/Section';
 import { FiFilter } from 'react-icons/fi';
 // import { ToggleButton } from '../components/Button';
 // import FilterContainer from '../components/Filters/FilterContainer';

@@ -2,7 +2,7 @@ import React from 'react';
 import { withMediaProps } from 'react-media-player';
 
 import { FaExpand, FaCompress } from 'react-icons/fa';
-import IconButton from '../IconButton';
+import IconButton from '../Buttons/IconButton';
 
 const Fullscreen = props => {
   // const [isFullscreen, setFullscreen] = React.useState(false);

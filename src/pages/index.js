@@ -2,12 +2,12 @@ import React from 'react';
 import { graphql } from 'gatsby';
 import styled from 'styled-components';
 
-import HeroImage from '../components/HeroImage';
+import HeroImage from '../components/Layout/HeroImage';
 import SEO from '../components/Seo';
 import Title from '../components/Title';
-import Section from '../components/Section';
-import ContactForm from '../components/ContactForm';
-import FlipCard from '../components/FlipCard';
+import Section from '../components/Sections/Section';
+import ContactForm from '../components/Forms/ContactForm';
+import FlipCard from '../components/Cards/FlipCard';
 
 import { FaMapMarkedAlt, FaClock } from 'react-icons/fa';
 import IconInfo from '../components/IconInfo';

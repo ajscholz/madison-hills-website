@@ -9,17 +9,17 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { useStaticQuery, graphql } from 'gatsby';
 import styled from 'styled-components';
-import { useBrowserWidth } from '../context/BrowserWidthContext';
+import { useBrowserWidth } from '../../context/BrowserWidthContext';
 import 'typeface-nunito-sans';
-import { MessageViewProvider } from '../context/MessageViewContext';
+import { MessageViewProvider } from '../../context/MessageViewContext';
 
 import Header from './Header';
 import Footer from './Footer';
-import SideDrawer from './SideDrawer';
-import Backdrop from './Backdrop';
-import GlobalStyles from './GlobalStyles';
+import SideDrawer from '../Navigation/SideDrawer';
+import Backdrop from '../Backdrop';
+import GlobalStyles from '../GlobalStyles';
 
-import links from '../utils/links';
+import links from '../../utils/links';
 import PreFooter from './PreFooter';
 // import Popup from './Popup/Popup';
 // import ModalController from './ModalComponents/ModalController';
