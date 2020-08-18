@@ -12,6 +12,10 @@ export default [
     path: '/messages',
   },
   {
+    name: `blog`,
+    path: `/blog`,
+  },
+  {
     name: 'visit',
     path: '/visit',
   },

@@ -21,6 +21,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
   const { createPage } = actions;
   const seriesTemplate = path.resolve(`src/templates/SeriesTemplate.js`);
   const messageTemplate = path.resolve(`src/templates/MessageTemplate.js`);
+  const blogTemplate = path.resolve(`src/templates/BlogTemplate.js`);
 
   const result = await graphql(
     `
@@ -38,6 +39,12 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
             series: messageSeries {
               id: contentful_id
             }
+          }
+        }
+        allBlogPosts: allContentfulBlogPost {
+          nodes {
+            id: contentful_id
+            slug
           }
         }
       }
@@ -75,6 +82,14 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
         id: message.id,
         seriesId: message.series.id,
       },
+    });
+  });
+
+  result.data.allBlogPosts.nodes.forEach(blog => {
+    createPage({
+      path: `blog/${blog.slug}`,
+      component: blogTemplate,
+      context: { id: blog.id },
     });
   });
 };

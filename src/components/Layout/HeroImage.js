@@ -72,4 +72,21 @@ export const query = graphql`
       }
     }
   }
+
+  fragment BlogPostHeroImageFragment on ContentfulBlogPost {
+    image {
+      fluid(quality: 90) {
+        ...GatsbyContentfulFluid_withWebp
+      }
+      file {
+        url
+        details {
+          image {
+            height
+            width
+          }
+        }
+      }
+    }
+  }
 `;
