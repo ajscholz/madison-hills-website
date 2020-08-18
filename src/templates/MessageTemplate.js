@@ -7,7 +7,7 @@ import Section from '../components/Sections/Section';
 import Title from '../components/Title';
 import MessageCard from '../components/Cards/MessageCard';
 import CardGridContainer from '../components/Layout/CardGridContainer';
-import Button from '../components/Buttons/Button';
+import { LinkButton } from '../components/Buttons/Button';
 import SEO from '../components/Seo';
 
 import Metadata from '../components/Metadata/Metadata';
@@ -70,7 +70,7 @@ const MessageTemplate = ({ data }) => {
       </Section>
 
       <Section>
-        <Button>All messages</Button>
+        <LinkButton to="/messages">All messages</LinkButton>
       </Section>
     </>
   );

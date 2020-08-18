@@ -5,7 +5,15 @@ import { graphql } from 'gatsby';
 
 import Banner from '../Banner';
 
-const HeroImage = ({ className, image, children, full, title, huge }) => {
+const HeroImage = ({
+  className,
+  image,
+  children,
+  full,
+  title,
+  huge,
+  backgroundPosition,
+}) => {
   // adds overlay
   const backgroundFluidImageStack = full
     ? [
@@ -28,6 +36,7 @@ const HeroImage = ({ className, image, children, full, title, huge }) => {
       Tag="section"
       className={className}
       fluid={backgroundFluidImageStack}
+      backgroundPosition={backgroundPosition}
     >
       <Banner>{title}</Banner>
       {children}
@@ -36,11 +45,14 @@ const HeroImage = ({ className, image, children, full, title, huge }) => {
 };
 
 const StyledHeroImage = styled(HeroImage)`
-  padding-top: 121.14px;
-  height: ${props => (props.full ? '85vh' : props.huge ? '100vh' : '65vh')};
-  background-position: ${props => props.backgroundPosition};
+  padding-top: 85.19px;
+  height: ${props => (props.full ? '75vh' : props.huge ? '80vh' : '50vh')};
   @media (min-width: 577px) {
-    height: ${props => (props.full ? '85vh' : props.huge ? '100vh' : '66vh')};
+    height: ${props => (props.full ? '65vh' : props.huge ? '80vh' : '50vh')};
+  }
+
+  @media (min-width: 663px) {
+    padding-top: 121.14px;
   }
 `;
 
@@ -51,6 +63,11 @@ const StyledBackgroundImage = styled(BackgroundImage)`
   justify-content: center;
   align-items: center;
   z-index: 0;
+
+  &&&::before {
+    color: red;
+    background-position: ${props => props.backgroundPosition} !important;
+  }
 `;
 
 export default StyledHeroImage;

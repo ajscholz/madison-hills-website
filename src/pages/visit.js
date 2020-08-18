@@ -58,7 +58,7 @@ const visit = ({ data }) => {
 
       <HeroImage
         image={image.fluid}
-        backgroundPosition="51% 78%"
+        backgroundPosition="50% 30%"
         title="Visit"
       />
 

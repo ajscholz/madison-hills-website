@@ -3,7 +3,7 @@ import { graphql } from 'gatsby';
 import styled from 'styled-components';
 
 import Seo from '../components/Seo';
-import StyledHeroImage from '../components/Layout/HeroImage';
+import HeroImage from '../components/Layout/HeroImage';
 import Section from '../components/Sections/Section';
 import { FiFilter } from 'react-icons/fi';
 
@@ -25,7 +25,11 @@ const MessagesPage = props => {
     <>
       <Seo title="Messages" image={img} />
 
-      <StyledHeroImage image={image.fluid} title="Messages"></StyledHeroImage>
+      <HeroImage
+        image={image.fluid}
+        title="Messages"
+        backgroundPosition="50% 20%"
+      ></HeroImage>
 
       <Section
         style={{

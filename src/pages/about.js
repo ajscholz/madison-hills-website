@@ -69,7 +69,11 @@ const about = ({ data }) => {
   return (
     <>
       <Seo title="About" image={img} />
-      <StyledHeroImage image={image.fluid} title="About" />
+      <StyledHeroImage
+        image={image.fluid}
+        title="About"
+        backgroundPosition="50% 10%"
+      />
 
       {sections.map(section => {
         return (

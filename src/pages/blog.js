@@ -21,7 +21,12 @@ const BlogPage = ({ data }) => {
     <>
       <SEO title="Blog" image={img} />
 
-      <HeroImage image={image.fluid} title="Bridge To Sunday Blogs" full />
+      <HeroImage
+        image={image.fluid}
+        title="Bridge To Sunday Blogs"
+        full
+        backgroundPosition="60% 10%"
+      />
 
       <StyledSection>
         {data.blogs.all.map(blog => (

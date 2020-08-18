@@ -32,6 +32,7 @@ const IndexPage = ({ data }) => {
       <HeroImage
         image={image.fluid}
         title="Helping&nbsp;people find&nbsp;and&nbsp;follow Jesus"
+        backgroundPosition="26% 20%"
         full
       />
 
