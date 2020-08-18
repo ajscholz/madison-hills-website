@@ -21,7 +21,7 @@ const BlogPage = ({ data }) => {
     <>
       <SEO title="Blog" image={img} />
 
-      <HeroImage image={image.fluid} title="Blogs from Madison Hills" full />
+      <HeroImage image={image.fluid} title="Bridge To Sunday Blogs" full />
 
       <StyledSection>
         {data.blogs.all.map(blog => (
@@ -38,7 +38,7 @@ export const data = graphql`
       ...HeroImageFragment
     }
 
-    blogs: allContentfulBlogPost {
+    blogs: allContentfulBlogPost(sort: { fields: date, order: DESC }) {
       all: nodes {
         ...BlogCardFragment
       }
