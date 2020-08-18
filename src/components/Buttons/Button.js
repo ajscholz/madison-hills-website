@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { Link } from 'gatsby';
 
 const Button = styled.button`
-  font-size: 0.9rem;
+  font-size: ${props => (props.small ? '0.75rem' : '0.9rem')};
   padding: 1em 2em;
   background-color: var(--primary);
   color: var(--white);
@@ -19,8 +19,9 @@ const Button = styled.button`
   display: flex;
   align-items: center;
   justify-content: center;
-  :hover {
-    transform: scale(1.02);
+  :hover,
+  :focus {
+    transform: scale(1.05);
     box-shadow: var(--shadow3);
   }
 `;

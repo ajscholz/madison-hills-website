@@ -5,13 +5,15 @@ import styled from 'styled-components';
 import Seo from '../components/Seo';
 import HeroImage from '../components/Layout/HeroImage';
 import Section from '../components/Sections/Section';
-import { FiFilter } from 'react-icons/fi';
+import Button from '../components/Buttons/Button';
+// import { FiFilter } from 'react-icons/fi';
 
-import FilterController from '../components/Filters/FilterController';
+// import FilterController from '../components/Filters/FilterController';
+import MessageCard from '../components/Cards/MessageCard';
+import SeriesCard from '../components/Cards/SeriesCard';
 
 const MessagesPage = props => {
-  const { page, allContentfulMessage, messageTags } = props.data;
-  const { messages } = allContentfulMessage;
+  const { page, messages, series } = props.data;
   const { image } = page;
   const img = {
     src: image.file.url,
@@ -19,7 +21,8 @@ const MessagesPage = props => {
     width: image.file.details.image.width,
   };
 
-  const [showFilters, setShowFilters] = useState(false);
+  // const [showFilters, setShowFilters] = useState(false);
+  const [show, setShow] = useState('messages');
 
   return (
     <>
@@ -29,24 +32,36 @@ const MessagesPage = props => {
         image={image.fluid}
         title="Messages"
         backgroundPosition="50% 20%"
-      ></HeroImage>
-
-      <Section
-        style={{
-          position: 'relative',
-          flexDirection: 'column',
-          alignItems: 'flex-start',
-        }}
       >
-        <FilterButton onClick={() => setShowFilters(!showFilters)}>
+        <StyledButton
+          small
+          onClick={() => setShow(show === 'messages' ? 'series' : 'messages')}
+        >{`View ${show === 'messages' ? 'Series' : 'Messages'}`}</StyledButton>
+      </HeroImage>
+
+      <Container>
+        <Row>
+          {show === 'messages'
+            ? messages.all.map(message => (
+                <Col key={message.id}>
+                  <MessageCard message={message} />
+                </Col>
+              ))
+            : series.all.map(series => (
+                <Col key={series.id}>
+                  <SeriesCard series={series} />
+                </Col>
+              ))}
+        </Row>
+        {/* <FilterButton onClick={() => setShowFilters(!showFilters)}>
           <FiFilter size={36} />
         </FilterButton>
         <FilterController
           state={[showFilters, setShowFilters]}
           filterData={messageTags}
           listData={messages}
-        />
-      </Section>
+        /> */}
+      </Container>
     </>
   );
 };
@@ -58,36 +73,73 @@ export const data = graphql`
     page: contentfulPages(title: { eq: "Messages" }) {
       ...HeroImageFragment
     }
-    allContentfulMessage(sort: { fields: messageDate, order: DESC }) {
-      messages: nodes {
+    messages: allContentfulMessage(sort: { fields: messageDate, order: DESC }) {
+      all: nodes {
         ...MessageCardFragment
       }
     }
-    messageTags: allContentfulMessage {
-      topics: distinct(field: tags)
-      communicator: distinct(field: communicator)
-      year: distinct(field: year)
+    series: allContentfulMessageSeries(
+      sort: { fields: seriesStartDate, order: DESC }
+    ) {
+      all: nodes {
+        ...SeriesCardFragment
+      }
     }
   }
 `;
 
-const FilterButton = styled.button`
-  padding: 1em;
-  align-self: flex-end;
-  background: red;
+// const FilterButton = styled.button`
+//   padding: 1em;
+//   align-self: flex-end;
+//   background: red;
+//   display: flex;
+//   position: fixed;
+//   z-index: 99;
+//   bottom: 20px;
+//   right: 20px;
+//   align-items: center;
+//   border: none;
+//   outline: none;
+//   border-radius: 50%;
+//   background: var(--primary);
+//   color: var(--white);
+//   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+//   &:focus {
+//     background: var(--primaryDark);
+//   }
+// `;
+
+const Container = styled(Section)`
+  justify-content: stretch;
+`;
+
+const Row = styled.div`
+  margin: 0 -16px;
+  max-width: 1400px;
   display: flex;
-  position: fixed;
-  z-index: 99;
-  bottom: 20px;
-  right: 20px;
-  align-items: center;
-  border: none;
-  outline: none;
-  border-radius: 50%;
-  background: var(--primary);
-  color: var(--white);
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
-  &:focus {
-    background: var(--primaryDark);
+  flex-wrap: wrap;
+  justify-content: center;
+`;
+
+const Col = styled.div`
+  padding: 1em;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+
+  @media (min-width: 662px) {
+    width: 50%;
   }
+
+  @media (min-width: 900px) {
+    width: 33.33%;
+  }
+
+  @media (min-width: 1200px) {
+    width: 25%;
+  }
+`;
+
+const StyledButton = styled(Button)`
+  margin-top: 2em;
 `;
