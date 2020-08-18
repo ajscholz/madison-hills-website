@@ -79,7 +79,6 @@ export default styled(MessageCard)`
   height: auto;
   width: 100%;
   max-width: 300px;
-  margin: 1.25em;
   display: grid;
   grid-template-columns: 100%;
   grid-template-rows: auto auto;
@@ -90,6 +89,7 @@ export default styled(MessageCard)`
     opacity: 1;
   }
   @media (min-width: 576px) {
+    margin: 1.25em;
   }
 `;
 

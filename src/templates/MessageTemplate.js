@@ -25,7 +25,9 @@ const MessageTemplate = ({ data }) => {
 
   return (
     <>
-      <SEO title={title} image={series.image.file.url} />
+      <SEO title={title} image={series.image.fluid} />
+
+      {/* <Spacer /> */}
 
       <VideoSection>
         <VideoWrapper>
@@ -74,8 +76,16 @@ const MessageTemplate = ({ data }) => {
   );
 };
 
+// const Spacer = styled.div``
+
 const VideoSection = styled(Section)`
   padding: 0;
+  margin-top: 85.19px;
+
+  @media (min-width: 662px) {
+    margin-top: 121.14px;
+  }
+
   @media (min-width: 1200px) {
     padding: 0 5vw;
     flex-direction: row;
@@ -93,6 +103,7 @@ const VideoWrapper = styled.div`
   justify-content: center;
   overflow: hidden;
   position: relative;
+
   @media (min-width: 1200px) {
     flex-shrink: 0;
   }
@@ -154,6 +165,7 @@ export const query = graphql`
       image: messagePhoto {
         fluid {
           ...GatsbyContentfulFluid
+          src
         }
       }
       video: messageVideo
