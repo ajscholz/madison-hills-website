@@ -42,7 +42,7 @@ const StyledHeader = styled.header`
   z-index: 1000;
   width: 100%;
   background: var(--white);
-  opacity: 0.7;
+  opacity: 0.8;
   padding: 1rem 2rem;
   display: flex;
   justify-content: space-between;

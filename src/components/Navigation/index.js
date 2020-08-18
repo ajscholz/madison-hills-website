@@ -49,7 +49,7 @@ const StyledList = styled.ul`
 const StyledListItem = styled.li`
   margin-bottom: 0.75rem;
   @media (min-width: 663px) {
-    margin: 0 1.75rem 0 1.75rem;
+    margin: 0 1.5rem 0 1.5rem;
   }
 `;
 
