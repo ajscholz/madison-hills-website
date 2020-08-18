@@ -59,7 +59,7 @@ export const query = graphql`
   fragment HeroImageFragment on ContentfulPages {
     image: bannerImage {
       fluid(quality: 90) {
-        ...GatsbyContentfulFluid
+        ...GatsbyContentfulFluid_withWebp
       }
       file {
         url
