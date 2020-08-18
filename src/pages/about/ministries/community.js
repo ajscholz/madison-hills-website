@@ -80,20 +80,7 @@ export default community;
 export const data = graphql`
   {
     page: contentfulPages(title: { eq: "Community" }) {
-      image: bannerImage {
-        fluid(quality: 90) {
-          ...GatsbyContentfulFluid
-        }
-        file {
-          url
-          details {
-            image {
-              height
-              width
-            }
-          }
-        }
-      }
+      ...HeroImageFragment
       sections: section {
         id: contentful_id
         title

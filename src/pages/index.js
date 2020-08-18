@@ -7,7 +7,6 @@ import SEO from '../components/Seo';
 import Title from '../components/Title';
 import Section from '../components/Sections/Section';
 import ContactForm from '../components/Forms/ContactForm';
-import FlipCard from '../components/Cards/FlipCard';
 import MessageCard from '../components/Cards/MessageCard';
 
 import { FaMapMarkedAlt, FaClock } from 'react-icons/fa';
@@ -126,35 +125,22 @@ const InfoWrapper = styled.div`
   }
 `;
 
-const EventsContainer = styled.div`
-  width: 100%;
-  display: flex;
-  flex-wrap: wrap;
-  max-width: 700px;
-  justify-content: space-between;
-  align-items: center;
-  @media (min-width: 920px) {
-    max-width: 860px;
-  }
-`;
+// const EventsContainer = styled.div`
+//   width: 100%;
+//   display: flex;
+//   flex-wrap: wrap;
+//   max-width: 700px;
+//   justify-content: space-between;
+//   align-items: center;
+//   @media (min-width: 920px) {
+//     max-width: 860px;
+//   }
+// `;
 
 export const data = graphql`
   {
     page: contentfulPages(title: { eq: "Home" }) {
-      image: bannerImage {
-        fluid(quality: 90) {
-          ...GatsbyContentfulFluid
-        }
-        file {
-          url
-          details {
-            image {
-              height
-              width
-            }
-          }
-        }
-      }
+      ...HeroImageFragment
     }
     site {
       siteMetadata {

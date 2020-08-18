@@ -67,20 +67,7 @@ export default Kids;
 export const data = graphql`
   {
     page: contentfulPages(title: { eq: "Kids" }) {
-      image: bannerImage {
-        fluid(quality: 90) {
-          ...GatsbyContentfulFluid
-        }
-        file {
-          url
-          details {
-            image {
-              height
-              width
-            }
-          }
-        }
-      }
+      ...HeroImageFragment
       sections: section {
         id: contentful_id
         title

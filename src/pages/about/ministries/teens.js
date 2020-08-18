@@ -139,20 +139,7 @@ const StyledContentfulRichText = styled(ContentfulRichText)`
 export const data = graphql`
   {
     page: contentfulPages(title: { eq: "Teens" }) {
-      image: bannerImage {
-        fluid(quality: 90) {
-          ...GatsbyContentfulFluid
-        }
-        file {
-          url
-          details {
-            image {
-              height
-              width
-            }
-          }
-        }
-      }
+      ...HeroImageFragment
       sections: section {
         title
         id: contentful_id

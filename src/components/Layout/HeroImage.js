@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import BackgroundImage from 'gatsby-background-image';
+import { graphql } from 'gatsby';
 
 import Banner from '../Banner';
 
@@ -53,3 +54,22 @@ const StyledBackgroundImage = styled(BackgroundImage)`
 `;
 
 export default StyledHeroImage;
+
+export const query = graphql`
+  fragment HeroImageFragment on ContentfulPages {
+    image: bannerImage {
+      fluid(quality: 90) {
+        ...GatsbyContentfulFluid
+      }
+      file {
+        url
+        details {
+          image {
+            height
+            width
+          }
+        }
+      }
+    }
+  }
+`;

@@ -81,20 +81,7 @@ export default visit;
 export const data = graphql`
   {
     page: contentfulPages(title: { eq: "Visit" }) {
-      image: bannerImage {
-        fluid(quality: 90) {
-          ...GatsbyContentfulFluid
-        }
-        file {
-          url
-          details {
-            image {
-              height
-              width
-            }
-          }
-        }
-      }
+      ...HeroImageFragment
       sections: section {
         id: contentful_id
         title
