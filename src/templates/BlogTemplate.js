@@ -11,11 +11,19 @@ import { MDXRenderer } from 'gatsby-plugin-mdx';
 import Metadata from '../components/Metadata/Metadata';
 
 const BlogTemplate = ({ data: { blog } }) => {
-  console.log(blog);
+  const image = {
+    image: blog.image,
+    focalPoint: {
+      focalPoint: {
+        x: blog.image.file.details.image.width / 2,
+        y: blog.image.file.details.image.height / 2,
+      },
+    },
+  };
   return (
     <>
       <SEO title={blog.title} />
-      <HeroImage image={blog.image.fluid} title={blog.title} />
+      <HeroImage image={image} title={blog.title} />
 
       <StyledSection>
         <Wrapper>

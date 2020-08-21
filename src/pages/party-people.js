@@ -30,8 +30,6 @@ const PartyPeoplePage = props => {
     },
   };
 
-  console.log(page);
-
   let videoLink = `${data.video.link}&wmode=opaque&rel=0`;
 
   videoLink = 'https://www.youtube.com/embed/AY_x_fMkOvs&wmode=opaque&rel=0';

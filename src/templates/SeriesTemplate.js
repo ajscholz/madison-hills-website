@@ -124,15 +124,7 @@ export const query = graphql`
         json
       }
       messages: message {
-        id: contentful_id
-        title: messageTitle
-        date: messageDate
-        communicator
-        image {
-          fluid {
-            ...GatsbyContentfulFluid
-          }
-        }
+        ...MessageCardFragment
       }
     }
   }

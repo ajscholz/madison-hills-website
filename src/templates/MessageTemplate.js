@@ -20,7 +20,7 @@ import { MDXRenderer } from 'gatsby-plugin-mdx';
 const MessageTemplate = ({ data }) => {
   const [touched, setTouched] = useState(false);
   const [ready, setReady] = useState(false);
-  const { message, otherMessages } = data;
+  const { message, messages } = data;
   const { title, communicator, date, video, series, description } = message;
 
   return (
@@ -63,7 +63,7 @@ const MessageTemplate = ({ data }) => {
       <Section>
         <Title>Messages in this series</Title>
         <CardGridContainer>
-          {otherMessages.nodes.map(message => (
+          {messages.all.map(message => (
             <MessageCard message={message} key={message.id} />
           ))}
         </CardGridContainer>
@@ -177,22 +177,14 @@ export const query = graphql`
         }
       }
     }
-    otherMessages: allContentfulMessage(
+    messages: allContentfulMessage(
       filter: {
         messageSeries: { contentful_id: { eq: $seriesId } }
         contentful_id: { ne: $id }
       }
     ) {
-      nodes {
-        id: contentful_id
-        title: messageTitle
-        date: messageDate
-        communicator
-        image {
-          fluid {
-            ...GatsbyContentfulFluid
-          }
-        }
+      all: nodes {
+        ...MessageCardFragment
       }
     }
   }

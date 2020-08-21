@@ -13,7 +13,8 @@ import ImageButton from '../components/Buttons/ImageButton';
 import { sectionHelper } from '../utils/helpers';
 
 const about = ({ data }) => {
-  const { image } = data.page;
+  const { page } = data;
+  const { image } = page;
   const img = {
     src: image.file.url,
     height: image.file.details.image.height,
@@ -68,7 +69,7 @@ const about = ({ data }) => {
     <>
       <Seo title="About" image={img} />
       <StyledHeroImage
-        image={image.fluid}
+        image={page}
         title="About"
         backgroundPosition="50% 10%"
       />

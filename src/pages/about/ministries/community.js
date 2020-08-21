@@ -56,8 +56,6 @@ const community = ({ data }) => {
     </>
   );
 
-  console.log(sections);
-
   return (
     <>
       <Seo title="Community Ministries" image={img} />
