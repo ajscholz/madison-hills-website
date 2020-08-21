@@ -2,41 +2,39 @@ import React from 'react';
 import styled from 'styled-components';
 import BackgroundImage from 'gatsby-background-image';
 import { graphql } from 'gatsby';
+import { getImageFocus } from '../../utils/helpers';
 
 import Banner from '../Banner';
 
-const HeroImage = ({
-  className,
-  image,
-  children,
-  full,
-  title,
-  huge,
-  backgroundPosition,
-}) => {
+const HeroImage = ({ className, image, children, full, title, huge }) => {
   // adds overlay
   const backgroundFluidImageStack = full
     ? [
-        image,
+        image.image.fluid,
         `linear-gradient(to bottom, rgba(0, 130, 29, .2), rgba(0, 130, 29, .1))`,
         `linear-gradient(rgba(0,0,0,.3), rgba(0,0,0,.4))`,
       ].reverse()
     : huge
     ? [
-        image,
+        image.image.fluid,
         `linear-gradient(to bottom, rgba(242, 238, 238, 0.7), rgba(242, 238, 238, 0.7))`,
       ].reverse()
     : [
-        image,
+        image.image.fluid,
         `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5))`,
       ].reverse();
+
+  const focus = getImageFocus(
+    image.image.file.details.image,
+    image.focalPoint.focalPoint
+  );
 
   return (
     <StyledBackgroundImage
       Tag="section"
       className={className}
       fluid={backgroundFluidImageStack}
-      backgroundPosition={backgroundPosition}
+      backgroundPosition={focus}
     >
       <Banner>{title}</Banner>
       {children}
@@ -45,14 +43,14 @@ const HeroImage = ({
 };
 
 const StyledHeroImage = styled(HeroImage)`
-  padding-top: 85.19px;
-  height: ${props => (props.full ? '75vh' : props.huge ? '80vh' : '50vh')};
+  padding-top: ${props => (props.huge ? '0' : '85.19px')};
+  height: ${props => (props.full ? '75vh' : props.huge ? '100%' : '50vh')};
   @media (min-width: 577px) {
-    height: ${props => (props.full ? '65vh' : props.huge ? '80vh' : '50vh')};
+    height: ${props => (props.full ? '65vh' : props.huge ? '100%' : '50vh')};
   }
 
   @media (min-width: 663px) {
-    padding-top: 121.14px;
+    padding-top: ${props => (props.huge ? '0' : '121.14px')};
   }
 `;
 
@@ -74,7 +72,7 @@ export default StyledHeroImage;
 
 export const query = graphql`
   fragment HeroImageFragment on ContentfulPages {
-    image: bannerImage {
+    image {
       fluid(quality: 90) {
         ...GatsbyContentfulFluid_withWebp
       }
@@ -86,6 +84,12 @@ export const query = graphql`
             width
           }
         }
+      }
+    }
+    focalPoint {
+      focalPoint {
+        x
+        y
       }
     }
   }

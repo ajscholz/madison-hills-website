@@ -17,7 +17,8 @@ import { sectionHelper } from '../../../utils/helpers';
 import ContentfulRichText from '../../../components/ContentfulRichText';
 
 const Teens = ({ data, className }) => {
-  const { image } = data.page;
+  const { page } = data;
+  const { image } = page;
 
   const img = {
     src: image.file.url,
@@ -85,7 +86,7 @@ const Teens = ({ data, className }) => {
       />
 
       <HeroImage
-        image={image.fluid}
+        image={page}
         backgroundPosition="45% 27%"
         title="Teen Ministry"
       />

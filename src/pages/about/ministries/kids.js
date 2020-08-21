@@ -12,7 +12,8 @@ import TextMessageButton from '../../../components/Buttons/TextMessageButton';
 import { sectionHelper } from '../../../utils/helpers';
 
 const Kids = ({ data }) => {
-  const { image } = data.page;
+  const { page } = data;
+  const { image } = page;
   const img = {
     src: image.file.url,
     height: image.file.details.image.height,
@@ -31,7 +32,7 @@ const Kids = ({ data }) => {
   return (
     <>
       <Seo title="Madison Hills Kids Ministry" image={img} />
-      <HeroImage image={image.fluid} title="Kids Ministry" />
+      <HeroImage image={page} title="Kids Ministry" />
 
       {sections.map((section, i) => (
         <Section key={section.id}>

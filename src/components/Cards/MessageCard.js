@@ -5,12 +5,14 @@ import Img from 'gatsby-image';
 import { graphql } from 'gatsby';
 import CardBase from './CardBase';
 
+import { getImageFocus } from '../../utils/helpers';
+
 import { FaAngleDoubleRight } from 'react-icons/fa';
 
 import Date from '../../components/Metadata/Date';
 
 const MessageCard = ({ className, message }) => {
-  const { title, communicator, date, image } = message;
+  const { title, communicator, date, image, focalPoint } = message;
   // const seriesSlug =
   //   series &&
   //   `/messages/series/${series.title
@@ -22,13 +24,15 @@ const MessageCard = ({ className, message }) => {
     .replace(/[?!,/^*%$@#()'"`|]/g, '')
     .toLowerCase()}`;
 
+  const focus = getImageFocus(image.file.details.image, focalPoint.focalPoint);
+
   return (
     <CardBase as={Link} className={className} to={messageSlug}>
       <div className="card-header">
         <Img
           fluid={image.fluid}
           alt="preaching photo"
-          style={{ width: '100%' }}
+          imgStyle={{ objectPosition: focus }}
         />
       </div>
       <div className="card-body">
@@ -75,13 +79,28 @@ export const query = graphql`
     year: year
     communicator
     topics: tags
-    image: messagePhoto {
+    image {
       fluid {
-        ...GatsbyContentfulFluid
+        ...GatsbyContentfulFluid_withWebp
+      }
+      file {
+        url
+        details {
+          image {
+            height
+            width
+          }
+        }
       }
     }
     series: messageSeries {
       title: seriesTitle
+    }
+    focalPoint: imageFocalPoint {
+      focalPoint {
+        x
+        y
+      }
     }
   }
 `;

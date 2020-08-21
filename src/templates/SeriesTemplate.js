@@ -128,7 +128,7 @@ export const query = graphql`
         title: messageTitle
         date: messageDate
         communicator
-        image: messagePhoto {
+        image {
           fluid {
             ...GatsbyContentfulFluid
           }

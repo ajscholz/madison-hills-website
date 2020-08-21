@@ -13,24 +13,19 @@ import { FaMapMarkedAlt, FaClock } from 'react-icons/fa';
 import IconInfo from '../components/IconInfo';
 
 const IndexPage = ({ data }) => {
-  const {
-    page: { image },
-    message,
-  } = data;
+  const { page, messages } = data;
   const img = {
-    src: image.file.url,
-    height: image.file.details.image.height,
-    width: image.file.details.image.width,
+    src: page.image.file.url,
+    height: page.image.file.details.image.height,
+    width: page.image.file.details.image.width,
   };
-
-  console.log(message);
 
   return (
     <>
       <SEO title="Home" image={img} />
 
       <HeroImage
-        image={image.fluid}
+        image={page}
         title="Helping&nbsp;people find&nbsp;and&nbsp;follow Jesus"
         backgroundPosition="26% 20%"
         full
@@ -54,7 +49,7 @@ const IndexPage = ({ data }) => {
 
       <Section dark>
         <Title>Listen to A Recent Message</Title>
-        <MessageCard message={message} />
+        <MessageCard message={messages.all[0]} />
       </Section>
 
       {/* <Section dark>
@@ -150,8 +145,15 @@ export const data = graphql`
         state
       }
     }
-    message: contentfulMessage {
-      ...MessageCardFragment
+
+    messages: allContentfulMessage(
+      limit: 1
+      filter: { communicator: { eq: "Ben Stroup" } }
+      sort: { fields: messageDate, order: DESC }
+    ) {
+      all: nodes {
+        ...MessageCardFragment
+      }
     }
   }
 `;

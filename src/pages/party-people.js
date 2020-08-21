@@ -20,13 +20,25 @@ const PartyPeoplePage = props => {
   //   width: image.file.details.image.width,
   // };
 
+  const page = {
+    image: data.image,
+    focalPoint: {
+      focalPoint: {
+        x: data.image.file.details.image.width / 2,
+        y: data.image.file.details.image.height / 2,
+      },
+    },
+  };
+
+  console.log(page);
+
   let videoLink = `${data.video.link}&wmode=opaque&rel=0`;
 
   videoLink = 'https://www.youtube.com/embed/AY_x_fMkOvs&wmode=opaque&rel=0';
 
   return (
     <div className={className}>
-      <HeroImage image={data.image.fluid} huge>
+      <HeroImage image={page} huge>
         <SEO
           title="Home"
           // image={img}
@@ -91,6 +103,14 @@ export const data = graphql`
     image: contentfulAsset(contentful_id: { eq: "MC5dWFao0NSvZst2Pw3vl" }) {
       fluid(resizingBehavior: FILL) {
         ...GatsbyContentfulFluid
+      }
+      file {
+        details {
+          image {
+            height
+            width
+          }
+        }
       }
     }
   }

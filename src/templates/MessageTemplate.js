@@ -162,7 +162,7 @@ export const query = graphql`
         }
       }
       date: messageDate(formatString: "M/D/YYYY")
-      image: messagePhoto {
+      image {
         fluid {
           ...GatsbyContentfulFluid
           src
@@ -188,7 +188,7 @@ export const query = graphql`
         title: messageTitle
         date: messageDate
         communicator
-        image: messagePhoto {
+        image {
           fluid {
             ...GatsbyContentfulFluid
           }

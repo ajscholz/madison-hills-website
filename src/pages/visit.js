@@ -11,7 +11,8 @@ import PyvForm from '../components/Forms/PyvForm';
 import { sectionHelper } from '../utils/helpers';
 
 const visit = ({ data }) => {
-  const { image } = data.page;
+  const { page } = data;
+  const { image } = page;
   const img = {
     src: image.file.url,
     height: image.file.details.image.height,
@@ -56,11 +57,7 @@ const visit = ({ data }) => {
     <>
       <Seo title="Visit" image={img} />
 
-      <HeroImage
-        image={image.fluid}
-        backgroundPosition="50% 30%"
-        title="Visit"
-      />
+      <HeroImage image={page} backgroundPosition="50% 30%" title="Visit" />
 
       {newSections.map(section => (
         <Section key={section.id}>

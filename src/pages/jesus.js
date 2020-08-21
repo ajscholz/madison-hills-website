@@ -15,7 +15,8 @@ import VerseSection from '../components/Sections/VerseSection';
 import { sectionHelper } from '../utils/helpers';
 
 const JesusPage = ({ data }) => {
-  const { image } = data.page;
+  const { page } = data;
+  const { image } = page;
 
   const img = {
     src: image.file.url,
@@ -60,11 +61,7 @@ const JesusPage = ({ data }) => {
     <>
       <Seo title="Jesus" image={img} />
 
-      <HeroImage
-        image={image.fluid}
-        backgroundPosition="51% 78%"
-        title="Jesus"
-      />
+      <HeroImage image={page} backgroundPosition="51% 78%" title="Jesus" />
 
       {sections.map((section, i) => {
         return (

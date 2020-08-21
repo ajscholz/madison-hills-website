@@ -13,7 +13,8 @@ import CommunityMinistriesForm from '../../../components/Forms/CommunityMinistri
 import { sectionHelper } from '../../../utils/helpers';
 
 const community = ({ data }) => {
-  const { image } = data.page;
+  const { page } = data;
+  const { image } = page;
   const img = {
     src: image.file.url,
     height: image.file.details.image.height,
@@ -61,7 +62,7 @@ const community = ({ data }) => {
     <>
       <Seo title="Community Ministries" image={img} />
 
-      <HeroImage image={image.fluid} title="Community Ministries" />
+      <HeroImage image={page} title="Community Ministries" />
 
       {sections.map(section => {
         return (

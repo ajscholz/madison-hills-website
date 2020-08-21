@@ -29,8 +29,6 @@ const about = ({ data }) => {
     data.page.sections
   );
 
-  console.log(sections);
-
   sections[0].content = (
     <FlexContainer>
       {sections[0].contentReferences.map(person => (
@@ -54,7 +52,7 @@ const about = ({ data }) => {
           aria-label={ministry.name}
           style={{ height: '100%', width: '100%' }}
         >
-          <ImageButton image={ministry.image.bannerImage}>
+          <ImageButton image={ministry.image.image}>
             {ministry.name}
           </ImageButton>
         </Link>
@@ -130,7 +128,7 @@ export const data = graphql`
             name
             contentful_id
             image {
-              bannerImage {
+              image {
                 fluid {
                   ...GatsbyContentfulFluid
                 }

@@ -273,7 +273,7 @@ const query = graphql`
           title: messageTitle
           date: messageDate(formatString: "MMM DD, YYYY")
           communicator
-          image: messagePhoto {
+          image {
             fluid {
               ...GatsbyContentfulFluid
             }

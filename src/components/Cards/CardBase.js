@@ -11,7 +11,7 @@ export default styled.div`
   overflow: hidden;
   outline: none;
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
-  border-left: 6px solid var(--primary);
+  /* border-left: 6px solid var(--primary); */
   cursor: pointer;
   transition: var(--mainTransition);
 
@@ -31,12 +31,10 @@ export default styled.div`
     align-items: center;
     justify-content: center;
     overflow: hidden;
-    /* transition: var(--mainTransition); */
-    img {
-      width: 100%;
+
+    & .gatsby-image-wrapper {
       height: 100%;
-      object-fit: cover;
-      /* transition: var(--mainTransition); */
+      width: 100%;
     }
   }
 

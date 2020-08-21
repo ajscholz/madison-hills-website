@@ -8,9 +8,8 @@ import Section from '../components/Sections/Section';
 import BlogCard from '../components/Cards/BlogCard';
 
 const BlogPage = ({ data }) => {
-  const {
-    page: { image },
-  } = data;
+  const { page } = data;
+  const { image } = page;
   const img = {
     src: image.file.url,
     height: image.file.details.image.height,
@@ -22,7 +21,7 @@ const BlogPage = ({ data }) => {
       <SEO title="Blog" image={img} />
 
       <HeroImage
-        image={image.fluid}
+        image={page}
         title="Bridge To Sunday Blogs"
         full
         backgroundPosition="60% 10%"

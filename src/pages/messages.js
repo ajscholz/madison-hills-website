@@ -28,11 +28,7 @@ const MessagesPage = props => {
     <>
       <Seo title="Messages" image={img} />
 
-      <HeroImage
-        image={image.fluid}
-        title="Messages"
-        backgroundPosition="50% 20%"
-      >
+      <HeroImage image={page} title="Messages" backgroundPosition="50% 20%">
         <StyledButton
           small
           onClick={() => setShow(show === 'messages' ? 'series' : 'messages')}
