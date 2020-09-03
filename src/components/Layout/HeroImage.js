@@ -73,7 +73,7 @@ export default StyledHeroImage;
 export const query = graphql`
   fragment HeroImageFragment on ContentfulPages {
     image {
-      fluid(quality: 90) {
+      fluid(maxWidth: 3200, quality: 90) {
         ...GatsbyContentfulFluid_withWebp
       }
       file {
@@ -96,7 +96,7 @@ export const query = graphql`
 
   fragment BlogPostHeroImageFragment on ContentfulBlogPost {
     image {
-      fluid(quality: 90) {
+      fluid(maxWidth: 3200, quality: 90) {
         ...GatsbyContentfulFluid_withWebp
       }
       file {

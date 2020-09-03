@@ -15,6 +15,8 @@ const Backdrop = ({ className, click }) => {
       className={className}
       onKeyDown={() => {}}
       onClick={() => click(false)}
+      aria-hidden={true}
+      aria-label="close"
     />
   );
 };

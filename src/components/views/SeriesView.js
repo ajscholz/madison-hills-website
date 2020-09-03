@@ -20,7 +20,7 @@ const query = graphql`
           year: seriesEndDate(formatString: "YYYY")
           length: seriesLength
           image: seriesGraphic {
-            fluid {
+            fluid(maxWidth: 500, quality: 80) {
               ...GatsbyContentfulFluid
             }
           }

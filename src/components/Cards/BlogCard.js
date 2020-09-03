@@ -2,7 +2,6 @@ import React from 'react';
 import styled from 'styled-components';
 import { graphql, Link } from 'gatsby';
 import Img from 'gatsby-image';
-import Metadata from '../Metadata/Metadata';
 
 const BlogCard = ({ className, blog }) => {
   return (
@@ -71,7 +70,7 @@ export const query = graphql`
     date(formatString: "MMM DD YYYY")
     slug
     image {
-      fluid {
+      fluid(maxWidth: 500, quality: 80) {
         ...GatsbyContentfulFluid_withWebp
       }
     }

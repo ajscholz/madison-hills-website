@@ -12,7 +12,7 @@ const data = graphql`
   {
     logo: file(name: { eq: "logo" }) {
       childImageSharp {
-        fluid {
+        fluid(maxWidth: 250, quality: 90) {
           ...GatsbyImageSharpFluid
         }
       }

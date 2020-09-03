@@ -80,7 +80,7 @@ export const query = graphql`
     communicator
     topics: tags
     image {
-      fluid {
+      fluid(maxWidth: 500, quality: 80) {
         ...GatsbyContentfulFluid_withWebp
       }
       file {
