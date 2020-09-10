@@ -1,5 +1,5 @@
 import React from 'react';
-import { graphql } from 'gatsby';
+import { graphql, Link } from 'gatsby';
 import styled from 'styled-components';
 
 import HeroImage from '../components/Layout/HeroImage';
@@ -11,6 +11,7 @@ import MessageCard from '../components/Cards/MessageCard';
 
 import { FaMapMarkedAlt, FaClock } from 'react-icons/fa';
 import IconInfo from '../components/IconInfo';
+import Button from '../components/Buttons/Button';
 
 const IndexPage = ({ data }) => {
   const { page, messages } = data;
@@ -47,10 +48,13 @@ const IndexPage = ({ data }) => {
         </InfoWrapper>
       </Section>
 
-      <Section dark>
-        <Title>Listen to A Recent Message</Title>
+      <LatestSection dark>
+        <Title>Latest Message</Title>
         <MessageCard message={messages.all[0]} />
-      </Section>
+        <Button as={Link} to="/messages">
+          View More Messages
+        </Button>
+      </LatestSection>
 
       {/* <Section dark>
         <Title>Upcoming Events</Title>
@@ -77,6 +81,12 @@ const IndexPage = ({ data }) => {
     </>
   );
 };
+
+const LatestSection = styled(Section)`
+  & ${Button} {
+    margin-top: 2em;
+  }
+`;
 
 const InfoWrapper = styled.div`
   width: 225px;
