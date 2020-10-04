@@ -22,7 +22,11 @@ const BlogTemplate = ({ data: { blog } }) => {
   };
   return (
     <>
-      <SEO title={blog.title} image={blog.image.file.url} />
+      <SEO
+        title={blog.title}
+        description={`A weekly blog to help us dig deeper into the Sunday message at Madison Hills Christian Church. This week's author is ${blog.author}.`}
+        image={{ src: blog.image.file.url }}
+      />
       <HeroImage image={image} title={blog.title} />
 
       <StyledSection>

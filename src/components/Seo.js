@@ -23,6 +23,8 @@ const Seo = ({ description, meta, image, title, lang }) => {
   const metaDescription = description || site.metadata.description;
   const img = image ? image.src : site.metadata.logo;
 
+  console.log('img', img);
+
   return (
     <Helmet
       htmlAttributes={{
@@ -100,7 +102,7 @@ const Seo = ({ description, meta, image, title, lang }) => {
   );
 };
 
-export default Seo
+export default Seo;
 
 Seo.propTypes = {
   lang: PropTypes.string,

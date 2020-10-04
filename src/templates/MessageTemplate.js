@@ -25,7 +25,11 @@ const MessageTemplate = ({ data }) => {
 
   return (
     <>
-      <SEO title={title} image={series.image.fluid} />
+      <SEO
+        title={title}
+        image={series.image.fluid}
+        description={`${communicator} preaches this week from the ${series.title} message series at Madison Hills Christian Church in Richmond, Kentucky.`}
+      />
 
       {/* <Spacer /> */}
 

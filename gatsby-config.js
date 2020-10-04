@@ -8,7 +8,7 @@ module.exports = {
     title: `Madison Hills Christian Church`,
     shortName: `Madison Hills`,
     mission: `Something about disciples`,
-    description: `A great church in a great place.`,
+    description: `A church in Richmond where you can be at home no matter who you are or your life has looked like. We're simply helping people find and follow Jesus.`,
     pastor: `Ben Stroup`,
     phone: `859-575-1575`,
     email: `mhcc@madisonhills.org`,

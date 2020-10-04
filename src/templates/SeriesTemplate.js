@@ -28,13 +28,17 @@ const SeriesTemplate = props => {
 
   return (
     <>
-      <SEO title={title} />
+      <SEO
+        title={title}
+        image={{ src: image.src }}
+        description={`${title} message series at Madison Hills Christian Church in Richmond, Kentucky.`}
+      />
 
       <SeriesSection>
         <Img fluid={image.fluid} />
         <Info>
-          <Title>{title}</Title>
-          <ContentfulRichText content={json} />
+          <Title position="left">{title}</Title>
+          <ContentfulRichText position="left" content={json} />
           <Metadata>
             <Date icon={true}>
               {start} - {end}
