@@ -1,8 +1,8 @@
 import styled from 'styled-components';
 
-export default styled.h2`
+export default styled.h1`
   font-size: 1.5rem;
-  text-align: center;
+  text-align: ${props => (props.position === 'left' ? 'left' : 'center')};
   text-transform: capitalize;
   position: relative;
   display: inline-block;
@@ -14,7 +14,7 @@ export default styled.h2`
     background: var(--primary);
     position: absolute;
     bottom: -0.5rem;
-    left: 10%;
+    left: ${props => (props.position === 'left' ? '0' : '10%')};
   }
   @media (min-width: 400px) {
     font-size: 2rem;

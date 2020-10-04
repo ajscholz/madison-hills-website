@@ -22,13 +22,13 @@ const BlogTemplate = ({ data: { blog } }) => {
   };
   return (
     <>
-      <SEO title={blog.title} />
+      <SEO title={blog.title} image={blog.image.file.url} />
       <HeroImage image={image} title={blog.title} />
 
       <StyledSection>
         <Wrapper>
-          <Title>{blog.title}</Title>
-          <Metadata>{`${blog.date}  |  ${blog.author}`}</Metadata>
+          <Title position="left">{blog.title}</Title>
+          <Metadata>{`${blog.date}\u00A0\u00A0|\u00A0\u00A0${blog.author}`}</Metadata>
           <div className="blog-body">
             <MDXRenderer>{blog.blog.mdx.body}</MDXRenderer>
           </div>
@@ -73,5 +73,13 @@ const Wrapper = styled.div`
 
   & .blog-body {
     margin-top: 2.5em;
+  }
+
+  & ${Title} {
+    margin-bottom: 1.75rem;
+  }
+
+  & ${Metadata} {
+    font-size: 0.86rem;
   }
 `;
