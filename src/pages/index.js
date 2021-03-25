@@ -36,7 +36,7 @@ const IndexPage = ({ data }) => {
         <Title>{`When & Where`}</Title>
         <InfoWrapper>
           <IconInfo icon={<FaClock alt="time" />}>
-            Every Sunday{'9:30 & 10:45'}
+            Every Sunday{'9:30 & 11:00am'}
           </IconInfo>
           <IconInfo
             icon={<FaMapMarkedAlt alt="location" />}
